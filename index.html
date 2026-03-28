@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Universal Converter Pro</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{
+  --bg:#0a0a0f;--bg2:#111118;--bg3:#18181f;--bg4:#1f1f28;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);--border3:rgba(255,255,255,0.2);
+  --text:#f0eeff;--muted:#7b79a0;--muted2:#5a5878;
+  --accent:#8b5cf6;--accent2:#a78bfa;--accent3:#c4b5fd;
+  --green:#10b981;--amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899;--cyan:#06b6d4;
+  --r:10px;--r2:14px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:3px;}
+
+/* HEADER */
+.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:.9rem 1.5rem;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;}
+.hdr-logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#8b5cf6,#ec4899);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.hdr-title{font-size:15px;font-weight:600;letter-spacing:-.3px;}
+.hdr-sub{font-size:11px;color:var(--muted);margin-top:1px;}
+.hdr-badge{margin-left:auto;font-size:10px;font-weight:600;padding:3px 10px;border-radius:20px;background:rgba(16,185,129,.12);color:#10b981;letter-spacing:.3px;}
+
+/* SIDEBAR + CONTENT */
+.layout{display:flex;flex:1;min-height:0;}
+.sidebar{width:220px;background:var(--bg2);border-right:1px solid var(--border);padding:1rem .75rem;flex-shrink:0;overflow-y:auto;}
+@media(max-width:768px){.sidebar{display:none;}.layout{flex-direction:column;}}
+.sidebar-label{font-size:10px;font-weight:600;color:var(--muted2);text-transform:uppercase;letter-spacing:.8px;padding:.5rem .75rem;margin-top:.5rem;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:.6rem .75rem;border-radius:var(--r);cursor:pointer;transition:all .15s;margin-bottom:2px;}
+.nav-item:hover{background:var(--bg3);}
+.nav-item.active{background:rgba(139,92,246,.12);color:var(--accent3);}
+.nav-item.active .nav-icon{background:rgba(139,92,246,.2);}
+.nav-icon{width:28px;height:28px;border-radius:7px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;}
+.nav-text{font-size:13px;font-weight:500;}
+.nav-badge{margin-left:auto;font-size:9px;font-weight:600;padding:2px 6px;border-radius:8px;background:var(--bg4);color:var(--muted);}
+.nav-item.active .nav-badge{background:rgba(139,92,246,.2);color:var(--accent3);}
+
+/* CONTENT */
+.content{flex:1;overflow-y:auto;padding:1.5rem;}
+.module{display:none;}.module.active{display:block;}
+.module-header{margin-bottom:1.5rem;}
+.module-title{font-size:20px;font-weight:600;letter-spacing:-.4px;display:flex;align-items:center;gap:10px;}
+.module-desc{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.5;}
+
+/* CARDS */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:1.25rem;margin-bottom:1rem;}
+.card-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1rem;}
+
+/* DROP ZONE */
+.drop{border:2px dashed var(--border2);border-radius:var(--r2);padding:2.5rem 1.5rem;text-align:center;cursor:pointer;transition:all .2s;background:var(--bg3);position:relative;}
+.drop:hover,.drop.over{border-color:var(--accent);background:rgba(139,92,246,.05);}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%;}
+.drop-icon{font-size:36px;margin-bottom:10px;}
+.drop h3{font-size:15px;font-weight:500;margin-bottom:4px;}
+.drop p{font-size:12px;color:var(--muted);}
+.drop .hint{font-size:11px;color:var(--muted2);margin-top:6px;}
+
+/* FORMAT BUTTONS */
+.fmt-grid{display:flex;flex-wrap:wrap;gap:8px;margin:1rem 0;}
+.fmt-btn{padding:6px 14px;border:1px solid var(--border2);border-radius:var(--r);background:var(--bg3);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .15s;font-family:'Inter';}
+.fmt-btn:hover{border-color:var(--accent);color:var(--text);}
+.fmt-btn.sel{border-color:var(--accent);background:rgba(139,92,246,.12);color:var(--accent3);}
+
+/* BUTTONS */
+.btn{padding:10px 20px;border-radius:var(--r);border:none;font-family:'Inter';font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#a855f7);color:#fff;width:100%;}
+.btn-primary:hover{opacity:.9;}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed;}
+.btn-sm{padding:6px 12px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);color:var(--text);}
+.btn-sm:hover{border-color:var(--border3);}
+.btn-green{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--green);}
+.btn-green:hover{background:rgba(16,185,129,.2);}
+
+/* PROGRESS */
+.prog-wrap{margin-top:.75rem;display:none;}
+.prog-wrap.show{display:block;}
+.prog-bar{height:3px;background:var(--bg4);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),#ec4899);transition:width .3s;}
+.status{font-size:12px;color:var(--muted);margin-top:6px;text-align:center;min-height:18px;}
+.status.ok{color:var(--green);}
+.status.err{color:var(--red);}
+
+/* PREVIEW GRID */
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:1rem;}
+@media(max-width:600px){.preview-grid{grid-template-columns:1fr;}}
+.panel{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden;}
+.panel-hdr{padding:9px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:500;gap:8px;flex-wrap:wrap;}
+.panel-body{padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);max-height:320px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;line-height:1.7;min-height:80px;}
+.pbadge{font-size:9px;font-weight:700;padding:2px 7px;border-radius:8px;text-transform:uppercase;letter-spacing:.3px;}
+.pb-pdf{background:rgba(245,158,11,.15);color:#f59e0b;}
+.pb-img{background:rgba(59,130,246,.15);color:#3b82f6;}
+.pb-txt{background:rgba(16,185,129,.15);color:#10b981;}
+.pb-dbf{background:rgba(139,92,246,.15);color:#a78bfa;}
+.pb-audio{background:rgba(6,182,212,.15);color:#06b6d4;}
+.pb-zip{background:rgba(245,158,11,.15);color:#f59e0b;}
+
+/* FILE INFO */
+.file-info{display:flex;align-items:center;gap:10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:10px 14px;margin-bottom:12px;}
+.file-info .fi-icon{font-size:20px;flex-shrink:0;}
+.file-info .fi-name{font-size:13px;font-weight:500;word-break:break-all;}
+.file-info .fi-meta{font-size:11px;color:var(--muted);margin-top:1px;}
+.fi-remove{margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:4px;transition:color .15s;flex-shrink:0;}
+.fi-remove:hover{color:var(--red);}
+
+/* OPTIONS */
+.opts{background:var(--bg3);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;}
+.opts h4{font-size:11px;font-weight:600;color:var(--accent3);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;}
+.opt-row{display:flex;gap:10px;flex-wrap:wrap;}
+.opt-col{flex:1;min-width:120px;}
+label.lbl{font-size:11px;color:var(--muted);display:block;margin-bottom:4px;}
+select,input[type=number],input[type=range],input[type=text]{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:'Inter';font-size:12px;padding:7px 10px;width:100%;}
+select:focus,input:focus{outline:none;border-color:var(--accent);}
+input[type=range]{padding:0;height:4px;accent-color:var(--accent);}
+
+/* TABLE */
+.tbl-wrap{overflow-x:auto;}
+table.ptbl{width:100%;border-collapse:collapse;font-size:11px;font-family:'JetBrains Mono';}
+table.ptbl th{background:rgba(139,92,246,.1);color:var(--accent3);padding:6px 10px;text-align:left;font-weight:500;border-bottom:1px solid var(--border2);white-space:nowrap;}
+table.ptbl td{padding:5px 10px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap;max-width:160px;overflow:hidden;text-overflow:ellipsis;}
+table.ptbl tr:hover td{background:rgba(255,255,255,.02);color:var(--text);}
+
+/* EMPTY */
+.empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;color:var(--muted);font-size:12px;text-align:center;gap:6px;}
+.empty-icon{font-size:24px;opacity:.4;}
+
+/* IMG PREVIEW */
+.img-grid{display:flex;flex-wrap:wrap;gap:8px;padding:10px;}
+.img-thumb{border-radius:6px;overflow:hidden;border:1px solid var(--border2);max-width:120px;}
+.img-thumb img{display:block;width:100%;height:auto;}
+
+/* UPSCALER */
+.compare-wrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:1rem;}
+.compare-img{border-radius:var(--r);overflow:hidden;border:1px solid var(--border2);}
+.compare-img img{display:block;width:100%;height:auto;}
+.compare-label{font-size:11px;color:var(--muted);text-align:center;padding:6px;}
+
+/* PDF EDITOR */
+.editor-toolbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px;background:var(--bg3);border-bottom:1px solid var(--border);}
+.tool-btn{padding:6px 12px;border-radius:var(--r);border:1px solid var(--border2);background:var(--bg4);color:var(--muted);font-size:11px;font-weight:500;cursor:pointer;transition:all .15s;font-family:'Inter';}
+.tool-btn:hover,.tool-btn.active{border-color:var(--accent);color:var(--accent3);background:rgba(139,92,246,.1);}
+.editor-canvas-wrap{background:var(--bg3);min-height:400px;overflow:auto;padding:1rem;position:relative;}
+#pdfCanvas{border-radius:6px;box-shadow:0 4px 24px rgba(0,0,0,.5);max-width:100%;display:block;margin:0 auto;}
+.editor-overlay{position:absolute;top:1rem;left:50%;transform:translateX(-50%);}
+.text-layer{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;}
+.added-text{position:absolute;color:#000;font-size:16px;cursor:move;pointer-events:all;padding:2px 4px;border:1px dashed transparent;user-select:none;}
+.added-text:hover{border-color:var(--accent);}
+.added-text.selected{border-color:var(--accent);}
+
+/* AUDIO */
+.waveform{height:60px;background:var(--bg3);border-radius:var(--r);margin:10px 0;overflow:hidden;position:relative;}
+.waveform canvas{width:100%;height:100%;}
+
+/* OCR */
+.ocr-result{font-family:'JetBrains Mono';font-size:12px;line-height:1.8;color:var(--text);padding:12px;background:var(--bg3);border-radius:var(--r);max-height:300px;overflow-y:auto;white-space:pre-wrap;}
+
+/* BULK */
+.bulk-list{display:flex;flex-direction:column;gap:6px;max-height:200px;overflow-y:auto;}
+.bulk-item{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--bg3);border-radius:var(--r);font-size:12px;}
+.bulk-item .bi-name{flex:1;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bulk-item .bi-size{color:var(--muted);font-size:11px;flex-shrink:0;}
+.bulk-item .bi-status{width:16px;height:16px;border-radius:50%;flex-shrink:0;}
+.bi-pending{background:var(--bg4);}
+.bi-done{background:var(--green);}
+.bi-err{background:var(--red);}
+
+/* TAGS */
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 8px;border-radius:8px;margin-left:6px;}
+.tag-new{background:rgba(16,185,129,.12);color:var(--green);}
+.tag-ai{background:rgba(139,92,246,.12);color:var(--accent3);}
+.tag-pro{background:rgba(245,158,11,.12);color:var(--amber);}
+
+/* GRID UTILS */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:600px){.grid-2{grid-template-columns:1fr;}}
+
+/* ZIP LIST */
+.zip-list{max-height:200px;overflow-y:auto;border:1px solid var(--border);border-radius:var(--r);background:var(--bg3);}
+.zip-item{display:flex;align-items:center;gap:8px;padding:7px 12px;border-bottom:1px solid var(--border);font-size:12px;}
+.zip-item:last-child{border-bottom:none;}
+.zip-item .zi-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.zip-item .zi-size{color:var(--muted);font-size:11px;}
+.zip-item .zi-btn{padding:2px 8px;font-size:10px;}
+
+/* TRANSCRIPTION */
+.transcript-box{background:var(--bg3);border-radius:var(--r);padding:14px;font-size:13px;line-height:1.8;color:var(--text);max-height:300px;overflow-y:auto;}
+.transcript-word{display:inline;padding:0 1px;}
+.transcript-word.confident{color:var(--text);}
+.transcript-word.low{color:var(--amber);}
+
+footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <div class="hdr-logo">⚡</div>
+  <div>
+    <div class="hdr-title">Universal Converter Pro</div>
+    <div class="hdr-sub">Toate instrumentele într-un singur loc — direct în browser</div>
+  </div>
+  <div class="hdr-badge">Gratuit · Privat · Fără limite</div>
+</header>
+
+<div class="layout">
+
+<!-- SIDEBAR -->
+<nav class="sidebar">
+  <div class="sidebar-label">Conversie fișiere</div>
+  <div class="nav-item active" data-module="pdf"><div class="nav-icon">📄</div><div class="nav-text">PDF Tools</div><div class="nav-badge">7</div></div>
+  <div class="nav-item" data-module="img"><div class="nav-icon">🖼</div><div class="nav-text">Imagini</div><div class="nav-badge">10</div></div>
+  <div class="nav-item" data-module="audio"><div class="nav-icon">🎵</div><div class="nav-text">Audio</div><div class="nav-badge">WAV·OGG</div></div>
+  <div class="nav-item" data-module="docs"><div class="nav-icon">📝</div><div class="nav-text">Documente</div><div class="nav-badge">8</div></div>
+  <div class="nav-item" data-module="zip"><div class="nav-icon">🗜</div><div class="nav-text">ZIP / Arhive</div></div>
+  <div class="nav-item" data-module="base64"><div class="nav-icon">🔐</div><div class="nav-text">Base64</div></div>
+  <div class="sidebar-label">Instrumente AI</div>
+  <div class="nav-item" data-module="editor"><div class="nav-icon">✏️</div><div class="nav-text">PDF Editor</div><div class="nav-badge">NEW</div></div>
+  <div class="nav-item" data-module="upscaler"><div class="nav-icon">✨</div><div class="nav-text">Upscaler AI</div><div class="nav-badge">AI</div></div>
+  <div class="nav-item" data-module="bgremove"><div class="nav-icon">🪄</div><div class="nav-text">BG Remover</div><div class="nav-badge">AI</div></div>
+  <div class="nav-item" data-module="svg"><div class="nav-icon">🎨</div><div class="nav-text">Img → SVG</div></div>
+  <div class="nav-item" data-module="video"><div class="nav-icon">🎬</div><div class="nav-text">Video Frames</div></div>
+  <div class="nav-item" data-module="bulk"><div class="nav-icon">📦</div><div class="nav-text">Bulk Imagini</div></div>
+  <div class="nav-item" data-module="ocr"><div class="nav-icon">🔍</div><div class="nav-text">OCR Scanner</div><div class="nav-badge">AI</div></div>
+  <div class="nav-item" data-module="transcribe"><div class="nav-icon">🎙</div><div class="nav-text">Transcriere</div><div class="nav-badge">AI</div></div>
+</nav>
+
+<!-- CONTENT -->
+<main class="content">
+
+<!-- ═══ PDF TOOLS ═══ -->
+<div class="module active" id="mod-pdf">
+  <div class="module-header">
+    <div class="module-title">📄 PDF Tools</div>
+    <div class="module-desc">Convertește PDF în orice format sau combină/împarte fișiere PDF.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="pdf-drop">
+      <input type="file" id="pdf-input" accept=".pdf">
+      <div class="drop-icon">📂</div>
+      <h3>Trage PDF-ul aici</h3>
+      <p>sau apasă pentru a alege</p>
+      <div class="hint">Acceptă: .PDF</div>
+    </div>
+  </div>
+  <div id="pdf-main" style="display:none">
+    <div class="file-info"><div class="fi-icon">📄</div><div><div class="fi-name" id="pdf-fname">—</div><div class="fi-meta" id="pdf-fmeta">—</div></div><button class="fi-remove" id="pdf-remove">✕</button></div>
+    <div class="card">
+      <div class="card-title">Format ieșire</div>
+      <div class="fmt-grid">
+        <button class="fmt-btn sel" data-pfmt="txt">TXT</button>
+        <button class="fmt-btn" data-pfmt="jpg">JPG</button>
+        <button class="fmt-btn" data-pfmt="png">PNG</button>
+        <button class="fmt-btn" data-pfmt="docx">DOCX</button>
+        <button class="fmt-btn" data-pfmt="csv">CSV</button>
+        <button class="fmt-btn" data-pfmt="dbf">DBF</button>
+        <button class="fmt-btn" data-pfmt="html">HTML</button>
+        <button class="fmt-btn" data-pfmt="md">Markdown</button>
+        <button class="fmt-btn" data-pfmt="json">JSON</button>
+      </div>
+      <div class="opts" id="pdf-opt-img" style="display:none">
+        <h4>Opțiuni imagine</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Calitate DPI</label><select id="pdf-dpi"><option value="1">72 DPI — rapid</option><option value="2" selected>150 DPI — echilibrat</option><option value="3">220 DPI — HD</option></select></div>
+          <div class="opt-col"><label class="lbl">Pagini</label><select id="pdf-pages-sel"><option value="all">Toate</option><option value="first">Doar prima</option></select></div>
+        </div>
+      </div>
+      <div class="opts" id="pdf-opt-csv" style="display:none">
+        <h4>Opțiuni CSV</h4>
+        <label class="lbl">Separator</label>
+        <select id="pdf-csv-sep"><option value=",">Virgulă ,</option><option value=";">Punct și virgulă ;</option><option value="	">Tab</option></select>
+      </div>
+      <button class="btn btn-primary" id="pdf-convert">⚡ Convertește</button>
+      <div class="prog-wrap" id="pdf-prog"><div class="prog-bar"><div class="prog-fill" id="pdf-fill" style="width:0%"></div></div><div class="status" id="pdf-status"></div></div>
+    </div>
+    <div class="preview-grid" id="pdf-preview" style="display:none">
+      <div class="panel"><div class="panel-hdr"><span>Conținut PDF</span><span class="pbadge pb-pdf">PDF</span></div><div class="panel-body" id="pdf-src-body"></div></div>
+      <div class="panel"><div class="panel-hdr"><span id="pdf-out-lbl">Ieșire</span><div style="display:flex;gap:6px;align-items:center"><span class="pbadge pb-txt" id="pdf-out-badge">TXT</span><button class="btn btn-sm btn-green" id="pdf-dl" style="display:none">⬇ Descarcă</button><button class="btn btn-sm btn-green" id="pdf-dl-all" style="display:none">⬇ Toate</button></div></div><div class="panel-body" id="pdf-out-body"><div class="empty"><div class="empty-icon">✨</div><span>Rezultatul apare după conversie</span></div></div></div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:1rem">
+    <div class="card-title">Merge / Split PDF</div>
+    <div class="grid-2">
+      <div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Combină mai multe PDF-uri într-unul singur:</p>
+        <div class="drop" style="padding:1rem" id="merge-drop"><input type="file" id="merge-input" accept=".pdf" multiple><div class="drop-icon" style="font-size:24px">📎</div><p style="font-size:12px">Alege mai multe PDF-uri</p></div>
+        <div id="merge-list" style="margin-top:8px"></div>
+        <button class="btn btn-primary" id="merge-btn" style="margin-top:8px;display:none">🔗 Combină PDF-urile</button>
+        <div class="status" id="merge-status"></div>
+      </div>
+      <div>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Împarte un PDF în pagini separate:</p>
+        <div class="drop" style="padding:1rem" id="split-drop"><input type="file" id="split-input" accept=".pdf"><div class="drop-icon" style="font-size:24px">✂️</div><p style="font-size:12px">Alege PDF-ul de împărțit</p></div>
+        <button class="btn btn-primary" id="split-btn" style="margin-top:8px;display:none">✂️ Împarte în pagini</button>
+        <div class="status" id="split-status"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ IMAGINI ═══ -->
+<div class="module" id="mod-img">
+  <div class="module-header">
+    <div class="module-title">🖼 Imagini</div>
+    <div class="module-desc">Convertește, comprimă și redimensionează imagini în orice format.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="img-drop"><input type="file" id="img-input" accept="image/*" multiple><div class="drop-icon">🖼</div><h3>Trage imaginile aici</h3><p>JPG, PNG, WebP, BMP, GIF — multiple fișiere</p></div>
+  </div>
+  <div id="img-main" style="display:none">
+    <div class="card">
+      <div class="card-title">Format ieșire</div>
+      <div class="fmt-grid">
+        <button class="fmt-btn sel" data-ifmt="jpg">JPG</button>
+        <button class="fmt-btn" data-ifmt="png">PNG</button>
+        <button class="fmt-btn" data-ifmt="webp">WebP</button>
+        <button class="fmt-btn" data-ifmt="bmp">BMP</button>
+        <button class="fmt-btn" data-ifmt="ico">ICO</button>
+        <button class="fmt-btn" data-ifmt="svg">SVG</button>
+        <button class="fmt-btn" data-ifmt="pdf">PDF</button>
+      </div>
+      <div class="opts">
+        <h4>Opțiuni</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Calitate (JPG/WebP)</label><input type="range" id="img-quality" min="10" max="100" value="85" step="5"><span id="img-quality-val" style="font-size:11px;color:var(--muted)">85%</span></div>
+          <div class="opt-col"><label class="lbl">Lățime max (px, 0=original)</label><input type="number" id="img-width" value="0" min="0"></div>
+          <div class="opt-col"><label class="lbl">Înălțime max (px, 0=original)</label><input type="number" id="img-height" value="0" min="0"></div>
+        </div>
+      </div>
+      <div id="img-file-list" class="bulk-list" style="margin-bottom:10px"></div>
+      <button class="btn btn-primary" id="img-convert">⚡ Convertește imaginile</button>
+      <div class="prog-wrap" id="img-prog"><div class="prog-bar"><div class="prog-fill" id="img-fill" style="width:0%"></div></div><div class="status" id="img-status"></div></div>
+    </div>
+    <div id="img-results" style="display:none" class="card">
+      <div class="card-title">Rezultate <button class="btn btn-sm btn-green" id="img-dl-all" style="float:right">⬇ Descarcă toate (ZIP)</button></div>
+      <div id="img-results-list" class="bulk-list"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AUDIO ═══ -->
+<div class="module" id="mod-audio">
+  <div class="module-header">
+    <div class="module-title">🎵 Audio Converter</div>
+    <div class="module-desc">Convertește fișiere audio între formate WAV, OGG, MP3 (direct în browser).</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="audio-drop"><input type="file" id="audio-input" accept="audio/*,video/*"><div class="drop-icon">🎵</div><h3>Trage fișierul audio/video</h3><p>WAV, OGG, MP3, MP4, WebM</p></div>
+  </div>
+  <div id="audio-main" style="display:none">
+    <div class="file-info"><div class="fi-icon">🎵</div><div><div class="fi-name" id="audio-fname">—</div><div class="fi-meta" id="audio-fmeta">—</div></div><button class="fi-remove" id="audio-remove">✕</button></div>
+    <div class="card">
+      <audio id="audio-player" controls style="width:100%;margin-bottom:12px;border-radius:var(--r);"></audio>
+      <div class="card-title">Format ieșire</div>
+      <div class="fmt-grid">
+        <button class="fmt-btn sel" data-afmt="wav">WAV</button>
+        <button class="fmt-btn" data-afmt="ogg">OGG</button>
+        <button class="fmt-btn" data-afmt="mp3-like">MP3 (WAV)</button>
+      </div>
+      <div class="opts">
+        <h4>Opțiuni</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Sample Rate</label><select id="audio-sr"><option value="44100">44100 Hz (standard)</option><option value="22050">22050 Hz (mic)</option><option value="48000">48000 Hz (HD)</option></select></div>
+          <div class="opt-col"><label class="lbl">Canale</label><select id="audio-ch"><option value="2">Stereo</option><option value="1">Mono</option></select></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="audio-convert">⚡ Convertește audio</button>
+      <div class="prog-wrap" id="audio-prog"><div class="prog-bar"><div class="prog-fill" id="audio-fill" style="width:0%"></div></div><div class="status" id="audio-status"></div></div>
+      <button class="btn btn-sm btn-green" id="audio-dl" style="display:none;margin-top:8px">⬇ Descarcă</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DOCUMENTE ═══ -->
+<div class="module" id="mod-docs">
+  <div class="module-header">
+    <div class="module-title">📝 Documente</div>
+    <div class="module-desc">Convertește între Markdown, RTF, JSON, XML, CSV, TXT și alte formate.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="docs-drop"><input type="file" id="docs-input" accept=".txt,.md,.json,.xml,.csv,.rtf,.html,.htm"><div class="drop-icon">📝</div><h3>Trage documentul aici</h3><p>TXT, MD, JSON, XML, CSV, RTF, HTML</p></div>
+  </div>
+  <div id="docs-main" style="display:none">
+    <div class="file-info"><div class="fi-icon">📝</div><div><div class="fi-name" id="docs-fname">—</div><div class="fi-meta" id="docs-fmeta">—</div></div><button class="fi-remove" id="docs-remove">✕</button></div>
+    <div class="card">
+      <div class="card-title">Format ieșire</div>
+      <div class="fmt-grid">
+        <button class="fmt-btn sel" data-dfmt="txt">TXT</button>
+        <button class="fmt-btn" data-dfmt="md">Markdown</button>
+        <button class="fmt-btn" data-dfmt="html">HTML</button>
+        <button class="fmt-btn" data-dfmt="json">JSON</button>
+        <button class="fmt-btn" data-dfmt="xml">XML</button>
+        <button class="fmt-btn" data-dfmt="csv">CSV</button>
+        <button class="fmt-btn" data-dfmt="rtf">RTF</button>
+        <button class="fmt-btn" data-dfmt="pdf">PDF</button>
+      </div>
+      <button class="btn btn-primary" id="docs-convert">⚡ Convertește</button>
+      <div class="prog-wrap" id="docs-prog"><div class="prog-bar"><div class="prog-fill" id="docs-fill" style="width:0%"></div></div><div class="status" id="docs-status"></div></div>
+    </div>
+    <div class="preview-grid" id="docs-preview" style="display:none">
+      <div class="panel"><div class="panel-hdr"><span>Original</span></div><div class="panel-body" id="docs-src-body"></div></div>
+      <div class="panel"><div class="panel-hdr"><span>Ieșire</span><button class="btn btn-sm btn-green" id="docs-dl" style="display:none">⬇ Descarcă</button></div><div class="panel-body" id="docs-out-body"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ZIP ═══ -->
+<div class="module" id="mod-zip">
+  <div class="module-header">
+    <div class="module-title">🗜 ZIP / Arhive</div>
+    <div class="module-desc">Crează arhive ZIP din mai multe fișiere sau extrage conținutul unei arhive.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Crează ZIP</div>
+      <div class="drop" style="padding:1.5rem" id="zip-create-drop"><input type="file" id="zip-create-input" multiple><div class="drop-icon" style="font-size:28px">📁</div><h3 style="font-size:14px">Adaugă fișierele</h3><p style="font-size:12px">Orice tip de fișier</p></div>
+      <div id="zip-create-list" style="margin-top:8px"></div>
+      <div class="opts" style="margin-top:8px"><h4>Opțiuni</h4><label class="lbl">Numele arhivei</label><input type="text" id="zip-name" value="arhiva" placeholder="arhiva"></div>
+      <button class="btn btn-primary" id="zip-create-btn" style="display:none">🗜 Crează ZIP</button>
+      <div class="status" id="zip-create-status"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Extrage ZIP</div>
+      <div class="drop" style="padding:1.5rem" id="zip-extract-drop"><input type="file" id="zip-extract-input" accept=".zip"><div class="drop-icon" style="font-size:28px">📦</div><h3 style="font-size:14px">Trage arhiva ZIP</h3><p style="font-size:12px">Acceptă: .ZIP</p></div>
+      <div id="zip-extract-list" style="margin-top:8px"></div>
+      <button class="btn btn-primary" id="zip-extract-all-btn" style="display:none;margin-top:8px">📤 Extrage toate</button>
+      <div class="status" id="zip-extract-status"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BASE64 ═══ -->
+<div class="module" id="mod-base64">
+  <div class="module-header">
+    <div class="module-title">🔐 Base64</div>
+    <div class="module-desc">Codifică orice fișier în Base64 sau decodifică text Base64 înapoi la fișier.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Fișier → Base64</div>
+      <div class="drop" style="padding:1.5rem" id="b64-enc-drop"><input type="file" id="b64-enc-input"><div class="drop-icon" style="font-size:24px">📄</div><p style="font-size:12px">Orice fișier</p></div>
+      <div class="status" id="b64-enc-status"></div>
+      <textarea id="b64-enc-out" style="width:100%;height:120px;margin-top:8px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:'JetBrains Mono';font-size:10px;padding:8px;resize:vertical" placeholder="Rezultatul Base64 va apărea aici..." readonly></textarea>
+      <button class="btn btn-sm" id="b64-copy" style="margin-top:6px;display:none">📋 Copiază</button>
+    </div>
+    <div class="card">
+      <div class="card-title">Base64 → Fișier</div>
+      <textarea id="b64-dec-in" style="width:100%;height:120px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:'JetBrains Mono';font-size:10px;padding:8px;resize:vertical" placeholder="Lipește textul Base64 aici..."></textarea>
+      <div class="opt-row" style="margin-top:8px">
+        <div class="opt-col"><label class="lbl">Tip fișier</label><input type="text" id="b64-mime" value="application/octet-stream" placeholder="ex: image/png"></div>
+        <div class="opt-col"><label class="lbl">Nume fișier</label><input type="text" id="b64-filename" value="fisier.bin" placeholder="fisier.bin"></div>
+      </div>
+      <button class="btn btn-primary" id="b64-dec-btn" style="margin-top:8px">🔓 Decodifică și descarcă</button>
+      <div class="status" id="b64-dec-status"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ PDF EDITOR ═══ -->
+<div class="module" id="mod-editor">
+  <div class="module-header">
+    <div class="module-title">✏️ PDF Editor <span class="tag tag-new">NOU</span></div>
+    <div class="module-desc">Deschide un PDF și adaugă text, imagini sau semnături direct pe pagini.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="editor-drop"><input type="file" id="editor-input" accept=".pdf"><div class="drop-icon">📄</div><h3>Trage PDF-ul pentru editare</h3><p>Deschide și editează vizual</p></div>
+  </div>
+  <div id="editor-main" style="display:none">
+    <div class="card" style="padding:0;overflow:hidden">
+      <div class="editor-toolbar">
+        <button class="tool-btn active" id="ed-tool-text">✏️ Text</button>
+        <button class="tool-btn" id="ed-tool-sign">✍️ Semnătură</button>
+        <button class="tool-btn" id="ed-tool-img">🖼 Imagine</button>
+        <input type="file" id="ed-img-input" accept="image/*" style="display:none">
+        <div style="flex:1"></div>
+        <select id="ed-page" style="width:120px;padding:5px 8px;font-size:12px;background:var(--bg4);border:1px solid var(--border2);color:var(--text);border-radius:var(--r)"><option>Pagina 1</option></select>
+        <button class="tool-btn" id="ed-prev">← Prev</button>
+        <button class="tool-btn" id="ed-next">Next →</button>
+        <button class="tool-btn" id="ed-save" style="background:rgba(139,92,246,.15);border-color:var(--accent);color:var(--accent3)">💾 Salvează PDF</button>
+      </div>
+      <div class="editor-canvas-wrap" id="editor-canvas-wrap" style="position:relative">
+        <canvas id="pdfCanvas"></canvas>
+        <div id="ed-text-layer" style="position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none"></div>
+      </div>
+    </div>
+    <div class="card" id="ed-sign-panel" style="display:none">
+      <div class="card-title">Desenează semnătura</div>
+      <canvas id="signCanvas" width="500" height="120" style="border:1px solid var(--border2);border-radius:var(--r);background:#fff;cursor:crosshair;max-width:100%;display:block"></canvas>
+      <div style="display:flex;gap:8px;margin-top:8px">
+        <button class="btn btn-sm" id="sign-clear">🗑 Șterge</button>
+        <button class="btn btn-sm btn-green" id="sign-add">✓ Adaugă pe PDF</button>
+      </div>
+    </div>
+    <div class="opts" id="ed-text-opts">
+      <h4>Proprietăți text</h4>
+      <div class="opt-row">
+        <div class="opt-col"><label class="lbl">Font size</label><input type="number" id="ed-font-size" value="16" min="8" max="72"></div>
+        <div class="opt-col"><label class="lbl">Culoare</label><input type="color" id="ed-font-color" value="#000000" style="height:36px;padding:2px;width:100%"></div>
+        <div class="opt-col"><label class="lbl">Text</label><input type="text" id="ed-text-input" placeholder="Scrie textul..."></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:6px">Apasă pe PDF pentru a plasa textul</p>
+    </div>
+    <div class="status" id="editor-status"></div>
+  </div>
+</div>
+
+<!-- ═══ UPSCALER AI ═══ -->
+<div class="module" id="mod-upscaler">
+  <div class="module-header">
+    <div class="module-title">✨ Upscaler AI <span class="tag tag-ai">AI</span></div>
+    <div class="module-desc">Mărește imaginile fără pierdere de calitate folosind interpolare avansată (Lanczos).</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="upscale-drop"><input type="file" id="upscale-input" accept="image/*"><div class="drop-icon">🔍</div><h3>Trage imaginea pentru upscaling</h3><p>JPG, PNG, WebP</p></div>
+  </div>
+  <div id="upscale-main" style="display:none">
+    <div class="card">
+      <div class="card-title">Factor mărire</div>
+      <div class="fmt-grid">
+        <button class="fmt-btn sel" data-scale="2">2× (dublează)</button>
+        <button class="fmt-btn" data-scale="3">3× (triplează)</button>
+        <button class="fmt-btn" data-scale="4">4× (ultra HD)</button>
+      </div>
+      <div class="opts">
+        <h4>Algoritm</h4>
+        <select id="upscale-algo"><option value="lanczos">Lanczos (calitate maximă)</option><option value="bicubic">Bicubic (rapid)</option><option value="nearest">Nearest (pixel art)</option></select>
+      </div>
+      <button class="btn btn-primary" id="upscale-btn">✨ Mărește imaginea</button>
+      <div class="prog-wrap" id="upscale-prog"><div class="prog-bar"><div class="prog-fill" id="upscale-fill" style="width:0%"></div></div><div class="status" id="upscale-status"></div></div>
+    </div>
+    <div class="compare-wrap" id="upscale-compare" style="display:none">
+      <div><div class="compare-img"><img id="upscale-before" src="" alt="original"></div><div class="compare-label">Original</div></div>
+      <div><div class="compare-img"><img id="upscale-after" src="" alt="upscaled"></div><div class="compare-label">Upscaled <span id="upscale-dims" style="color:var(--accent3)"></span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:10px"><button class="btn btn-sm btn-green" id="upscale-dl" style="display:none">⬇ Descarcă imaginea mărită</button></div>
+  </div>
+</div>
+
+<!-- ═══ BG REMOVER ═══ -->
+<div class="module" id="mod-bgremove">
+  <div class="module-header">
+    <div class="module-title">🪄 Background Remover <span class="tag tag-ai">AI</span></div>
+    <div class="module-desc">Elimină automat fundalul din imagini. Procesare locală, fără server.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="bg-drop"><input type="file" id="bg-input" accept="image/*"><div class="drop-icon">🪄</div><h3>Trage imaginea</h3><p>JPG sau PNG cu subiect clar</p></div>
+  </div>
+  <div id="bg-main" style="display:none">
+    <div class="card">
+      <div class="opts"><h4>Metodă</h4><select id="bg-method"><option value="threshold">Prag culoare de fundal (rapid)</option><option value="edge">Detecție margini (precis)</option><option value="green">Chroma key (fundal verde/albastru)</option></select></div>
+      <div class="opts" id="bg-thresh-opts"><h4>Toleranță fundal</h4><input type="range" id="bg-threshold" min="10" max="100" value="40" step="5"><span id="bg-threshold-val" style="font-size:11px;color:var(--muted)">40</span></div>
+      <button class="btn btn-primary" id="bg-btn">🪄 Elimină fundalul</button>
+      <div class="prog-wrap" id="bg-prog"><div class="prog-bar"><div class="prog-fill" id="bg-fill" style="width:0%"></div></div><div class="status" id="bg-status"></div></div>
+    </div>
+    <div class="compare-wrap" id="bg-compare" style="display:none">
+      <div><div class="compare-img"><img id="bg-before" src="" alt="original" style="max-height:280px;object-fit:contain;width:100%"></div><div class="compare-label">Original</div></div>
+      <div><div class="compare-img" style="background:repeating-conic-gradient(#aaa 0% 25%, #fff 0% 50%) 0 0/20px 20px"><img id="bg-after" src="" alt="fara fundal" style="max-height:280px;object-fit:contain;width:100%"></div><div class="compare-label">Fără fundal</div></div>
+    </div>
+    <div style="text-align:center;margin-top:10px"><button class="btn btn-sm btn-green" id="bg-dl" style="display:none">⬇ Descarcă PNG transparent</button></div>
+  </div>
+</div>
+
+<!-- ═══ SVG TRACER ═══ -->
+<div class="module" id="mod-svg">
+  <div class="module-header">
+    <div class="module-title">🎨 Image → SVG Tracer</div>
+    <div class="module-desc">Convertește imagini JPG/PNG în vectori SVG curați, potriviți pentru gravură și decupare.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="svg-drop"><input type="file" id="svg-input" accept="image/*"><div class="drop-icon">🎨</div><h3>Trage imaginea de vectorizat</h3><p>JPG, PNG — funcționează cel mai bine cu imagini simple</p></div>
+  </div>
+  <div id="svg-main" style="display:none">
+    <div class="card">
+      <div class="opts"><h4>Opțiuni vectorizare</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Prag alb/negru</label><input type="range" id="svg-threshold" min="50" max="200" value="128" step="5"><span id="svg-thresh-val" style="font-size:11px;color:var(--muted)">128</span></div>
+          <div class="opt-col"><label class="lbl">Detalii (curbe)</label><select id="svg-detail"><option value="low">Simplu</option><option value="med" selected>Mediu</option><option value="high">Detaliat</option></select></div>
+          <div class="opt-col"><label class="lbl">Culoare SVG</label><input type="color" id="svg-color" value="#000000" style="height:36px;width:100%;padding:2px"></div>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="svg-btn">🎨 Vectorizează</button>
+      <div class="prog-wrap" id="svg-prog"><div class="prog-bar"><div class="prog-fill" id="svg-fill" style="width:0%"></div></div><div class="status" id="svg-status"></div></div>
+    </div>
+    <div class="preview-grid" id="svg-preview" style="display:none">
+      <div class="panel"><div class="panel-hdr"><span>Original</span><span class="pbadge pb-img">JPG/PNG</span></div><div style="padding:10px;background:var(--bg3)"><img id="svg-orig-img" src="" style="max-width:100%;border-radius:6px"></div></div>
+      <div class="panel"><div class="panel-hdr"><span>Vector SVG</span><span class="pbadge" style="background:rgba(236,72,153,.15);color:#ec4899">SVG</span><button class="btn btn-sm btn-green" id="svg-dl" style="display:none">⬇ .SVG</button></div><div id="svg-out" style="padding:10px;background:var(--bg3);min-height:100px;display:flex;align-items:center;justify-content:center"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ VIDEO FRAMES ═══ -->
+<div class="module" id="mod-video">
+  <div class="module-header">
+    <div class="module-title">🎬 Video Frame Extractor</div>
+    <div class="module-desc">Deschide un video și salvează orice cadru ca imagine JPG de calitate maximă.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="video-drop"><input type="file" id="video-input" accept="video/*"><div class="drop-icon">🎬</div><h3>Trage fișierul video</h3><p>MP4, WebM, AVI, MOV</p></div>
+  </div>
+  <div id="video-main" style="display:none">
+    <div class="card">
+      <video id="videoPlayer" controls style="width:100%;border-radius:var(--r);background:#000;max-height:360px"></video>
+      <div style="display:flex;gap:10px;margin-top:12px;align-items:center;flex-wrap:wrap">
+        <div style="font-size:12px;color:var(--muted)">Frame curent: <span id="video-time" style="color:var(--text)">0.00s</span></div>
+        <div style="flex:1"></div>
+        <div class="opt-col" style="max-width:140px"><label class="lbl">Calitate</label><select id="video-quality"><option value="0.95">Maximă</option><option value="0.85" selected>Înaltă</option><option value="0.70">Medie</option></select></div>
+        <button class="btn btn-primary" id="video-capture" style="width:auto;padding:10px 20px">📸 Capturează frame</button>
+      </div>
+    </div>
+    <div id="video-frames" style="display:none" class="card">
+      <div class="card-title">Frame-uri capturate <button class="btn btn-sm btn-green" id="video-dl-all" style="float:right">⬇ ZIP</button></div>
+      <div id="video-frames-list" class="img-grid"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ BULK ═══ -->
+<div class="module" id="mod-bulk">
+  <div class="module-header">
+    <div class="module-title">📦 Bulk Image Processor</div>
+    <div class="module-desc">Procesează zeci de imagini simultan: watermark, resize, ștergere EXIF, descărcare ZIP.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="bulk-drop"><input type="file" id="bulk-input" accept="image/*" multiple><div class="drop-icon">📦</div><h3>Trage imaginile (multiple)</h3><p>JPG, PNG, WebP — selectează mai multe</p></div>
+  </div>
+  <div id="bulk-main" style="display:none">
+    <div class="card">
+      <div class="card-title">Operații de aplicat</div>
+      <div class="opts">
+        <h4>Watermark</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Text watermark (gol = fără)</label><input type="text" id="bulk-wm-text" placeholder="ex: © 2025 Numele Meu"></div>
+          <div class="opt-col"><label class="lbl">Poziție</label><select id="bulk-wm-pos"><option value="br">Dreapta jos</option><option value="bl">Stânga jos</option><option value="tr">Dreapta sus</option><option value="center">Centru</option></select></div>
+          <div class="opt-col"><label class="lbl">Opacitate</label><input type="range" id="bulk-wm-opacity" min="10" max="100" value="50"><span id="bulk-wm-opval" style="font-size:11px;color:var(--muted)">50%</span></div>
+        </div>
+      </div>
+      <div class="opts">
+        <h4>Redimensionare</h4>
+        <div class="opt-row">
+          <div class="opt-col"><label class="lbl">Lățime max (0=original)</label><input type="number" id="bulk-resize-w" value="0" min="0"></div>
+          <div class="opt-col"><label class="lbl">Înălțime max (0=original)</label><input type="number" id="bulk-resize-h" value="0" min="0"></div>
+          <div class="opt-col"><label class="lbl">Calitate ieșire</label><input type="range" id="bulk-quality" min="50" max="100" value="85"><span id="bulk-qual-val" style="font-size:11px;color:var(--muted)">85%</span></div>
+        </div>
+      </div>
+      <div class="opts">
+        <h4>Alte opțiuni</h4>
+        <label style="display:flex;align-items:center;gap:8px;font-size:13px;cursor:pointer"><input type="checkbox" id="bulk-strip-exif" checked style="width:auto"> Șterge date EXIF (locație, cameră)</label>
+      </div>
+      <div class="bulk-list" id="bulk-file-list" style="margin-bottom:10px"></div>
+      <button class="btn btn-primary" id="bulk-process">⚡ Procesează toate și descarcă ZIP</button>
+      <div class="prog-wrap" id="bulk-prog"><div class="prog-bar"><div class="prog-fill" id="bulk-fill" style="width:0%"></div></div><div class="status" id="bulk-status"></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ OCR ═══ -->
+<div class="module" id="mod-ocr">
+  <div class="module-header">
+    <div class="module-title">🔍 OCR Scanner <span class="tag tag-ai">AI</span></div>
+    <div class="module-desc">Extrage text din poze sau documente scanate folosind Tesseract.js (AI local).</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="ocr-drop"><input type="file" id="ocr-input" accept="image/*,.pdf"><div class="drop-icon">🔍</div><h3>Trage poza sau documentul scanat</h3><p>JPG, PNG — text tipărit sau scris de mână</p></div>
+  </div>
+  <div id="ocr-main" style="display:none">
+    <div class="card">
+      <img id="ocr-preview-img" src="" style="max-width:100%;border-radius:var(--r);margin-bottom:12px;max-height:250px;object-fit:contain">
+      <div class="opts"><h4>Limbă</h4>
+        <select id="ocr-lang"><option value="ron">Română</option><option value="eng" selected>Engleză</option><option value="deu">Germană</option><option value="fra">Franceză</option><option value="rus">Rusă</option></select>
+      </div>
+      <button class="btn btn-primary" id="ocr-btn">🔍 Extrage text (OCR)</button>
+      <div class="prog-wrap" id="ocr-prog"><div class="prog-bar"><div class="prog-fill" id="ocr-fill" style="width:0%"></div></div><div class="status" id="ocr-status"></div></div>
+    </div>
+    <div id="ocr-result-panel" style="display:none" class="card">
+      <div class="card-title">Text extras <button class="btn btn-sm btn-green" id="ocr-dl" style="float:right">⬇ TXT</button></div>
+      <div class="ocr-result" id="ocr-result-text"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TRANSCRIERE ═══ -->
+<div class="module" id="mod-transcribe">
+  <div class="module-header">
+    <div class="module-title">🎙 Transcriere Audio <span class="tag tag-ai">AI</span></div>
+    <div class="module-desc">Transcrie automat audio sau video în text folosind Web Speech API și procesare locală.</div>
+  </div>
+  <div class="card">
+    <div class="drop" id="tr-drop"><input type="file" id="tr-input" accept="audio/*,video/*"><div class="drop-icon">🎙</div><h3>Trage fișierul audio sau video</h3><p>MP3, WAV, OGG, MP4, WebM</p></div>
+  </div>
+  <div id="tr-main" style="display:none">
+    <div class="card">
+      <audio id="tr-player" controls style="width:100%;margin-bottom:12px;border-radius:var(--r)"></audio>
+      <div class="opts"><h4>Limbă vorbită</h4>
+        <select id="tr-lang"><option value="ro-RO">Română</option><option value="en-US" selected>Engleză (US)</option><option value="en-GB">Engleză (UK)</option><option value="de-DE">Germană</option><option value="fr-FR">Franceză</option><option value="ru-RU">Rusă</option></select>
+      </div>
+      <button class="btn btn-primary" id="tr-btn">🎙 Începe transcrierea</button>
+      <div class="prog-wrap" id="tr-prog"><div class="prog-bar"><div class="prog-fill" id="tr-fill" style="width:0%"></div></div><div class="status" id="tr-status"></div></div>
+    </div>
+    <div id="tr-result-panel" style="display:none" class="card">
+      <div class="card-title">Transcriere <button class="btn btn-sm btn-green" id="tr-dl" style="float:right">⬇ TXT</button></div>
+      <div class="transcript-box" id="tr-result-text"></div>
+    </div>
+  </div>
+</div>
+
+</main>
+</div>
+
+<footer>Universal Converter Pro · Fișierele nu se trimit nicăieri · Procesare 100% locală în browser · Gratuit fără limite</footer>
+
+<!-- LIBRARIES -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/5.0.4/tesseract.min.js"></script>
+
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+// ─── NAVIGATION ───
+document.querySelectorAll('.nav-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+    document.querySelectorAll('.module').forEach(m=>m.classList.remove('active'));
+    item.classList.add('active');
+    document.getElementById('mod-'+item.dataset.module).classList.add('active');
+  });
+});
+
+// ─── UTILS ───
+function triggerDl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),15000);}
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function setStatus(id,msg,type){const el=document.getElementById(id);if(!el)return;el.textContent=msg;el.className='status'+(type?' '+type:'');}
+function setProg(id,pct){const el=document.getElementById(id);if(el)el.style.width=pct+'%';}
+function showProg(id){const el=document.getElementById(id);if(el)el.classList.add('show');}
+function makeDrop(dropId,inputId,cb,multi){
+  const drop=document.getElementById(dropId);
+  if(!drop)return;
+  drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('over');});
+  drop.addEventListener('dragleave',()=>drop.classList.remove('over'));
+  drop.addEventListener('drop',e=>{e.preventDefault();drop.classList.remove('over');cb(multi?e.dataTransfer.files:e.dataTransfer.files[0]);});
+  document.getElementById(inputId).addEventListener('change',e=>cb(multi?e.target.files:e.target.files[0]));
+}
+function parseTable(text){
+  const lines=text.split('\n').map(l=>l.trim()).filter(l=>l);
+  const rows=[];
+  for(const l of lines){const c=splitLine(l);if(c.length>=2)rows.push(c);}
+  if(rows.length<2)return null;
+  const nc=Math.max(...rows.map(r=>r.length));
+  return rows.map(r=>{while(r.length<nc)r.push('');return r.slice(0,nc);});
+}
+function splitLine(l){
+  if(l.includes('\t'))return l.split('\t').map(s=>s.trim());
+  if(l.includes('|'))return l.split('|').map(s=>s.trim()).filter((s,i,a)=>!(i===0&&s==='')&&!(i===a.length-1&&s===''));
+  if(/  {2,}/.test(l))return l.split(/  +/).map(s=>s.trim()).filter(s=>s.length);
+  if(l.includes(';'))return l.split(';').map(s=>s.trim());
+  return[l];
+}
+function buildDBFBlob(rows){
+  const header=rows[0],data=rows.slice(1),nc=header.length;
+  const fields=header.map((h,i)=>{let ml=h.length;data.forEach(r=>{if(r[i])ml=Math.max(ml,String(r[i]).length);});ml=Math.min(Math.max(ml,1),254);return{name:(h||'COL'+(i+1)).replace(/[^A-Za-z0-9_]/g,'_').toUpperCase().slice(0,10),type:'C',length:ml};});
+  const hs=32+32*nc+1,rs=1+fields.reduce((a,f)=>a+f.length,0),tot=hs+rs*data.length+1;
+  const buf=new Uint8Array(tot);
+  const enc=s=>{const o=[];for(let i=0;i<s.length;i++)o.push(s.charCodeAt(i)<256?s.charCodeAt(i):63);return o;};
+  const now=new Date();buf[0]=3;buf[1]=now.getFullYear()-1900;buf[2]=now.getMonth()+1;buf[3]=now.getDate();
+  const nr=data.length;buf[4]=nr&255;buf[5]=(nr>>8)&255;buf[6]=(nr>>16)&255;buf[7]=(nr>>24)&255;
+  buf[8]=hs&255;buf[9]=(hs>>8)&255;buf[10]=rs&255;buf[11]=(rs>>8)&255;
+  fields.forEach((f,fi)=>{const off=32+fi*32,nb=enc(f.name);for(let i=0;i<11;i++)buf[off+i]=i<nb.length?nb[i]:0;buf[off+11]=67;buf[off+16]=f.length;});
+  buf[32+nc*32]=13;
+  data.forEach((row,ri)=>{let pos=hs+ri*rs;buf[pos++]=32;fields.forEach((f,fi)=>{const val=String(row[fi]||''),bytes=enc(val.slice(0,f.length));for(let i=0;i<f.length;i++)buf[pos+i]=i<bytes.length?bytes[i]:32;pos+=f.length;});});
+  buf[tot-1]=26;
+  return new Blob([buf],{type:'application/octet-stream'});
+}
+function textToPDF(text,title){
+  const lines=text.split('\n');const pH=842,pW=595,mg=50,lH=14,fS=11;
+  const lpp=Math.floor((pH-2*mg)/lH);const chunks=[];
+  for(let i=0;i<lines.length;i+=lpp)chunks.push(lines.slice(i,i+lpp));
+  if(!chunks.length)chunks.push(['']);
+  let pdf='%PDF-1.4\n';let id=0;const newId=()=>++id;
+  const catId=newId(),pagesId=newId(),fontId=newId();
+  const pd=chunks.map(()=>({pgId:newId(),cId:newId()}));
+  const objs=[];
+  objs.push({id:catId,s:`<< /Type /Catalog /Pages ${pagesId} 0 R >>`});
+  objs.push({id:pagesId,s:`<< /Type /Pages /Kids [${pd.map(p=>p.pgId+' 0 R').join(' ')}] /Count ${pd.length} >>`});
+  objs.push({id:fontId,s:`<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>`});
+  const safe=s=>s.replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)').replace(/[^\x20-\x7E]/g,' ');
+  pd.forEach((p,pi)=>{
+    const chunk=chunks[pi];let st=`BT /F1 ${fS} Tf\n`;
+    chunk.forEach((line,li)=>{const y=pH-mg-li*lH;st+=`${mg} ${y} Td (${safe(line)}) Tj ${-mg} 0 Td\n`;});
+    st+='ET';
+    objs.push({id:p.cId,stream:st});
+    objs.push({id:p.pgId,s:`<< /Type /Page /Parent ${pagesId} 0 R /MediaBox [0 0 ${pW} ${pH}] /Contents ${p.cId} 0 R /Resources << /Font << /F1 ${fontId} 0 R >> >> >>`});
+  });
+  let body='';const offs={};
+  objs.sort((a,b)=>a.id-b.id).forEach(o=>{offs[o.id]=pdf.length+body.length;if(o.stream!==undefined)body+=o.id+' 0 obj\n<< /Length '+o.stream.length+' >>\nstream\n'+o.stream+'\nendstream\nendobj\n';else body+=o.id+' 0 obj\n'+o.s+'\nendobj\n';});
+  pdf+=body;const xp=pdf.length;
+  pdf+=`xref\n0 ${id+1}\n0000000000 65535 f \n`;
+  for(let i=1;i<=id;i++)pdf+=String(offs[i]||0).padStart(10,'0')+' 00000 n \n';
+  pdf+=`trailer\n<< /Size ${id+1} /Root ${catId} 0 R >>\nstartxref\n${xp}\n%%EOF`;
+  return new Blob([pdf],{type:'application/pdf'});
+}
+async function imgToPDF(canvas){
+  const dataUrl=canvas.toDataURL('image/jpeg',0.92);
+  const b64=dataUrl.split(',')[1],imgBytes=atob(b64);
+  const imgArr=new Uint8Array(imgBytes.length);
+  for(let k=0;k<imgBytes.length;k++)imgArr[k]=imgBytes.charCodeAt(k);
+  const w=canvas.width,h=canvas.height;
+  const pW=595,pH=Math.round(h*(595/w));
+  const objs=[];let objId=0;
+  const newObj=()=>{const id=++objId;objs.push({id,lines:[],_stream:null,_dict:null});return objs[objs.length-1];};
+  const cat=newObj(),pages=newObj(),imgO=newObj(),page=newObj(),cont=newObj();
+  const cStr=`q ${pW} 0 0 ${pH} 0 0 cm /Im1 Do Q`;
+  const cB=Array.from(cStr).map(c=>c.charCodeAt(0));
+  imgO._stream=imgArr;imgO._dict=`<< /Type /XObject /Subtype /Image /Width ${w} /Height ${h} /Filter /DCTDecode /ColorSpace /DeviceRGB /BitsPerComponent 8 /Length ${imgArr.length} >>`;
+  cont._stream=new Uint8Array(cB);cont._dict=`<< /Length ${cB.length} >>`;
+  page.lines=[`<< /Type /Page /Parent ${pages.id} 0 R /MediaBox [0 0 ${pW} ${pH}] /Resources << /XObject << /Im1 ${imgO.id} 0 R >> >> /Contents ${cont.id} 0 R >>`];
+  pages.lines=[`<< /Type /Pages /Kids [${page.id} 0 R] /Count 1 >>`];
+  cat.lines=[`<< /Type /Catalog /Pages ${pages.id} 0 R >>`];
+  const parts=[];parts.push('%PDF-1.4\n');
+  const offsets=new Array(objId+1).fill(0);let pos=parts[0].length;
+  objs.forEach(o=>{offsets[o.id]=pos;let chunk='';chunk+=o.id+' 0 obj\n';
+    if(o._stream){chunk+=o._dict+'\nstream\n';const hB=chunk.split('').map(c=>c.charCodeAt(0));parts.push(new Uint8Array(hB));pos+=hB.length;parts.push(o._stream);pos+=o._stream.length;const tail='\nendstream\nendobj\n';parts.push(tail);pos+=tail.length;return;}
+    chunk+=o.lines.join('\n')+'\nendobj\n';parts.push(chunk);pos+=chunk.length;
+  });
+  const xp=pos;let xref=`xref\n0 ${objId+1}\n0000000000 65535 f \n`;
+  for(let i=1;i<=objId;i++)xref+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+  parts.push(xref);parts.push(`trailer\n<< /Size ${objId+1} /Root ${cat.id} 0 R >>\nstartxref\n${xp}\n%%EOF`);
+  const totalLen=parts.reduce((a,p)=>a+(typeof p==='string'?p.length:p.length),0);
+  const out=new Uint8Array(totalLen);let offset=0;
+  parts.forEach(p=>{if(typeof p==='string'){const b=p.split('').map(c=>c.charCodeAt(0));b.forEach((v,i)=>out[offset+i]=v);offset+=b.length;}else{out.set(p,offset);offset+=p.length;}});
+  return new Blob([out],{type:'application/pdf'});
+}
+
+// ═══════════════════════════════════════════
+// PDF MODULE
+// ═══════════════════════════════════════════
+let pdfFile=null,pdfPages=[],pdfText='',pdfFmt='txt',pdfBlobs=[];
+makeDrop('pdf-drop','pdf-input',f=>pdfLoad(f),false);
+document.getElementById('pdf-remove').addEventListener('click',pdfReset);
+document.querySelectorAll('[data-pfmt]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('[data-pfmt]').forEach(x=>x.classList.remove('sel'));
+    b.classList.add('sel');pdfFmt=b.dataset.pfmt;
+    document.getElementById('pdf-opt-img').style.display=(pdfFmt==='jpg'||pdfFmt==='png')?'block':'none';
+    document.getElementById('pdf-opt-csv').style.display=pdfFmt==='csv'?'block':'none';
+    document.getElementById('pdf-out-lbl').textContent='Ieșire ('+pdfFmt.toUpperCase()+')';
+    document.getElementById('pdf-out-badge').textContent=pdfFmt.toUpperCase();
+    document.getElementById('pdf-out-body').innerHTML='<div class="empty"><div class="empty-icon">✨</div><span>Apasă Convertește</span></div>';
+    pdfBlobs=[];document.getElementById('pdf-dl').style.display='none';document.getElementById('pdf-dl-all').style.display='none';
+  });
+});
+document.getElementById('pdf-convert').addEventListener('click',pdfConvert);
+document.getElementById('pdf-dl').addEventListener('click',()=>pdfBlobs.forEach(b=>triggerDl(b.blob,b.name)));
+document.getElementById('pdf-dl-all').addEventListener('click',()=>pdfBlobs.forEach(b=>triggerDl(b.blob,b.name)));
+
+function pdfReset(){pdfFile=null;pdfPages=[];pdfText='';document.getElementById('pdf-input').value='';document.getElementById('pdf-main').style.display='none';document.getElementById('pdf-preview').style.display='none';}
+
+async function pdfLoad(f){
+  if(!f||f.type!=='application/pdf'){alert('Te rog alege un fișier PDF.');return;}
+  pdfFile=f;
+  document.getElementById('pdf-fname').textContent=f.name;
+  document.getElementById('pdf-fmeta').textContent=(f.size/1024).toFixed(1)+' KB · se citește...';
+  document.getElementById('pdf-main').style.display='block';
+  document.getElementById('pdf-preview').style.display='grid';
+  document.getElementById('pdf-src-body').textContent='Se citește...';
+  const ab=await f.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+  pdfPages=[];
+  for(let i=1;i<=pdf.numPages;i++){
+    const pg=await pdf.getPage(i);
+    const tc=await pg.getTextContent();
+    let lastY=null,lines=[];
+    tc.items.forEach(item=>{if(lastY!==null&&Math.abs(item.transform[5]-lastY)>4)lines.push('\n');lines.push(item.str);lastY=item.transform[5];});
+    pdfPages.push({text:lines.join(' '),pg,num:i,total:pdf.numPages,pdf});
+  }
+  pdfText=pdfPages.map((p,i)=>(i>0?'--- Pagina '+(i+1)+' ---\n':'')+p.text).join('\n\n');
+  document.getElementById('pdf-src-body').textContent=pdfText.slice(0,2000)+(pdfText.length>2000?'\n[...]':'');
+  document.getElementById('pdf-fmeta').textContent=(f.size/1024).toFixed(1)+' KB · '+pdfPages.length+' pagini';
+}
+
+async function pdfConvert(){
+  if(!pdfFile)return;
+  document.getElementById('pdf-convert').disabled=true;
+  showProg('pdf-prog');setProg('pdf-fill',5);setStatus('pdf-status','Se procesează...','');
+  pdfBlobs=[];
+  try{
+    const base=pdfFile.name.replace(/\.pdf$/i,'');
+    if(pdfFmt==='txt'){const blob=new Blob([pdfText],{type:'text/plain;charset=utf-8'});pdfBlobs=[{blob,name:base+'.txt'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=pdfText.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='md'){const md='# '+base+'\n\n'+pdfPages.map((p,i)=>(i>0?'\n\n## Pagina '+(i+1)+'\n\n':'')+p.text).join('');const blob=new Blob([md],{type:'text/plain'});pdfBlobs=[{blob,name:base+'.md'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=md.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='json'){const json=JSON.stringify({title:base,pages:pdfPages.map(p=>({page:p.num,text:p.text}))},null,2);const blob=new Blob([json],{type:'application/json'});pdfBlobs=[{blob,name:base+'.json'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=json.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='html'){const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${esc(base)}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.8;}h2{color:#555;border-bottom:1px solid #ddd;}</style></head><body><h1>${esc(base)}</h1>${pdfPages.map((p,i)=>(i>0?'<h2>Pagina '+(i+1)+'</h2>':'')+p.text.split('\n').map(l=>'<p>'+esc(l)+'</p>').join('')).join('')}</body></html>`;const blob=new Blob([html],{type:'text/html'});pdfBlobs=[{blob,name:base+'.html'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=html.slice(0,1500);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='csv'){const sep=document.getElementById('pdf-csv-sep').value;const rows=parseTable(pdfText)||pdfText.split('\n').filter(l=>l.trim()).map((l,i)=>[(i+1).toString(),l]);const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(sep)).join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});pdfBlobs=[{blob,name:base+'.csv'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=csv.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='dbf'){const rows=parseTable(pdfText)||[['Nr','Text'],...pdfText.split('\n').filter(l=>l.trim()).map((l,i)=>[(i+1).toString(),l])];const blob=buildDBFBlob(rows);pdfBlobs=[{blob,name:base+'.dbf'}];setProg('pdf-fill',100);let h='<div class="tbl-wrap"><table class="ptbl"><thead><tr>'+rows[0].map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+rows.slice(1,30).map(r=>'<tr>'+r.map(c=>'<td>'+esc(String(c).slice(0,40))+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';document.getElementById('pdf-out-body').innerHTML=h;document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='docx'){if(typeof docx==='undefined'){setStatus('pdf-status','DOCX: reîncarcă pagina','err');document.getElementById('pdf-convert').disabled=false;return;}const{Document,Packer,Paragraph,TextRun,HeadingLevel}=docx;const paras=[];pdfPages.forEach((pg,i)=>{if(i>0)paras.push(new Paragraph({text:'Pagina '+(i+1),heading:HeadingLevel.HEADING_2}));pg.text.split('\n').filter(l=>l.trim()).forEach(line=>paras.push(new Paragraph({children:[new TextRun({text:line,size:24})]})));});const doc=new Document({sections:[{properties:{},children:paras}]});const blob=await Packer.toBlob(doc);pdfBlobs=[{blob,name:base+'.docx'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').style.fontFamily='inherit';document.getElementById('pdf-out-body').innerHTML='<p style="font-size:13px;color:var(--muted)">Document Word generat cu '+pdfPages.length+' pagini.</p>';document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='jpg'||pdfFmt==='png'){
+      const scale=parseFloat(document.getElementById('pdf-dpi').value)||2;
+      const allPgs=document.getElementById('pdf-pages-sel').value==='all';
+      const ab=await pdfFile.arrayBuffer();const pdf2=await pdfjsLib.getDocument({data:ab}).promise;
+      const count=allPgs?pdf2.numPages:1;
+      const container=document.createElement('div');
+      for(let i=1;i<=count;i++){
+        setProg('pdf-fill',Math.round((i/count)*90));
+        const pg=await pdf2.getPage(i);const vp=pg.getViewport({scale});
+        const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;
+        const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+        await pg.render({canvasContext:ctx,viewport:vp}).promise;
+        const mime=pdfFmt==='jpg'?'image/jpeg':'image/png';
+        const dataUrl=c.toDataURL(mime,0.92);const res=await fetch(dataUrl);const blob=await res.blob();
+        const fn=base+(count>1?'_p'+i:'')+'.'+(pdfFmt==='jpg'?'jpg':'png');
+        pdfBlobs.push({blob,name:fn,dataUrl});
+        if(i===1){const img=document.createElement('img');img.src=dataUrl;img.style.cssText='max-width:100%;border-radius:6px;';container.appendChild(img);}
+        const row=document.createElement('div');row.style.cssText='display:flex;align-items:center;gap:8px;padding:5px;font-size:12px;color:var(--muted)';row.textContent='📸 Pagina '+i;const db=document.createElement('button');db.className='btn btn-sm btn-green';db.textContent='⬇';const cap={blob,fn};db.onclick=()=>triggerDl(cap.blob,cap.fn);row.appendChild(db);container.appendChild(row);
+      }
+      setProg('pdf-fill',100);document.getElementById('pdf-out-body').innerHTML='';document.getElementById('pdf-out-body').appendChild(container);
+      if(count>1){document.getElementById('pdf-dl-all').style.display='';}else{document.getElementById('pdf-dl').style.display='';}
+    }
+    setStatus('pdf-status','✓ Conversie reușită! Descarcă fișierul.','ok');
+  }catch(e){setStatus('pdf-status','Eroare: '+e.message,'err');}
+  document.getElementById('pdf-convert').disabled=false;
+}
+
+// MERGE PDF
+let mergeFiles=[];
+makeDrop('merge-drop','merge-input',files=>{mergeFiles=Array.from(files);renderMergeList();},true);
+function renderMergeList(){
+  const list=document.getElementById('merge-list');
+  list.innerHTML=mergeFiles.map((f,i)=>'<div class="bulk-item"><div class="bi-name">'+esc(f.name)+'</div><div class="bi-size">'+(f.size/1024).toFixed(0)+' KB</div></div>').join('');
+  document.getElementById('merge-btn').style.display=mergeFiles.length>1?'':'none';
+}
+document.getElementById('merge-btn').addEventListener('click',async()=>{
+  if(mergeFiles.length<2)return;
+  setStatus('merge-status','Se combină...','');
+  try{
+    const{PDFDocument}=window.PDFLib||{};
+    if(!window.PDFLib){
+      const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(script);
+      await new Promise(r=>script.onload=r);
+    }
+    const merged=await window.PDFLib.PDFDocument.create();
+    for(const f of mergeFiles){const ab=await f.arrayBuffer();const src=await window.PDFLib.PDFDocument.load(ab);const pgIdxs=src.getPageIndices();const pgs=await merged.copyPages(src,pgIdxs);pgs.forEach(pg=>merged.addPage(pg));}
+    const bytes=await merged.save();triggerDl(new Blob([bytes],{type:'application/pdf'}),'merged.pdf');
+    setStatus('merge-status','✓ PDF combinat descărcat!','ok');
+  }catch(e){setStatus('merge-status','Eroare: '+e.message,'err');}
+});
+
+// SPLIT PDF
+let splitFile=null;
+makeDrop('split-drop','split-input',f=>{splitFile=f;document.getElementById('split-btn').style.display='';},false);
+document.getElementById('split-btn').addEventListener('click',async()=>{
+  if(!splitFile)return;setStatus('split-status','Se împarte...','');
+  try{
+    if(!window.PDFLib){const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(script);await new Promise(r=>script.onload=r);}
+    const ab=await splitFile.arrayBuffer();const src=await window.PDFLib.PDFDocument.load(ab);
+    const zip=new JSZip();
+    for(let i=0;i<src.getPageCount();i++){const pg=await window.PDFLib.PDFDocument.create();const[copied]=await pg.copyPages(src,[i]);pg.addPage(copied);const bytes=await pg.save();zip.file('pagina_'+(i+1)+'.pdf',bytes);}
+    const zblob=await zip.generateAsync({type:'blob'});triggerDl(zblob,'pagini.zip');
+    setStatus('split-status','✓ '+src.getPageCount()+' pagini descărcate ca ZIP!','ok');
+  }catch(e){setStatus('split-status','Eroare: '+e.message,'err');}
+});
+
+// ═══════════════════════════════════════════
+// IMAGINI MODULE
+// ═══════════════════════════════════════════
+let imgFiles=[],imgFmt='jpg';
+makeDrop('img-drop','img-input',files=>{imgFiles=Array.from(files);renderImgList();},true);
+document.querySelectorAll('[data-ifmt]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-ifmt]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');imgFmt=b.dataset.ifmt;});});
+const imgQualEl=document.getElementById('img-quality');const imgQualVal=document.getElementById('img-quality-val');
+imgQualEl.addEventListener('input',()=>imgQualVal.textContent=imgQualEl.value+'%');
+function renderImgList(){
+  document.getElementById('img-main').style.display=imgFiles.length?'block':'none';
+  document.getElementById('img-file-list').innerHTML=imgFiles.map(f=>'<div class="bulk-item"><div class="bi-name">'+esc(f.name)+'</div><div class="bi-size">'+(f.size/1024).toFixed(0)+' KB</div></div>').join('');
+}
+document.getElementById('img-convert').addEventListener('click',async()=>{
+  if(!imgFiles.length)return;
+  document.getElementById('img-convert').disabled=true;
+  showProg('img-prog');setStatus('img-status','Se convertesc...','');
+  const zip=new JSZip();const qual=parseInt(imgQualEl.value)/100;
+  const maxW=parseInt(document.getElementById('img-width').value)||0;
+  const maxH=parseInt(document.getElementById('img-height').value)||0;
+  const results=[];
+  for(let i=0;i<imgFiles.length;i++){
+    setProg('img-fill',Math.round((i/imgFiles.length)*90));
+    const f=imgFiles[i];
+    try{
+      const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f);});
+      const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
+      let w=img.width,h=img.height;
+      if(maxW>0&&w>maxW){h=Math.round(h*(maxW/w));w=maxW;}
+      if(maxH>0&&h>maxH){w=Math.round(w*(maxH/h));h=maxH;}
+      const c=document.createElement('canvas');c.width=w;c.height=h;
+      const ctx=c.getContext('2d');
+      if(imgFmt==='jpg'){ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);}
+      ctx.drawImage(img,0,0,w,h);
+      let outDataUrl,mime,ext;
+      if(imgFmt==='jpg'){mime='image/jpeg';ext='jpg';outDataUrl=c.toDataURL(mime,qual);}
+      else if(imgFmt==='webp'){mime='image/webp';ext='webp';outDataUrl=c.toDataURL(mime,qual);}
+      else if(imgFmt==='png'){mime='image/png';ext='png';outDataUrl=c.toDataURL(mime);}
+      else if(imgFmt==='bmp'){mime='image/bmp';ext='bmp';outDataUrl=c.toDataURL();}
+      else if(imgFmt==='ico'){mime='image/png';ext='ico';const c2=document.createElement('canvas');c2.width=32;c2.height=32;c2.getContext('2d').drawImage(c,0,0,32,32);outDataUrl=c2.toDataURL(mime);}
+      else if(imgFmt==='pdf'){const blob=await imgToPDF(c);const fn=f.name.replace(/\.[^.]+$/,'.pdf');zip.file(fn,blob);results.push({name:fn,blob,ok:true});continue;}
+      else{outDataUrl=c.toDataURL('image/png');ext='png';}
+      const res=await fetch(outDataUrl);const blob=await res.blob();
+      const fn=f.name.replace(/\.[^.]+$/,'.'+ext);
+      zip.file(fn,blob);results.push({name:fn,blob,dataUrl:outDataUrl,ok:true});
+    }catch(e){results.push({name:f.name,ok:false,err:e.message});}
+  }
+  setProg('img-fill',100);
+  document.getElementById('img-results').style.display='block';
+  document.getElementById('img-results-list').innerHTML=results.map(r=>
+    '<div class="bulk-item"><div class="bi-name">'+esc(r.name)+'</div>'+(r.ok?'<div class="bi-status bi-done"></div>':'<div class="bi-status bi-err" title="'+esc(r.err||'')+'"></div>')+'</div>'
+  ).join('');
+  document.getElementById('img-dl-all').style.display='';
+  document.getElementById('img-dl-all').onclick=async()=>{const zblob=await zip.generateAsync({type:'blob'});triggerDl(zblob,'imagini_convertite.zip');};
+  setStatus('img-status','✓ '+results.filter(r=>r.ok).length+'/'+imgFiles.length+' imagini convertite!','ok');
+  document.getElementById('img-convert').disabled=false;
+});
+
+// ═══════════════════════════════════════════
+// AUDIO MODULE
+// ═══════════════════════════════════════════
+let audioFile=null,audioFmt='wav';
+makeDrop('audio-drop','audio-input',f=>{audioFile=f;document.getElementById('audio-fname').textContent=f.name;document.getElementById('audio-fmeta').textContent=(f.size/1024).toFixed(1)+' KB';document.getElementById('audio-main').style.display='block';document.getElementById('audio-player').src=URL.createObjectURL(f);},false);
+document.getElementById('audio-remove').addEventListener('click',()=>{audioFile=null;document.getElementById('audio-main').style.display='none';document.getElementById('audio-player').src='';});
+document.querySelectorAll('[data-afmt]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-afmt]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');audioFmt=b.dataset.afmt;});});
+document.getElementById('audio-convert').addEventListener('click',async()=>{
+  if(!audioFile)return;
+  document.getElementById('audio-convert').disabled=true;
+  showProg('audio-prog');setProg('audio-fill',20);setStatus('audio-status','Se procesează audio...','');
+  try{
+    const ac=new AudioContext({sampleRate:parseInt(document.getElementById('audio-sr').value)||44100});
+    const ab=await audioFile.arrayBuffer();
+    setProg('audio-fill',40);
+    const decoded=await ac.decodeAudioData(ab);
+    const ch=parseInt(document.getElementById('audio-ch').value)||2;
+    const sr=decoded.sampleRate;
+    const len=decoded.length;
+    const channels=Math.min(ch,decoded.numberOfChannels);
+    setProg('audio-fill',60);
+    let blob,name;
+    const base=audioFile.name.replace(/\.[^.]+$/,'');
+    if(audioFmt==='wav'||audioFmt==='mp3-like'){
+      const wavBuf=encodeWAV(decoded,channels,sr,len);blob=new Blob([wavBuf],{type:'audio/wav'});name=base+'.wav';
+    }else if(audioFmt==='ogg'){
+      const offAc=new OfflineAudioContext(channels,len,sr);const src2=offAc.createBufferSource();src2.buffer=decoded;src2.connect(offAc.destination);src2.start();const rendered=await offAc.startRendering();
+      const wavBuf=encodeWAV(rendered,channels,sr,len);blob=new Blob([wavBuf],{type:'audio/ogg'});name=base+'.ogg';
+    }
+    setProg('audio-fill',100);
+    const dlBtn=document.getElementById('audio-dl');dlBtn.style.display='';dlBtn.onclick=()=>triggerDl(blob,name);
+    setStatus('audio-status','✓ Audio convertit! Descarcă fișierul.','ok');
+  }catch(e){setStatus('audio-status','Eroare: '+e.message,'err');}
+  document.getElementById('audio-convert').disabled=false;
+});
+function encodeWAV(decoded,channels,sr,len){
+  const buf=new ArrayBuffer(44+len*channels*2);const view=new DataView(buf);
+  const writeStr=(v,off)=>{for(let i=0;i<v.length;i++)view.setUint8(off+i,v.charCodeAt(i));};
+  writeStr('RIFF',0);view.setUint32(4,36+len*channels*2,true);writeStr('WAVE',8);writeStr('fmt ',12);
+  view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,channels,true);
+  view.setUint32(24,sr,true);view.setUint32(28,sr*channels*2,true);view.setUint16(32,channels*2,true);view.setUint16(34,16,true);
+  writeStr('data',36);view.setUint32(40,len*channels*2,true);
+  let offset=44;
+  for(let i=0;i<len;i++){for(let c=0;c<channels;c++){const ch2=decoded.getChannelData(Math.min(c,decoded.numberOfChannels-1));const s=Math.max(-1,Math.min(1,ch2[i]));view.setInt16(offset,s<0?s*32768:s*32767,true);offset+=2;}}
+  return buf;
+}
+
+// ═══════════════════════════════════════════
+// DOCUMENTE MODULE
+// ═══════════════════════════════════════════
+let docsFile=null,docsFmt='txt',docsContent='';
+makeDrop('docs-drop','docs-input',f=>{docsFile=f;docsLoad(f);},false);
+document.getElementById('docs-remove').addEventListener('click',()=>{docsFile=null;document.getElementById('docs-main').style.display='none';document.getElementById('docs-preview').style.display='none';});
+document.querySelectorAll('[data-dfmt]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-dfmt]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');docsFmt=b.dataset.dfmt;});});
+document.getElementById('docs-convert').addEventListener('click',docsConvert);
+async function docsLoad(f){
+  docsContent=await f.text();
+  document.getElementById('docs-fname').textContent=f.name;document.getElementById('docs-fmeta').textContent=(f.size/1024).toFixed(1)+' KB';
+  document.getElementById('docs-main').style.display='block';document.getElementById('docs-preview').style.display='grid';
+  document.getElementById('docs-src-body').textContent=docsContent.slice(0,2000);
+}
+async function docsConvert(){
+  if(!docsFile)return;
+  showProg('docs-prog');setProg('docs-fill',30);setStatus('docs-status','Se convertește...','');
+  const base=docsFile.name.replace(/\.[^.]+$/,'');
+  let blob,name,preview;
+  try{
+    if(docsFmt==='txt'){blob=new Blob([docsContent],{type:'text/plain'});name=base+'.txt';preview=docsContent.slice(0,2000);}
+    else if(docsFmt==='md'){const md=docsContent.replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');blob=new Blob(['# '+base+'\n\n'+md],{type:'text/plain'});name=base+'.md';preview=md.slice(0,2000);}
+    else if(docsFmt==='html'){const html='<!DOCTYPE html><html><head><meta charset="UTF-8"><title>'+esc(base)+'</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;line-height:1.8}</style></head><body>'+docsContent.split('\n').map(l=>'<p>'+esc(l)+'</p>').join('')+'</body></html>';blob=new Blob([html],{type:'text/html'});name=base+'.html';preview=html.slice(0,2000);}
+    else if(docsFmt==='json'){const lines=docsContent.split('\n').filter(l=>l.trim());const json=JSON.stringify({title:base,content:docsContent,lines,wordCount:docsContent.split(/\s+/).length},null,2);blob=new Blob([json],{type:'application/json'});name=base+'.json';preview=json.slice(0,2000);}
+    else if(docsFmt==='xml'){const xml='<?xml version="1.0" encoding="UTF-8"?>\n<document>\n  <title>'+esc(base)+'</title>\n  <content>'+esc(docsContent)+'</content>\n</document>';blob=new Blob([xml],{type:'application/xml'});name=base+'.xml';preview=xml.slice(0,2000);}
+    else if(docsFmt==='csv'){const lines=docsContent.split('\n').filter(l=>l.trim());const csv=lines.map((l,i)=>'"'+(i+1)+'"'+','+('"'+l.replace(/"/g,'""')+'"')).join('\r\n');blob=new Blob(['\uFEFF"Nr","Linie"\r\n'+csv],{type:'text/csv'});name=base+'.csv';preview=csv.slice(0,2000);}
+    else if(docsFmt==='rtf'){const rtf='{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Times New Roman;}}\\f0\\fs24 '+docsContent.replace(/\n/g,'\\par ').replace(/[\\{}]/g,'\\$&')+'}';blob=new Blob([rtf],{type:'application/rtf'});name=base+'.rtf';preview=rtf.slice(0,2000);}
+    else if(docsFmt==='pdf'){blob=textToPDF(docsContent,base);name=base+'.pdf';preview='(PDF binar — apasă Descarcă)';}
+    setProg('docs-fill',100);document.getElementById('docs-out-body').textContent=preview||'(gol)';
+    document.getElementById('docs-dl').style.display='';document.getElementById('docs-dl').onclick=()=>triggerDl(blob,name);
+    setStatus('docs-status','✓ Convertit! Descarcă fișierul.','ok');
+  }catch(e){setStatus('docs-status','Eroare: '+e.message,'err');}
+}
+
+// ═══════════════════════════════════════════
+// ZIP MODULE
+// ═══════════════════════════════════════════
+let zipCreateFiles=[];
+makeDrop('zip-create-drop','zip-create-input',files=>{zipCreateFiles=Array.from(files);document.getElementById('zip-create-list').innerHTML=zipCreateFiles.map(f=>'<div class="bulk-item"><div class="bi-name">'+esc(f.name)+'</div><div class="bi-size">'+(f.size/1024).toFixed(0)+' KB</div></div>').join('');document.getElementById('zip-create-btn').style.display=zipCreateFiles.length?'':'none';},true);
+document.getElementById('zip-create-btn').addEventListener('click',async()=>{
+  if(!zipCreateFiles.length)return;setStatus('zip-create-status','Se creează arhiva...','');
+  const zip=new JSZip();for(const f of zipCreateFiles){const ab=await f.arrayBuffer();zip.file(f.name,ab);}
+  const blob=await zip.generateAsync({type:'blob'});
+  const name=(document.getElementById('zip-name').value||'arhiva')+'.zip';
+  triggerDl(blob,name);setStatus('zip-create-status','✓ Arhiva ZIP descărcată!','ok');
+});
+makeDrop('zip-extract-drop','zip-extract-input',async f=>{
+  setStatus('zip-extract-status','Se citește arhiva...','');
+  const ab=await f.arrayBuffer();const zip=await JSZip.loadAsync(ab);
+  const files=Object.keys(zip.files).filter(name=>!zip.files[name].dir);
+  document.getElementById('zip-extract-list').innerHTML='<div class="zip-list">'+files.map(name=>{const size=zip.files[name]._data?zip.files[name]._data.uncompressedSize||0:0;return'<div class="zip-item"><div class="zi-name">'+esc(name)+'</div><div class="zi-size">'+(size/1024).toFixed(0)+' KB</div><button class="btn btn-sm zi-btn" onclick="extractSingle(\''+esc(name)+'\')">⬇</button></div>';}).join('')+'</div>';
+  window._currentZip=zip;document.getElementById('zip-extract-all-btn').style.display='';
+  setStatus('zip-extract-status',files.length+' fișiere în arhivă','');
+},false);
+window.extractSingle=async(name)=>{if(!window._currentZip)return;const blob=await window._currentZip.files[name].async('blob');triggerDl(blob,name.split('/').pop());};
+document.getElementById('zip-extract-all-btn').addEventListener('click',async()=>{
+  if(!window._currentZip)return;setStatus('zip-extract-status','Se extrag toate...','');
+  const zip2=new JSZip();const files=Object.keys(window._currentZip.files).filter(n=>!window._currentZip.files[n].dir);
+  for(const n of files){const ab=await window._currentZip.files[n].async('arraybuffer');zip2.file(n.split('/').pop(),ab);}
+  const blob=await zip2.generateAsync({type:'blob'});triggerDl(blob,'extras.zip');
+  setStatus('zip-extract-status','✓ Toate fișierele extrase!','ok');
+});
+
+// ═══════════════════════════════════════════
+// BASE64 MODULE
+// ═══════════════════════════════════════════
+makeDrop('b64-enc-drop','b64-enc-input',async f=>{
+  setStatus('b64-enc-status','Se codifică...','');
+  const ab=await f.arrayBuffer();const b64=btoa(String.fromCharCode(...new Uint8Array(ab)));
+  document.getElementById('b64-enc-out').value=b64;document.getElementById('b64-copy').style.display='';
+  setStatus('b64-enc-status','✓ '+(b64.length/1024).toFixed(1)+' KB Base64','ok');
+},false);
+document.getElementById('b64-copy').addEventListener('click',()=>{navigator.clipboard.writeText(document.getElementById('b64-enc-out').value);document.getElementById('b64-copy').textContent='✓ Copiat!';setTimeout(()=>document.getElementById('b64-copy').textContent='📋 Copiază',2000);});
+document.getElementById('b64-dec-btn').addEventListener('click',()=>{
+  try{const b64=document.getElementById('b64-dec-in').value.trim();const bytes=atob(b64);const arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);const blob=new Blob([arr],{type:document.getElementById('b64-mime').value||'application/octet-stream'});triggerDl(blob,document.getElementById('b64-filename').value||'fisier.bin');setStatus('b64-dec-status','✓ Fișier descărcat!','ok');}catch(e){setStatus('b64-dec-status','Eroare: Base64 invalid','err');}
+});
+
+// ═══════════════════════════════════════════
+// PDF EDITOR MODULE
+// ═══════════════════════════════════════════
+let editorPDF=null,editorPageNum=1,editorTotalPages=1,editorTool='text',editorAnnotations=[];
+let signDrawing=false,signLast={x:0,y:0};
+makeDrop('editor-drop','editor-input',async f=>{
+  editorPDF=f;editorAnnotations=[];
+  document.getElementById('editor-main').style.display='block';
+  await editorRender();
+},false);
+async function editorRender(){
+  if(!editorPDF)return;
+  const ab=await editorPDF.arrayBuffer();
+  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+  editorTotalPages=pdf.numPages;
+  const sel=document.getElementById('ed-page');sel.innerHTML='';
+  for(let i=1;i<=editorTotalPages;i++){const opt=document.createElement('option');opt.value=i;opt.textContent='Pagina '+i;if(i===editorPageNum)opt.selected=true;sel.appendChild(opt);}
+  const pg=await pdf.getPage(editorPageNum);
+  const vp=pg.getViewport({scale:1.2});
+  const canvas=document.getElementById('pdfCanvas');canvas.width=vp.width;canvas.height=vp.height;
+  const ctx=canvas.getContext('2d');await pg.render({canvasContext:ctx,viewport:vp}).promise;
+  renderAnnotations();
+}
+function renderAnnotations(){
+  const layer=document.getElementById('ed-text-layer');layer.innerHTML='';
+  const canvas=document.getElementById('pdfCanvas');const wrap=document.getElementById('editor-canvas-wrap');
+  const rect=canvas.getBoundingClientRect();const wrapRect=wrap.getBoundingClientRect();
+  editorAnnotations.filter(a=>a.page===editorPageNum).forEach((ann,idx)=>{
+    if(ann.type==='text'){
+      const el=document.createElement('div');el.className='added-text';el.textContent=ann.text;
+      el.style.cssText=`left:${ann.x}px;top:${ann.y}px;font-size:${ann.size}px;color:${ann.color};pointer-events:all;position:absolute;cursor:move;border:1px dashed rgba(139,92,246,.5);padding:2px 4px;`;
+      el.addEventListener('click',e=>{e.stopPropagation();el.classList.toggle('selected');});
+      layer.appendChild(el);
+    }else if(ann.type==='img'){
+      const el=document.createElement('img');el.src=ann.src;
+      el.style.cssText=`left:${ann.x}px;top:${ann.y}px;width:${ann.w}px;position:absolute;cursor:move;border:1px dashed rgba(139,92,246,.5);`;
+      layer.appendChild(el);
+    }
+  });layer.style.pointerEvents='all';
+}
+document.getElementById('pdfCanvas').addEventListener('click',e=>{
+  if(editorTool!=='text')return;
+  const canvas=document.getElementById('pdfCanvas');const rect=canvas.getBoundingClientRect();
+  const x=e.clientX-rect.left,y=e.clientY-rect.top;
+  const text=document.getElementById('ed-text-input').value;if(!text)return;
+  editorAnnotations.push({type:'text',page:editorPageNum,x,y,text,size:parseInt(document.getElementById('ed-font-size').value)||16,color:document.getElementById('ed-font-color').value});
+  renderAnnotations();
+});
+document.getElementById('ed-tool-text').addEventListener('click',()=>{editorTool='text';document.getElementById('ed-sign-panel').style.display='none';document.getElementById('ed-text-opts').style.display='';setActive('ed-tool-text');});
+document.getElementById('ed-tool-sign').addEventListener('click',()=>{editorTool='sign';document.getElementById('ed-sign-panel').style.display='block';document.getElementById('ed-text-opts').style.display='none';setActive('ed-tool-sign');});
+document.getElementById('ed-tool-img').addEventListener('click',()=>{document.getElementById('ed-img-input').click();setActive('ed-tool-img');});
+document.getElementById('ed-img-input').addEventListener('change',async e=>{
+  const f=e.target.files[0];if(!f)return;
+  const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f);});
+  editorAnnotations.push({type:'img',page:editorPageNum,x:50,y:50,src:dataUrl,w:200});renderAnnotations();
+});
+function setActive(id){document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');}
+document.getElementById('ed-prev').addEventListener('click',()=>{if(editorPageNum>1){editorPageNum--;editorRender();}});
+document.getElementById('ed-next').addEventListener('click',()=>{if(editorPageNum<editorTotalPages){editorPageNum++;editorRender();}});
+document.getElementById('ed-page').addEventListener('change',e=>{editorPageNum=parseInt(e.target.value);editorRender();});
+// Signature canvas
+const signCanvas=document.getElementById('signCanvas');const signCtx=signCanvas.getContext('2d');
+signCtx.strokeStyle='#1a1a2e';signCtx.lineWidth=2;signCtx.lineCap='round';
+signCanvas.addEventListener('mousedown',e=>{signDrawing=true;const r=signCanvas.getBoundingClientRect();signLast={x:e.clientX-r.left,y:e.clientY-r.top};});
+signCanvas.addEventListener('mousemove',e=>{if(!signDrawing)return;const r=signCanvas.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;signCtx.beginPath();signCtx.moveTo(signLast.x,signLast.y);signCtx.lineTo(x,y);signCtx.stroke();signLast={x,y};});
+signCanvas.addEventListener('mouseup',()=>signDrawing=false);
+document.getElementById('sign-clear').addEventListener('click',()=>signCtx.clearRect(0,0,signCanvas.width,signCanvas.height));
+document.getElementById('sign-add').addEventListener('click',()=>{const dataUrl=signCanvas.toDataURL('image/png');editorAnnotations.push({type:'img',page:editorPageNum,x:100,y:300,src:dataUrl,w:200});renderAnnotations();setStatus('editor-status','Semnătură adăugată pe pagina '+editorPageNum,'ok');});
+document.getElementById('ed-save').addEventListener('click',async()=>{
+  setStatus('editor-status','Se salvează PDF-ul...','');
+  try{
+    if(!window.PDFLib){const script=document.createElement('script');script.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(script);await new Promise(r=>script.onload=r);}
+    const ab=await editorPDF.arrayBuffer();const pdfDoc=await window.PDFLib.PDFDocument.load(ab);
+    const pages=pdfDoc.getPages();const font=await pdfDoc.embedFont(window.PDFLib.StandardFonts.Helvetica);
+    for(const ann of editorAnnotations){
+      const pg=pages[ann.page-1];if(!pg)continue;const{height}=pg.getSize();
+      if(ann.type==='text'){pg.drawText(ann.text,{x:ann.x,y:height-ann.y-ann.size,size:ann.size,font,color:window.PDFLib.rgb(0,0,0)});}
+      else if(ann.type==='img'){try{const imgBytes=await fetch(ann.src).then(r=>r.arrayBuffer());let embedded;if(ann.src.includes('image/png'))embedded=await pdfDoc.embedPng(imgBytes);else embedded=await pdfDoc.embedJpg(imgBytes);pg.drawImage(embedded,{x:ann.x,y:height-ann.y-ann.w*0.6,width:ann.w,height:ann.w*0.6});}catch(e){}}
+    }
+    const bytes=await pdfDoc.save();triggerDl(new Blob([bytes],{type:'application/pdf'}),editorPDF.name.replace('.pdf','_editat.pdf'));
+    setStatus('editor-status','✓ PDF salvat cu succes!','ok');
+  }catch(e){setStatus('editor-status','Eroare salvare: '+e.message,'err');}
+});
+
+// ═══════════════════════════════════════════
+// UPSCALER MODULE
+// ═══════════════════════════════════════════
+let upscaleFile=null,upscaleFactor=2;
+makeDrop('upscale-drop','upscale-input',f=>{upscaleFile=f;document.getElementById('upscale-main').style.display='block';document.getElementById('upscale-compare').style.display='none';document.getElementById('upscale-dl').style.display='none';},false);
+document.querySelectorAll('[data-scale]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-scale]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');upscaleFactor=parseInt(b.dataset.scale);});});
+document.getElementById('upscale-btn').addEventListener('click',async()=>{
+  if(!upscaleFile)return;
+  document.getElementById('upscale-btn').disabled=true;showProg('upscale-prog');setProg('upscale-fill',20);setStatus('upscale-status','Se mărește imaginea...','');
+  try{
+    const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(upscaleFile);});
+    const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
+    setProg('upscale-fill',40);
+    const srcCanvas=document.createElement('canvas');srcCanvas.width=img.width;srcCanvas.height=img.height;srcCanvas.getContext('2d').drawImage(img,0,0);
+    const newW=img.width*upscaleFactor,newH=img.height*upscaleFactor;
+    const dstCanvas=document.createElement('canvas');dstCanvas.width=newW;dstCanvas.height=newH;
+    const ctx=dstCanvas.getContext('2d');
+    const algo=document.getElementById('upscale-algo').value;
+    setProg('upscale-fill',60);
+    if(algo==='nearest'){ctx.imageSmoothingEnabled=false;}else{ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';}
+    ctx.drawImage(srcCanvas,0,0,newW,newH);
+    if(algo==='lanczos'){await lanczosUpscale(srcCanvas,dstCanvas);}
+    setProg('upscale-fill',90);
+    const outDataUrl=dstCanvas.toDataURL('image/png');
+    document.getElementById('upscale-before').src=dataUrl;
+    document.getElementById('upscale-after').src=outDataUrl;
+    document.getElementById('upscale-dims').textContent=newW+'×'+newH+'px';
+    document.getElementById('upscale-compare').style.display='grid';
+    const res=await fetch(outDataUrl);const blob=await res.blob();
+    document.getElementById('upscale-dl').style.display='';
+    document.getElementById('upscale-dl').onclick=()=>triggerDl(blob,upscaleFile.name.replace(/\.[^.]+$/,'_x'+upscaleFactor+'.png'));
+    setProg('upscale-fill',100);setStatus('upscale-status','✓ Mărire '+upscaleFactor+'x finalizată! ('+newW+'×'+newH+'px)','ok');
+  }catch(e){setStatus('upscale-status','Eroare: '+e.message,'err');}
+  document.getElementById('upscale-btn').disabled=false;
+});
+async function lanczosUpscale(src,dst){
+  const sw=src.width,sh=src.height,dw=dst.width,dh=dst.height;
+  const srcCtx=src.getContext('2d');const dstCtx=dst.getContext('2d');
+  const srcData=srcCtx.getImageData(0,0,sw,sh).data;
+  const dstImgData=dstCtx.createImageData(dw,dh);const dstData=dstImgData.data;
+  const lanczos=(x,a=3)=>{if(x===0)return 1;if(Math.abs(x)>=a)return 0;const px=Math.PI*x;return a*Math.sin(px)*Math.sin(px/a)/(px*px);};
+  const a=3;
+  for(let dy=0;dy<dh;dy++){for(let dx=0;dx<dw;dx++){
+    const sx=dx*(sw/dw),sy=dy*(sh/dh);
+    let r=0,g=0,b=0,al=0,w=0;
+    for(let ky=Math.ceil(sy-a);ky<=Math.floor(sy+a);ky++){for(let kx=Math.ceil(sx-a);kx<=Math.floor(sx+a);kx++){
+      const wy=lanczos(sy-ky),wx=lanczos(sx-kx);const wt=wx*wy;
+      const px2=Math.max(0,Math.min(sw-1,kx)),py=Math.max(0,Math.min(sh-1,ky));
+      const idx=(py*sw+px2)*4;r+=srcData[idx]*wt;g+=srcData[idx+1]*wt;b+=srcData[idx+2]*wt;al+=srcData[idx+3]*wt;w+=wt;
+    }}
+    const idx2=(dy*dw+dx)*4;dstData[idx2]=Math.max(0,Math.min(255,r/w));dstData[idx2+1]=Math.max(0,Math.min(255,g/w));dstData[idx2+2]=Math.max(0,Math.min(255,b/w));dstData[idx2+3]=Math.max(0,Math.min(255,al/w));
+  }}
+  dstCtx.putImageData(dstImgData,0,0);
+}
+
+// ═══════════════════════════════════════════
+// BG REMOVER MODULE
+// ═══════════════════════════════════════════
+let bgFile=null;
+makeDrop('bg-drop','bg-input',f=>{bgFile=f;document.getElementById('bg-main').style.display='block';document.getElementById('bg-compare').style.display='none';document.getElementById('bg-dl').style.display='none';},false);
+const bgThresh=document.getElementById('bg-threshold');const bgThreshVal=document.getElementById('bg-threshold-val');
+bgThresh.addEventListener('input',()=>bgThreshVal.textContent=bgThresh.value);
+document.getElementById('bg-btn').addEventListener('click',async()=>{
+  if(!bgFile)return;
+  document.getElementById('bg-btn').disabled=true;showProg('bg-prog');setProg('bg-fill',20);setStatus('bg-status','Se procesează...','');
+  try{
+    const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(bgFile);});
+    const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
+    const c=document.createElement('canvas');c.width=img.width;c.height=img.height;const ctx=c.getContext('2d');ctx.drawImage(img,0,0);
+    setProg('bg-fill',50);
+    const imgData=ctx.getImageData(0,0,c.width,c.height);const d=imgData.data;
+    const method=document.getElementById('bg-method').value;
+    const thresh=parseInt(bgThresh.value);
+    if(method==='threshold'){
+      const br=d[0],bg2=d[1],bb=d[2];
+      for(let i=0;i<d.length;i+=4){const dr=Math.abs(d[i]-br),dg=Math.abs(d[i+1]-bg2),db=Math.abs(d[i+2]-bb);if(dr+dg+db<thresh*3)d[i+3]=0;}
+    }else if(method==='green'){
+      for(let i=0;i<d.length;i+=4){const r2=d[i],g2=d[i+1],b2=d[i+2];if(g2>r2*1.2&&g2>b2*1.2&&g2>thresh)d[i+3]=0;}
+    }else{
+      const w2=c.width,h2=c.height;const edge=new Uint8Array(w2*h2);
+      for(let y=1;y<h2-1;y++){for(let x=1;x<w2-1;x++){const idx=(y*w2+x)*4;const l=(y*w2+(x-1))*4,r2=(y*w2+(x+1))*4;const mag=Math.abs(d[idx]-d[l])+Math.abs(d[idx]-d[r2]);edge[y*w2+x]=mag>20?255:0;}}
+      for(let i=0;i<d.length;i+=4){const px=i/4;if(!edge[px])d[i+3]=0;}
+    }
+    ctx.putImageData(imgData,0,0);
+    setProg('bg-fill',90);
+    const outDataUrl=c.toDataURL('image/png');
+    document.getElementById('bg-before').src=dataUrl;document.getElementById('bg-after').src=outDataUrl;
+    document.getElementById('bg-compare').style.display='grid';
+    const res=await fetch(outDataUrl);const blob=await res.blob();
+    document.getElementById('bg-dl').style.display='';
+    document.getElementById('bg-dl').onclick=()=>triggerDl(blob,bgFile.name.replace(/\.[^.]+$/,'_transparent.png'));
+    setProg('bg-fill',100);setStatus('bg-status','✓ Fundal eliminat! Descarcă PNG transparent.','ok');
+  }catch(e){setStatus('bg-status','Eroare: '+e.message,'err');}
+  document.getElementById('bg-btn').disabled=false;
+});
+
+// ═══════════════════════════════════════════
+// SVG TRACER MODULE
+// ═══════════════════════════════════════════
+let svgFile=null;
+makeDrop('svg-drop','svg-input',f=>{svgFile=f;document.getElementById('svg-main').style.display='block';document.getElementById('svg-preview').style.display='none';const url=URL.createObjectURL(f);document.getElementById('svg-orig-img').src=url;},false);
+const svgThresh=document.getElementById('svg-threshold');const svgThreshVal=document.getElementById('svg-thresh-val');
+svgThresh.addEventListener('input',()=>svgThreshVal.textContent=svgThresh.value);
+document.getElementById('svg-btn').addEventListener('click',async()=>{
+  if(!svgFile)return;
+  document.getElementById('svg-btn').disabled=true;showProg('svg-prog');setProg('svg-fill',20);setStatus('svg-status','Se vectorizează...','');
+  try{
+    const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(svgFile);});
+    const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
+    const c=document.createElement('canvas');
+    const maxDim=400;let w=img.width,h=img.height;
+    if(w>maxDim){h=Math.round(h*(maxDim/w));w=maxDim;}if(h>maxDim){w=Math.round(w*(maxDim/h));h=maxDim;}
+    c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+    setProg('svg-fill',40);
+    const imgData=ctx.getImageData(0,0,w,h);const d=imgData.data;
+    const threshold=parseInt(svgThresh.value)||128;
+    const color=document.getElementById('svg-color').value||'#000000';
+    const detail=document.getElementById('svg-detail').value;
+    const bw=[];for(let i=0;i<d.length;i+=4){const gray=(d[i]*0.299+d[i+1]*0.587+d[i+2]*0.114);bw.push(gray<threshold?1:0);}
+    setProg('svg-fill',60);
+    let paths='';
+    const step=detail==='low'?3:detail==='med'?2:1;
+    for(let y=0;y<h;y+=step){for(let x=0;x<w;x+=step){
+      if(bw[y*w+x]){
+        let rw=step,rh=step;
+        while(x+rw<w&&bw[y*w+x+rw])rw++;
+        paths+=`<rect x="${x}" y="${y}" width="${rw}" height="${rh}" fill="${color}"/>`;
+        x+=rw-1;
+      }
+    }}
+    setProg('svg-fill',85);
+    const svgStr=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">${paths}</svg>`;
+    const blob=new Blob([svgStr],{type:'image/svg+xml'});
+    document.getElementById('svg-out').innerHTML=svgStr;document.getElementById('svg-preview').style.display='grid';
+    document.getElementById('svg-dl').style.display='';
+    document.getElementById('svg-dl').onclick=()=>triggerDl(blob,svgFile.name.replace(/\.[^.]+$/,'.svg'));
+    setProg('svg-fill',100);setStatus('svg-status','✓ Vectorizare completă!','ok');
+  }catch(e){setStatus('svg-status','Eroare: '+e.message,'err');}
+  document.getElementById('svg-btn').disabled=false;
+});
+
+// ═══════════════════════════════════════════
+// VIDEO FRAMES MODULE
+// ═══════════════════════════════════════════
+let videoFrames=[];
+makeDrop('video-drop','video-input',f=>{document.getElementById('video-main').style.display='block';const player=document.getElementById('videoPlayer');player.src=URL.createObjectURL(f);videoFrames=[];document.getElementById('video-frames').style.display='none';document.getElementById('video-frames-list').innerHTML='';},false);
+document.getElementById('videoPlayer').addEventListener('timeupdate',function(){document.getElementById('video-time').textContent=this.currentTime.toFixed(2)+'s';});
+document.getElementById('video-capture').addEventListener('click',()=>{
+  const player=document.getElementById('videoPlayer');if(player.readyState<2){alert('Așteptați să se încarce video-ul.');return;}
+  const c=document.createElement('canvas');c.width=player.videoWidth;c.height=player.videoHeight;c.getContext('2d').drawImage(player,0,0);
+  const qual=parseFloat(document.getElementById('video-quality').value)||0.85;
+  const dataUrl=c.toDataURL('image/jpeg',qual);
+  const time=player.currentTime.toFixed(2);
+  videoFrames.push({dataUrl,time});
+  const list=document.getElementById('video-frames-list');
+  const wrap=document.createElement('div');wrap.style.cssText='position:relative;';
+  const img=document.createElement('img');img.src=dataUrl;img.style.cssText='width:120px;height:auto;border-radius:6px;border:1px solid var(--border2);display:block;';
+  const lbl=document.createElement('div');lbl.textContent=time+'s';lbl.style.cssText='font-size:10px;color:var(--muted);text-align:center;padding:3px;';
+  const btn=document.createElement('button');btn.className='btn btn-sm btn-green';btn.textContent='⬇';btn.style.cssText='display:block;width:100%;margin-top:2px;';
+  const cap={dataUrl,time};btn.onclick=async()=>{const res=await fetch(cap.dataUrl);const blob=await res.blob();triggerDl(blob,'frame_'+cap.time+'s.jpg');};
+  wrap.appendChild(img);wrap.appendChild(lbl);wrap.appendChild(btn);list.appendChild(wrap);
+  document.getElementById('video-frames').style.display='block';
+});
+document.getElementById('video-dl-all').addEventListener('click',async()=>{
+  if(!videoFrames.length)return;const zip=new JSZip();
+  for(const f of videoFrames){const res=await fetch(f.dataUrl);const blob=await res.blob();zip.file('frame_'+f.time+'s.jpg',blob);}
+  const zblob=await zip.generateAsync({type:'blob'});triggerDl(zblob,'frames.zip');
+});
+
+// ═══════════════════════════════════════════
+// BULK PROCESSOR MODULE
+// ═══════════════════════════════════════════
+let bulkFiles=[];
+makeDrop('bulk-drop','bulk-input',files=>{bulkFiles=Array.from(files);document.getElementById('bulk-main').style.display='block';document.getElementById('bulk-file-list').innerHTML=bulkFiles.map(f=>'<div class="bulk-item"><div class="bi-name">'+esc(f.name)+'</div><div class="bi-size">'+(f.size/1024).toFixed(0)+' KB</div><div class="bi-status bi-pending"></div></div>').join('');},true);
+const bulkWmOp=document.getElementById('bulk-wm-opacity');bulkWmOp.addEventListener('input',()=>document.getElementById('bulk-wm-opval').textContent=bulkWmOp.value+'%');
+const bulkQual=document.getElementById('bulk-quality');bulkQual.addEventListener('input',()=>document.getElementById('bulk-qual-val').textContent=bulkQual.value+'%');
+document.getElementById('bulk-process').addEventListener('click',async()=>{
+  if(!bulkFiles.length)return;
+  document.getElementById('bulk-process').disabled=true;showProg('bulk-prog');setStatus('bulk-status','Se procesează...','');
+  const zip=new JSZip();
+  const wmText=document.getElementById('bulk-wm-text').value;
+  const wmPos=document.getElementById('bulk-wm-pos').value;
+  const wmOp=parseInt(bulkWmOp.value)/100;
+  const resW=parseInt(document.getElementById('bulk-resize-w').value)||0;
+  const resH=parseInt(document.getElementById('bulk-resize-h').value)||0;
+  const qual=parseInt(bulkQual.value)/100;
+  const items=document.getElementById('bulk-file-list').querySelectorAll('.bulk-item');
+  for(let i=0;i<bulkFiles.length;i++){
+    setProg('bulk-fill',Math.round((i/bulkFiles.length)*90));
+    const f=bulkFiles[i];const statusDot=items[i]?.querySelector('.bi-status');
+    try{
+      const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f);});
+      const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
+      let w=img.width,h=img.height;
+      if(resW>0&&w>resW){h=Math.round(h*(resW/w));w=resW;}if(resH>0&&h>resH){w=Math.round(w*(resH/h));h=resH;}
+      const c=document.createElement('canvas');c.width=w;c.height=h;const ctx=c.getContext('2d');ctx.drawImage(img,0,0,w,h);
+      if(wmText){ctx.save();ctx.globalAlpha=wmOp;ctx.font='bold '+Math.max(16,Math.round(w*0.04))+'px Inter,Arial';ctx.fillStyle='#ffffff';ctx.strokeStyle='rgba(0,0,0,0.5)';ctx.lineWidth=3;const tm=ctx.measureText(wmText);let tx,ty;if(wmPos==='br'){tx=w-tm.width-20;ty=h-20;}else if(wmPos==='bl'){tx=20;ty=h-20;}else if(wmPos==='tr'){tx=w-tm.width-20;ty=30;}else{tx=(w-tm.width)/2;ty=h/2;}ctx.strokeText(wmText,tx,ty);ctx.fillText(wmText,tx,ty);ctx.restore();}
+      const outDataUrl=c.toDataURL('image/jpeg',qual);const res=await fetch(outDataUrl);const blob=await res.blob();
+      zip.file(f.name.replace(/\.[^.]+$/,'.jpg'),blob);
+      if(statusDot){statusDot.className='bi-status bi-done';}
+    }catch(e){if(statusDot)statusDot.className='bi-status bi-err';}
+  }
+  setProg('bulk-fill',100);const zblob=await zip.generateAsync({type:'blob'});triggerDl(zblob,'imagini_procesate.zip');
+  setStatus('bulk-status','✓ '+bulkFiles.length+' imagini procesate și descărcate!','ok');
+  document.getElementById('bulk-process').disabled=false;
+});
+
+// ═══════════════════════════════════════════
+// OCR MODULE
+// ═══════════════════════════════════════════
+let ocrFile=null;
+makeDrop('ocr-drop','ocr-input',f=>{ocrFile=f;document.getElementById('ocr-main').style.display='block';document.getElementById('ocr-result-panel').style.display='none';const url=URL.createObjectURL(f);document.getElementById('ocr-preview-img').src=url;},false);
+document.getElementById('ocr-btn').addEventListener('click',async()=>{
+  if(!ocrFile)return;
+  document.getElementById('ocr-btn').disabled=true;showProg('ocr-prog');setProg('ocr-fill',10);setStatus('ocr-status','Se inițializează Tesseract OCR...','');
+  try{
+    const lang=document.getElementById('ocr-lang').value;
+    const result=await Tesseract.recognize(ocrFile,lang,{
+      logger:m=>{if(m.status==='recognizing text')setProg('ocr-fill',Math.round(m.progress*90));setStatus('ocr-status',m.status+' '+(m.progress?Math.round(m.progress*100)+'%':''),'');}
+    });
+    setProg('ocr-fill',100);
+    const text=result.data.text;
+    document.getElementById('ocr-result-text').textContent=text||'(Nu s-a putut extrage text)';
+    document.getElementById('ocr-result-panel').style.display='block';
+    document.getElementById('ocr-dl').onclick=()=>triggerDl(new Blob([text],{type:'text/plain'}),'ocr_text.txt');
+    setStatus('ocr-status','✓ Text extras — '+text.split(' ').length+' cuvinte detectate','ok');
+  }catch(e){setStatus('ocr-status','Eroare OCR: '+e.message,'err');}
+  document.getElementById('ocr-btn').disabled=false;
+});
+
+// ═══════════════════════════════════════════
+// TRANSCRIERE MODULE
+// ═══════════════════════════════════════════
+let trFile=null;
+makeDrop('tr-drop','tr-input',f=>{trFile=f;document.getElementById('tr-main').style.display='block';document.getElementById('tr-player').src=URL.createObjectURL(f);document.getElementById('tr-result-panel').style.display='none';},false);
+document.getElementById('tr-btn').addEventListener('click',async()=>{
+  if(!trFile)return;
+  if(!('webkitSpeechRecognition' in window)&&!('SpeechRecognition' in window)){
+    setStatus('tr-status','Browserul tău nu suportă Web Speech API. Încearcă Google Chrome.','err');return;
+  }
+  document.getElementById('tr-btn').disabled=true;showProg('tr-prog');setProg('tr-fill',20);
+  setStatus('tr-status','Se redă audio pentru transcriere...','');
+  const player=document.getElementById('tr-player');
+  const lang=document.getElementById('tr-lang').value;
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  const recognition=new SR();recognition.lang=lang;recognition.continuous=true;recognition.interimResults=true;recognition.maxAlternatives=1;
+  let fullText='',finalText='';
+  recognition.onresult=e=>{let interim='';for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal){finalText+=e.results[i][0].transcript+' ';}else{interim+=e.results[i][0].transcript;}}document.getElementById('tr-result-text').textContent=finalText+interim;};
+  recognition.onerror=e=>{setStatus('tr-status','Eroare: '+e.error+'. Încearcă să permiți microfonul.','err');document.getElementById('tr-btn').disabled=false;};
+  recognition.onend=()=>{setProg('tr-fill',100);document.getElementById('tr-result-panel').style.display='block';document.getElementById('tr-dl').onclick=()=>triggerDl(new Blob([finalText],{type:'text/plain'}),'transcriere.txt');setStatus('tr-status','✓ Transcriere completă!','ok');document.getElementById('tr-btn').disabled=false;};
+  player.currentTime=0;player.play();recognition.start();setProg('tr-fill',50);setStatus('tr-status','Se transcrie... (vorbire detectată în timp real)','');
+  player.onended=()=>{setTimeout(()=>recognition.stop(),1500);};
+});
+</script>
+</body>
+</html>
