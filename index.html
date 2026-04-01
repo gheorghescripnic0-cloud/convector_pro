@@ -240,7 +240,8 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
 <!-- SIDEBAR -->
 <nav class="sidebar">
   <div class="sidebar-label">Conversie fișiere</div>
-  <div class="nav-item active" data-module="pdf"><div class="nav-icon">📄</div><div class="nav-text">PDF Tools</div><div class="nav-badge">7</div></div>
+  <div class="nav-item active" data-module="pdf"><div class="nav-icon">📄</div><div class="nav-text">PDF Tools</div><div class="nav-badge">9</div></div>
+  <div class="nav-item" data-module="pdfmerge"><div class="nav-icon">🔗</div><div class="nav-text">PDF Merge / Split</div></div>
   <div class="nav-item" data-module="img"><div class="nav-icon">🖼</div><div class="nav-text">Imagini</div><div class="nav-badge">10</div></div>
   <div class="nav-item" data-module="audio"><div class="nav-icon">🎵</div><div class="nav-text">Audio</div><div class="nav-badge">WAV·OGG</div></div>
   <div class="nav-item" data-module="docs"><div class="nav-icon">📝</div><div class="nav-text">Documente</div><div class="nav-badge">8</div></div>
@@ -342,22 +343,14 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
       </div>
     </div>
   </div>
-  <div class="card" style="margin-top:1rem">
-    <div class="card-title">Merge / Split PDF</div>
-    <div class="grid-2">
+  <div class="card" style="margin-top:1rem;background:rgba(139,92,246,.04);border-color:rgba(139,92,246,.15)">
+    <div style="display:flex;align-items:center;gap:12px">
+      <div style="font-size:22px">🔗</div>
       <div>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Combină mai multe PDF-uri într-unul singur:</p>
-        <div class="drop" style="padding:1rem" id="merge-drop"><input type="file" id="merge-input" accept=".pdf" multiple><div class="drop-icon" style="font-size:24px">📎</div><p style="font-size:12px">Alege mai multe PDF-uri</p></div>
-        <div id="merge-list" style="margin-top:8px"></div>
-        <button class="btn btn-primary" id="merge-btn" style="margin-top:8px;display:none">🔗 Combină PDF-urile</button>
-        <div class="status" id="merge-status"></div>
+        <div style="font-size:13px;font-weight:500;color:var(--text)">Combină sau împarte PDF-uri</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px">Folosește secțiunea dedicată din meniu pentru Merge & Split</div>
       </div>
-      <div>
-        <p style="font-size:12px;color:var(--muted);margin-bottom:8px">Împarte un PDF în pagini separate:</p>
-        <div class="drop" style="padding:1rem" id="split-drop"><input type="file" id="split-input" accept=".pdf"><div class="drop-icon" style="font-size:24px">✂️</div><p style="font-size:12px">Alege PDF-ul de împărțit</p></div>
-        <button class="btn btn-primary" id="split-btn" style="margin-top:8px;display:none">✂️ Împarte în pagini</button>
-        <div class="status" id="split-status"></div>
-      </div>
+      <button class="btn btn-sm" style="margin-left:auto;border-color:rgba(139,92,246,.3);color:var(--accent3)" onclick="document.querySelector('[data-module=pdfmerge]').click()">Deschide →</button>
     </div>
   </div>
 </div>
@@ -563,7 +556,9 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
     <div class="card" style="padding:0;overflow:hidden">
       <div style="padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
         <span style="font-size:12px;font-weight:600;color:var(--green)">✅ Apryse WebViewer activ</span>
-        <span style="font-size:11px;color:var(--muted)">Folosește toolbar-ul din viewer pentru text, semnătură, highlight, imagini</span>
+        <input type="file" id="wv-file-input" accept=".pdf" style="display:none">
+        <button class="btn btn-sm" id="wv-open-btn" style="border-color:rgba(139,92,246,.4);color:var(--accent3)">📂 Deschide PDF</button>
+        <span style="font-size:11px;color:var(--muted)">sau trage PDF-ul direct în viewer</span>
         <div style="flex:1"></div>
         <button class="btn btn-sm btn-green" id="wv-save-btn">💾 Descarcă PDF editat</button>
       </div>
@@ -635,6 +630,32 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
         <button class="btn btn-sm" id="sign-clear">🗑 Șterge</button>
         <button class="btn btn-sm btn-green" id="sign-add">✓ Plasează semnătura pe PDF</button>
       </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ PDF MERGE / SPLIT ═══ -->
+<div class="module" id="mod-pdfmerge">
+  <div class="module-header">
+    <div class="module-title">🔗 PDF Merge / Split</div>
+    <div class="module-desc"><strong>Combină</strong> mai multe PDF-uri într-un singur document, sau <strong>împarte</strong> un PDF în pagini individuale descărcate ca ZIP.</div>
+  </div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">📎 Combină PDF-uri</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Selectează mai multe fișiere PDF — vor fi combinate în ordinea selectată.</p>
+      <div class="drop" id="merge-drop"><input type="file" id="merge-input" accept=".pdf" multiple><div class="drop-icon">📎</div><h3>Alege 2+ fișiere PDF</h3><p>Selectează-le simultan din calculator</p></div>
+      <div id="merge-list" style="margin-top:10px"></div>
+      <button class="btn btn-primary" id="merge-btn" style="margin-top:10px;display:none">🔗 Combină și descarcă PDF</button>
+      <div class="status" id="merge-status"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">✂️ Împarte PDF în pagini</div>
+      <p style="font-size:12px;color:var(--muted);margin-bottom:10px">Fiecare pagină devine un fișier PDF separat. Toate paginile se descarcă într-un ZIP.</p>
+      <div class="drop" id="split-drop"><input type="file" id="split-input" accept=".pdf"><div class="drop-icon">✂️</div><h3>Alege PDF-ul de împărțit</h3><p>Acceptă: .PDF</p></div>
+      <button class="btn btn-primary" id="split-btn" style="margin-top:10px;display:none">✂️ Împarte în pagini ZIP</button>
+      <div class="status" id="split-status"></div>
     </div>
   </div>
 </div>
@@ -1002,7 +1023,7 @@ async function imgToPDF(canvas){
 // ═══════════════════════════════════════════
 // PDF MODULE
 // ═══════════════════════════════════════════
-let pdfFile=null,pdfPages=[],pdfText='',pdfFmt='txt',pdfBlobs=[],pdfCurrentPage=1;
+let pdfFile=null,pdfPages=[],pdfText='',pdfFmt='txt',pdfBlobs=[],pdfCurrentPage=1,pdfPdfDoc=null;
 makeDrop('pdf-drop','pdf-input',f=>pdfLoad(f),false);
 document.getElementById('pdf-remove').addEventListener('click',pdfReset);
 document.querySelectorAll('[data-pfmt]').forEach(b=>{
@@ -1071,16 +1092,31 @@ async function renderPdfCanvas(){
   try{
     const pg=await pdfPdfDoc.getPage(pdfCurrentPage);
     const wrap=document.getElementById('pdf-canvas-wrap');if(!wrap)return;
-    const maxW=Math.max(300,wrap.clientWidth-24)||480;
+    // Use a good fixed scale — don't rely on clientWidth (may be 0 when hidden)
     const vpRaw=pg.getViewport({scale:1});
-    const scale=Math.min(maxW/vpRaw.width,2.2);
+    const targetW=480; // good preview width
+    const scale=Math.max(0.5, Math.min(targetW/vpRaw.width, 2.0));
     const vp=pg.getViewport({scale});
     let canvas=document.getElementById('pdf-render-canvas');
-    if(!canvas){canvas=document.createElement('canvas');canvas.id='pdf-render-canvas';wrap.innerHTML='';wrap.appendChild(canvas);}
-    canvas.width=vp.width;canvas.height=vp.height;
-    const ctx=canvas.getContext('2d');ctx.fillStyle='#ffffff';ctx.fillRect(0,0,canvas.width,canvas.height);
+    if(!canvas){
+      canvas=document.createElement('canvas');
+      canvas.id='pdf-render-canvas';
+      canvas.style.borderRadius='3px';
+      canvas.style.boxShadow='0 2px 12px rgba(0,0,0,.4)';
+      wrap.innerHTML='';
+      wrap.appendChild(canvas);
+    }
+    canvas.width=vp.width;
+    canvas.height=vp.height;
+    canvas.style.width=vp.width+'px';
+    canvas.style.height=vp.height+'px';
+    canvas.style.maxWidth='100%';
+    const ctx=canvas.getContext('2d');
+    ctx.fillStyle='#ffffff';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
     await pg.render({canvasContext:ctx,viewport:vp}).promise;
-    const empty=document.getElementById('pdf-canvas-empty');if(empty)empty.style.display='none';
+    wrap.style.minHeight='';
+    wrap.style.background='#525659';
   }catch(e){console.warn('Canvas render:',e);}
 }
 function updatePdfSrcBody(){
@@ -1400,7 +1436,17 @@ function initWebViewer(){
       UI.setLanguage('ro');
       // Enable all annotation tools
       UI.enableFeatures([UI.Feature.Annotations, UI.Feature.Redaction]);
-      setStatus('wv-status','✅ WebViewer gata — deschide un PDF din toolbar (icona folder)', 'ok');
+      setStatus('wv-status','✅ WebViewer gata — apasă „Deschide PDF" sau trage un fișier în viewer', 'ok');
+      // Wire open button
+      document.getElementById('wv-open-btn').addEventListener('click',()=>document.getElementById('wv-file-input').click());
+      document.getElementById('wv-file-input').addEventListener('change', async e=>{
+        const f=e.target.files[0]; if(!f)return;
+        const ab=await f.arrayBuffer();
+        const blob=new Blob([ab],{type:'application/pdf'});
+        const url=URL.createObjectURL(blob);
+        instance.UI.loadDocument(url,{filename:f.name});
+        setStatus('wv-status','📄 '+f.name+' — editează și apasă Descarcă când ești gata','ok');
+      });
     });
   };
   document.head.appendChild(script);
@@ -1714,51 +1760,99 @@ makeDrop('upscale-drop','upscale-input',f=>{upscaleFile=f;document.getElementByI
 document.querySelectorAll('[data-scale]').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('[data-scale]').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');upscaleFactor=parseInt(b.dataset.scale);});});
 document.getElementById('upscale-btn').addEventListener('click',async()=>{
   if(!upscaleFile)return;
-  document.getElementById('upscale-btn').disabled=true;showProg('upscale-prog');setProg('upscale-fill',20);setStatus('upscale-status','Se mărește imaginea...','');
+  document.getElementById('upscale-btn').disabled=true;
+  showProg('upscale-prog');setProg('upscale-fill',10);
+  setStatus('upscale-status','Se citește imaginea...','info');
   try{
     const dataUrl=await new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(upscaleFile);});
     const img=await new Promise((res,rej)=>{const im=new Image();im.onload=()=>res(im);im.onerror=rej;im.src=dataUrl;});
-    setProg('upscale-fill',40);
-    const srcCanvas=document.createElement('canvas');srcCanvas.width=img.width;srcCanvas.height=img.height;srcCanvas.getContext('2d').drawImage(img,0,0);
-    const newW=img.width*upscaleFactor,newH=img.height*upscaleFactor;
-    const dstCanvas=document.createElement('canvas');dstCanvas.width=newW;dstCanvas.height=newH;
-    const ctx=dstCanvas.getContext('2d');
+    setProg('upscale-fill',25);
     const algo=document.getElementById('upscale-algo').value;
-    setProg('upscale-fill',60);
-    if(algo==='nearest'){ctx.imageSmoothingEnabled=false;}else{ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';}
-    ctx.drawImage(srcCanvas,0,0,newW,newH);
-    if(algo==='lanczos'){await lanczosUpscale(srcCanvas,dstCanvas);}
-    setProg('upscale-fill',90);
-    const outDataUrl=dstCanvas.toDataURL('image/png');
+    const newW=img.width*upscaleFactor, newH=img.height*upscaleFactor;
+    // Guard: max 4000x4000 for Lanczos to avoid browser crash
+    if(algo==='lanczos'&&(newW>4000||newH>4000)){
+      setStatus('upscale-status','Imaginea e prea mare pentru Lanczos (max 4000px). Folosind Bicubic automat.','info');
+    }
+    const srcC=document.createElement('canvas');srcC.width=img.width;srcC.height=img.height;
+    srcC.getContext('2d').drawImage(img,0,0);
+    const dstC=document.createElement('canvas');dstC.width=newW;dstC.height=newH;
+    const ctx=dstC.getContext('2d');
+    // Always draw bicubic first as base
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    ctx.drawImage(srcC,0,0,newW,newH);
+    setProg('upscale-fill',40);
+    if(algo==='nearest'){
+      ctx.imageSmoothingEnabled=false;
+      ctx.clearRect(0,0,newW,newH);
+      ctx.drawImage(srcC,0,0,newW,newH);
+      setProg('upscale-fill',90);
+    } else if(algo==='lanczos'&&newW<=4000&&newH<=4000){
+      setStatus('upscale-status','Lanczos — procesare în bucăți, nu închide pagina...','info');
+      await lanczosChunked(srcC,dstC,(pct)=>{setProg('upscale-fill',40+pct*0.5);});
+      setProg('upscale-fill',90);
+    } else {
+      setProg('upscale-fill',90);
+    }
+    const outDataUrl=dstC.toDataURL('image/png');
     document.getElementById('upscale-before').src=dataUrl;
     document.getElementById('upscale-after').src=outDataUrl;
     document.getElementById('upscale-dims').textContent=newW+'×'+newH+'px';
     document.getElementById('upscale-compare').style.display='grid';
-    const res=await fetch(outDataUrl);const blob=await res.blob();
-    document.getElementById('upscale-dl').style.display='';
+    const res2=await fetch(outDataUrl);const blob=await res2.blob();
+    document.getElementById('upscale-dl').style.display='flex';
     document.getElementById('upscale-dl').onclick=()=>triggerDl(blob,upscaleFile.name.replace(/\.[^.]+$/,'_x'+upscaleFactor+'.png'));
-    setProg('upscale-fill',100);setStatus('upscale-status','✓ Mărire '+upscaleFactor+'x finalizată! ('+newW+'×'+newH+'px)','ok');
+    setProg('upscale-fill',100);
+    setStatus('upscale-status','✅ Mărire '+upscaleFactor+'x gata! ('+newW+'×'+newH+'px)','ok');
   }catch(e){setStatus('upscale-status','Eroare: '+e.message,'err');}
   document.getElementById('upscale-btn').disabled=false;
 });
-async function lanczosUpscale(src,dst){
-  const sw=src.width,sh=src.height,dw=dst.width,dh=dst.height;
-  const srcCtx=src.getContext('2d');const dstCtx=dst.getContext('2d');
-  const srcData=srcCtx.getImageData(0,0,sw,sh).data;
-  const dstImgData=dstCtx.createImageData(dw,dh);const dstData=dstImgData.data;
-  const lanczos=(x,a=3)=>{if(x===0)return 1;if(Math.abs(x)>=a)return 0;const px=Math.PI*x;return a*Math.sin(px)*Math.sin(px/a)/(px*px);};
-  const a=3;
-  for(let dy=0;dy<dh;dy++){for(let dx=0;dx<dw;dx++){
-    const sx=dx*(sw/dw),sy=dy*(sh/dh);
-    let r=0,g=0,b=0,al=0,w=0;
-    for(let ky=Math.ceil(sy-a);ky<=Math.floor(sy+a);ky++){for(let kx=Math.ceil(sx-a);kx<=Math.floor(sx+a);kx++){
-      const wy=lanczos(sy-ky),wx=lanczos(sx-kx);const wt=wx*wy;
-      const px2=Math.max(0,Math.min(sw-1,kx)),py=Math.max(0,Math.min(sh-1,ky));
-      const idx=(py*sw+px2)*4;r+=srcData[idx]*wt;g+=srcData[idx+1]*wt;b+=srcData[idx+2]*wt;al+=srcData[idx+3]*wt;w+=wt;
-    }}
-    const idx2=(dy*dw+dx)*4;dstData[idx2]=Math.max(0,Math.min(255,r/w));dstData[idx2+1]=Math.max(0,Math.min(255,g/w));dstData[idx2+2]=Math.max(0,Math.min(255,b/w));dstData[idx2+3]=Math.max(0,Math.min(255,al/w));
-  }}
-  dstCtx.putImageData(dstImgData,0,0);
+
+// Lanczos chunked — yields to browser every CHUNK rows via setTimeout
+function lanczosChunked(src, dst, onProgress){
+  return new Promise(resolve=>{
+    const sw=src.width,sh=src.height,dw=dst.width,dh=dst.height;
+    const srcData=src.getContext('2d').getImageData(0,0,sw,sh).data;
+    const dstImg=dst.getContext('2d').createImageData(dw,dh);
+    const dd=dstImg.data;
+    const a=2; // Lanczos a=2 (faster than a=3, still good quality)
+    const lz=(x)=>{if(x===0)return 1;const ax=Math.abs(x);if(ax>=a)return 0;const px=Math.PI*x;return a*Math.sin(px)*Math.sin(px/a)/(px*px);};
+    const CHUNK=30; // rows per chunk
+    let dy=0;
+    function processChunk(){
+      const end=Math.min(dy+CHUNK,dh);
+      for(;dy<end;dy++){
+        for(let dx=0;dx<dw;dx++){
+          const sx=dx*(sw/dw),sy=dy*(sh/dh);
+          let r=0,g=0,b=0,al=0,tw=0;
+          const ky0=Math.ceil(sy-a),ky1=Math.floor(sy+a);
+          const kx0=Math.ceil(sx-a),kx1=Math.floor(sx+a);
+          for(let ky=ky0;ky<=ky1;ky++){
+            const wy=lz(sy-ky);
+            const py=Math.max(0,Math.min(sh-1,ky));
+            for(let kx=kx0;kx<=kx1;kx++){
+              const wt=wy*lz(sx-kx);
+              const px2=Math.max(0,Math.min(sw-1,kx));
+              const idx=(py*sw+px2)*4;
+              r+=srcData[idx]*wt;g+=srcData[idx+1]*wt;b+=srcData[idx+2]*wt;al+=srcData[idx+3]*wt;tw+=wt;
+            }
+          }
+          const i2=(dy*dw+dx)*4;
+          dd[i2]=Math.max(0,Math.min(255,r/tw));
+          dd[i2+1]=Math.max(0,Math.min(255,g/tw));
+          dd[i2+2]=Math.max(0,Math.min(255,b/tw));
+          dd[i2+3]=Math.max(0,Math.min(255,al/tw));
+        }
+      }
+      onProgress(dy/dh);
+      if(dy<dh){
+        setTimeout(processChunk,0); // yield to browser
+      } else {
+        dst.getContext('2d').putImageData(dstImg,0,0);
+        resolve();
+      }
+    }
+    processChunk();
+  });
 }
 
 // ═══════════════════════════════════════════
