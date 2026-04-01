@@ -324,7 +324,7 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
               <button class="btn btn-sm" id="pdf-next-page" style="padding:3px 8px;font-size:11px">▶</button>
             </div>
           </div>
-          <div class="pdf-canvas-preview-wrap" id="pdf-canvas-wrap"><canvas id="pdf-render-canvas"></canvas><div class="empty" id="pdf-canvas-empty" style="position:absolute"><div class="empty-icon">📋</div><span>Se încarcă...</span></div></div>
+          <div id="pdf-canvas-wrap" style="background:#525659;min-height:340px;display:flex;align-items:flex-start;justify-content:center;padding:16px;"><div style="color:#aaa;font-size:13px;margin:auto;text-align:center"><div style="font-size:28px;margin-bottom:8px">📄</div><div>Alege un PDF pentru a vedea previzualizarea</div></div></div>
           <div class="panel-body large" id="pdf-src-body" style="display:none"></div>
           <div class="pdf-thumbs-strip" id="pdf-thumbs" style="display:none"></div>
         </div>
@@ -522,53 +522,11 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
 <div class="module" id="mod-editor">
   <div class="module-header">
     <div class="module-title">✏️ PDF Editor <span class="tag tag-new">PRO</span></div>
-    <div class="module-desc">Editor PDF profesional integrat cu <strong>Apryse WebViewer</strong>: adaugă și mută text liber cu drag-and-drop, inserează imagini, desenează semnătura, adaugă highlight-uri, note și adnotări. <strong>Selectezi orice element și îl muți</strong> exact unde vrei.</div>
+    <div class="module-desc">Editor vizual cu <strong>drag-and-drop real</strong>: adaugă text oriunde pe pagina PDF și <strong>mută-l cu mouse-ul</strong> exact unde vrei. Inserează imagini, desenează semnătura cu mouse-ul sau touchscreen. Suportă Undo, ștergere individuală și redimensionare imagini. Salvează un PDF nou cu toate modificările.</div>
   </div>
 
-  <!-- INFO CARD -->
-  <div class="card" id="ed-info-card" style="background:rgba(139,92,246,.06);border-color:rgba(139,92,246,.2)">
-    <div style="display:flex;gap:14px;align-items:flex-start;flex-wrap:wrap">
-      <div style="font-size:28px;flex-shrink:0">⚠️</div>
-      <div>
-        <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px">WebViewer necesită fișierele locale</div>
-        <div style="font-size:12px;color:var(--muted);line-height:1.7">
-          Apryse WebViewer nu poate fi încărcat dintr-un CDN simplu — necesită fișierele SDK (~50MB) găzduite pe același server cu site-ul.<br>
-          <strong style="color:var(--text)">Dacă ai publicat pe GitHub Pages:</strong> urmează pașii de mai jos pentru a adăuga fișierele SDK.<br>
-          <strong style="color:var(--text)">Alternativ:</strong> editorul cu drag-and-drop propriu (fără SDK extern) rămâne activ mai jos.
-        </div>
-        <div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">
-          <button class="btn btn-sm" onclick="document.getElementById('ed-setup-steps').style.display=document.getElementById('ed-setup-steps').style.display==='none'?'block':'none'" style="border-color:rgba(139,92,246,.4);color:var(--accent3)">📋 Arată pașii de setup GitHub</button>
-          <button class="btn btn-sm btn-green" onclick="document.getElementById('ed-info-card').style.display='none';document.getElementById('ed-drop-wrap').style.display='block'">⚡ Folosește editorul built-in</button>
-        </div>
-        <div id="ed-setup-steps" style="display:none;margin-top:12px;background:var(--bg3);border-radius:var(--r);padding:12px;font-size:12px;color:var(--muted);line-height:1.9">
-          <strong style="color:var(--text)">Setup WebViewer pe GitHub Pages:</strong><br>
-          1. Descarcă SDK de pe <a href="https://apryse.com/documentation/web/get-started" target="_blank" style="color:var(--accent2)">apryse.com/documentation/web/get-started</a><br>
-          2. Extrage folderul <code style="background:var(--bg4);padding:1px 5px;border-radius:4px">lib/</code> din arhivă<br>
-          3. Încarcă folderul <code style="background:var(--bg4);padding:1px 5px;border-radius:4px">lib/</code> în repository-ul tău GitHub (lângă <code style="background:var(--bg4);padding:1px 5px;border-radius:4px">index.html</code>)<br>
-          4. Reîncarcă pagina — WebViewer se va activa automat
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- WEBVIEWER CONTAINER (shown if lib/ detected) -->
-  <div id="ed-webviewer-wrap" style="display:none">
-    <div class="card" style="padding:0;overflow:hidden">
-      <div style="padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <span style="font-size:12px;font-weight:600;color:var(--green)">✅ Apryse WebViewer activ</span>
-        <input type="file" id="wv-file-input" accept=".pdf" style="display:none">
-        <button class="btn btn-sm" id="wv-open-btn" style="border-color:rgba(139,92,246,.4);color:var(--accent3)">📂 Deschide PDF</button>
-        <span style="font-size:11px;color:var(--muted)">sau trage PDF-ul direct în viewer</span>
-        <div style="flex:1"></div>
-        <button class="btn btn-sm btn-green" id="wv-save-btn">💾 Descarcă PDF editat</button>
-      </div>
-      <div id="webviewer" style="width:100%;height:700px;"></div>
-    </div>
-    <div class="status" id="wv-status" style="margin-top:8px"></div>
-  </div>
-
-  <!-- BUILT-IN DRAG-AND-DROP EDITOR (always available fallback) -->
-  <div id="ed-drop-wrap" style="display:none">
+  <!-- BUILT-IN DRAG-AND-DROP EDITOR -->
+  <div id="ed-drop-wrap" style="display:block">
     <div class="card">
       <div class="drop" id="editor-drop"><input type="file" id="editor-input" accept=".pdf"><div class="drop-icon">📄</div><h3>Trage PDF-ul pentru editare</h3><p>Editor cu drag-and-drop complet</p></div>
     </div>
@@ -1048,33 +1006,38 @@ function pdfReset(){pdfFile=null;pdfPages=[];pdfText='';pdfCurrentPage=1;documen
 
 async function pdfLoad(f){
   if(!f||f.type!=='application/pdf'){alert('Te rog alege un fisier .PDF');return;}
-  pdfFile=f;pdfCurrentPage=1;pdfBlobs=[];
+  pdfFile=f;pdfCurrentPage=1;pdfBlobs=[];pdfPdfDoc=null;
   document.getElementById('pdf-fname').textContent=f.name;
   document.getElementById('pdf-fmeta').textContent=(f.size/1024).toFixed(1)+' KB · se citeste...';
   document.getElementById('pdf-main').style.display='block';
   document.getElementById('pdf-preview').style.display='block';
-  document.getElementById('pdf-src-body').innerHTML='<div class="empty"><div class="empty-icon">...</div><span>Se citeste PDF-ul...</span></div>';
   ['pdf-dl','pdf-dl-zip','pdf-dl-all'].forEach(id=>document.getElementById(id).style.display='none');
+  // Show canvas wrap immediately with loading state
+  const canvasWrap=document.getElementById('pdf-canvas-wrap');
+  canvasWrap.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:320px;color:#aaa;font-size:13px;flex-direction:column;gap:10px"><div style="font-size:28px">⏳</div><span>Se renderizează pagina...</span></div>';
   const ab=await f.arrayBuffer();
-  const pdf=await pdfjsLib.getDocument({data:ab}).promise;
+  // Store pdf doc globally so renderPdfCanvas can use it
+  pdfPdfDoc=await pdfjsLib.getDocument({data:new Uint8Array(ab)}).promise;
   pdfPages=[];
-  for(let i=1;i<=pdf.numPages;i++){
-    const pg=await pdf.getPage(i);const tc=await pg.getTextContent();
+  for(let i=1;i<=pdfPdfDoc.numPages;i++){
+    const pg=await pdfPdfDoc.getPage(i);
+    const tc=await pg.getTextContent();
     let lastY=null,lines=[];
     tc.items.forEach(item=>{if(lastY!==null&&Math.abs(item.transform[5]-lastY)>3)lines.push('\n');lines.push(item.str);lastY=item.transform[5];});
-    pdfPages.push({text:lines.join(' '),pg,num:i});
+    pdfPages.push({text:lines.join(' '),num:i});
   }
   pdfText=pdfPages.map((p,i)=>(i>0?'\n\n--- Pagina '+(i+1)+' ---\n\n':'')+p.text).join('');
   const wc=pdfText.split(/\s+/).filter(w=>w).length;
-  document.getElementById('pdf-meta-pages').textContent='Pagini: '+pdfPages.length;
+  document.getElementById('pdf-meta-pages').textContent='Pagini: '+pdfPdfDoc.numPages;
   document.getElementById('pdf-meta-words').textContent='Cuvinte: ~'+wc.toLocaleString();
   document.getElementById('pdf-meta-size').textContent='Dimensiune: '+(f.size/1024).toFixed(1)+' KB';
-  document.getElementById('pdf-fmeta').textContent=(f.size/1024).toFixed(1)+' KB · '+pdfPages.length+' pagini';
+  document.getElementById('pdf-fmeta').textContent=(f.size/1024).toFixed(1)+' KB · '+pdfPdfDoc.numPages+' pagini';
+  // Render thumbnails
   const thumbsEl=document.getElementById('pdf-thumbs');thumbsEl.innerHTML='';
-  if(pdf.numPages>1){
+  if(pdfPdfDoc.numPages>1){
     thumbsEl.style.display='flex';
-    for(let i=1;i<=Math.min(pdf.numPages,16);i++){
-      const pg2=await pdf.getPage(i);const vp=pg2.getViewport({scale:0.14});
+    for(let i=1;i<=Math.min(pdfPdfDoc.numPages,16);i++){
+      const pg2=await pdfPdfDoc.getPage(i);const vp=pg2.getViewport({scale:0.15});
       const tc2=document.createElement('canvas');tc2.width=vp.width;tc2.height=vp.height;
       const ctx=tc2.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,tc2.width,tc2.height);
       await pg2.render({canvasContext:ctx,viewport:vp}).promise;
@@ -1085,39 +1048,42 @@ async function pdfLoad(f){
     }
   }else{thumbsEl.style.display='none';}
   updatePdfSrcBody();
-  renderPdfCanvas();
+  await renderPdfCanvas();
 }
 async function renderPdfCanvas(){
   if(!pdfPdfDoc)return;
+  const wrap=document.getElementById('pdf-canvas-wrap');
+  if(!wrap)return;
   try{
     const pg=await pdfPdfDoc.getPage(pdfCurrentPage);
-    const wrap=document.getElementById('pdf-canvas-wrap');if(!wrap)return;
-    // Use a good fixed scale — don't rely on clientWidth (may be 0 when hidden)
     const vpRaw=pg.getViewport({scale:1});
-    const targetW=480; // good preview width
-    const scale=Math.max(0.5, Math.min(targetW/vpRaw.width, 2.0));
+    // Target width 500px — reliable without needing clientWidth
+    const scale=Math.max(0.5, Math.min(500/vpRaw.width, 2.0));
     const vp=pg.getViewport({scale});
-    let canvas=document.getElementById('pdf-render-canvas');
-    if(!canvas){
-      canvas=document.createElement('canvas');
-      canvas.id='pdf-render-canvas';
-      canvas.style.borderRadius='3px';
-      canvas.style.boxShadow='0 2px 12px rgba(0,0,0,.4)';
-      wrap.innerHTML='';
-      wrap.appendChild(canvas);
-    }
+    // Always rebuild canvas to avoid stale render task errors
+    wrap.innerHTML='';
+    const canvas=document.createElement('canvas');
+    canvas.id='pdf-render-canvas';
     canvas.width=vp.width;
     canvas.height=vp.height;
-    canvas.style.width=vp.width+'px';
-    canvas.style.height=vp.height+'px';
-    canvas.style.maxWidth='100%';
+    canvas.style.cssText='display:block;max-width:100%;border-radius:3px;box-shadow:0 2px 16px rgba(0,0,0,.5);';
+    wrap.style.background='#525659';
+    wrap.style.display='flex';
+    wrap.style.alignItems='flex-start';
+    wrap.style.justifyContent='center';
+    wrap.style.padding='16px';
+    wrap.style.minHeight='340px';
+    wrap.appendChild(canvas);
     const ctx=canvas.getContext('2d');
     ctx.fillStyle='#ffffff';
     ctx.fillRect(0,0,canvas.width,canvas.height);
     await pg.render({canvasContext:ctx,viewport:vp}).promise;
-    wrap.style.minHeight='';
-    wrap.style.background='#525659';
-  }catch(e){console.warn('Canvas render:',e);}
+    // Update page indicator
+    const ind=document.getElementById('pdf-page-indicator');
+    if(ind) ind.textContent='Pagina '+pdfCurrentPage+' din '+(pdfPages.length||pdfPdfDoc.numPages);
+  }catch(e){
+    wrap.innerHTML='<div style="color:#f87171;padding:20px;font-size:12px">Eroare render: '+e.message+'</div>';
+  }
 }
 function updatePdfSrcBody(){
   if(!pdfPages.length)return;
@@ -1401,69 +1367,10 @@ document.getElementById('b64-dec-btn').addEventListener('click',()=>{
 const APRYSE_KEY = 'demo:1774940427236:6340c2b6030000000070a892f7677a40bf2aaf4500692c978e67b71d77';
 
 // Auto-detect if WebViewer lib/ folder is present
-(async function detectWebViewer(){
-  try{
-    const r = await fetch('lib/webviewer.min.js', {method:'HEAD'});
-    if(r.ok){
-      document.getElementById('ed-info-card').style.display = 'none';
-      document.getElementById('ed-webviewer-wrap').style.display = 'block';
-      initWebViewer();
-    } else {
-      showBuiltinEditor();
-    }
-  } catch(e){ showBuiltinEditor(); }
-})();
-
+// WebViewer removed (trial watermark) — built-in editor is default
 function showBuiltinEditor(){
-  document.getElementById('ed-drop-wrap').style.display = 'block';
-}
-
-// ── WEBVIEWER INIT ──
-let wvInstance = null;
-function initWebViewer(){
-  const script = document.createElement('script');
-  script.src = 'lib/webviewer.min.js';
-  script.onload = () => {
-    WebViewer({
-      path: 'lib',
-      licenseKey: APRYSE_KEY,
-      fullAPI: true,
-      enableAnnotations: true,
-    }, document.getElementById('webviewer')).then(instance => {
-      wvInstance = instance;
-      const { UI, Core } = instance;
-      UI.setTheme('dark');
-      UI.setLanguage('ro');
-      // Enable all annotation tools
-      UI.enableFeatures([UI.Feature.Annotations, UI.Feature.Redaction]);
-      setStatus('wv-status','✅ WebViewer gata — apasă „Deschide PDF" sau trage un fișier în viewer', 'ok');
-      // Wire open button
-      document.getElementById('wv-open-btn').addEventListener('click',()=>document.getElementById('wv-file-input').click());
-      document.getElementById('wv-file-input').addEventListener('change', async e=>{
-        const f=e.target.files[0]; if(!f)return;
-        const ab=await f.arrayBuffer();
-        const blob=new Blob([ab],{type:'application/pdf'});
-        const url=URL.createObjectURL(blob);
-        instance.UI.loadDocument(url,{filename:f.name});
-        setStatus('wv-status','📄 '+f.name+' — editează și apasă Descarcă când ești gata','ok');
-      });
-    });
-  };
-  document.head.appendChild(script);
-
-  document.getElementById('wv-save-btn').addEventListener('click', async () => {
-    if(!wvInstance){ setStatus('wv-status','WebViewer nu e inițializat','err'); return; }
-    try{
-      const { documentViewer, annotationManager } = wvInstance.Core;
-      const doc = documentViewer.getDocument();
-      if(!doc){ setStatus('wv-status','Niciun document deschis','err'); return; }
-      const xfdf = await annotationManager.exportAnnotations();
-      const data = await doc.getFileData({ xfdfString: xfdf });
-      const blob = new Blob([data], { type: 'application/pdf' });
-      triggerDl(blob, 'document_editat.pdf');
-      setStatus('wv-status','✅ PDF descărcat cu toate adnotările!','ok');
-    } catch(e){ setStatus('wv-status','Eroare: '+e.message,'err'); }
-  });
+  const el=document.getElementById('ed-drop-wrap');
+  if(el) el.style.display='block';
 }
 
 // ── BUILT-IN DRAG-AND-DROP EDITOR ──
