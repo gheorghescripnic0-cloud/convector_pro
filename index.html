@@ -222,6 +222,58 @@ table.ptbl tr:hover td{background:rgba(255,255,255,.02);color:var(--text);}
 .transcript-word.low{color:var(--amber);}
 
 footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-top:1px solid var(--border);}
+
+/* APP SWITCHER */
+.app-switcher{display:flex;justify-content:center;gap:0;padding:0;background:var(--bg2);border-bottom:1px solid var(--border);}
+.app-tab{padding:10px 32px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;display:flex;align-items:center;gap:8px;white-space:nowrap;}
+.app-tab:hover{color:var(--text);}
+.app-tab.active{color:var(--accent3);border-bottom-color:var(--accent);}
+
+/* ACCOUNTING sidebar labels */
+.sidebar-label-acc{font-size:10px;font-weight:600;color:#f59e0b;text-transform:uppercase;letter-spacing:.8px;padding:.5rem .75rem;margin-top:.5rem;}
+
+/* ACCOUNTING modules */
+.acc-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r2);padding:1.25rem;margin-bottom:1rem;}
+.acc-card-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.6px;margin-bottom:1rem;}
+.acc-result{background:var(--bg3);border:1px solid rgba(16,185,129,.2);border-radius:var(--r);padding:14px 16px;margin-top:12px;display:none;}
+.acc-result.show{display:block;}
+.acc-result-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;}
+.acc-result-row:last-child{border-bottom:none;font-weight:600;color:var(--green);font-size:14px;}
+.acc-result-label{color:var(--muted);}
+.acc-result-val{color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12px;}
+.acc-input-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;align-items:flex-end;}
+.acc-input-col{flex:1;min-width:120px;}
+.acc-input-col label{font-size:11px;color:var(--muted);display:block;margin-bottom:4px;}
+.acc-input-col input,.acc-input-col select{background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:'Inter';font-size:13px;padding:8px 10px;width:100%;}
+.acc-input-col input:focus,.acc-input-col select:focus{outline:none;border-color:var(--accent);}
+.acc-btn{padding:9px 20px;border-radius:var(--r);border:none;font-family:'Inter';font-size:13px;font-weight:600;cursor:pointer;background:linear-gradient(135deg,#f59e0b,#d97706);color:#fff;width:100%;margin-top:4px;}
+.acc-btn:hover{opacity:.9;}
+.acc-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:8px;background:rgba(245,158,11,.15);color:#f59e0b;margin-left:8px;}
+.acc-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:8px;}
+.acc-table th{background:rgba(245,158,11,.1);color:#f59e0b;padding:7px 10px;text-align:left;font-weight:500;border-bottom:1px solid var(--border2);}
+.acc-table td{padding:6px 10px;color:var(--muted);border-bottom:1px solid var(--border);font-family:'JetBrains Mono',monospace;font-size:11px;}
+.acc-table tr:last-child td{color:var(--text);font-weight:600;background:rgba(245,158,11,.05);}
+.acc-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:1rem;}
+.acc-tab{padding:8px 16px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;}
+.acc-tab.on{color:#f59e0b;border-bottom-color:#f59e0b;}
+.acc-info{font-size:11px;color:var(--muted2);margin-top:6px;line-height:1.6;}
+.acc-stat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px;margin:10px 0;}
+.acc-stat{background:var(--bg3);border-radius:var(--r);padding:10px 12px;text-align:center;}
+.acc-stat-val{font-size:18px;font-weight:600;color:var(--text);font-family:'JetBrains Mono';}
+.acc-stat-lbl{font-size:10px;color:var(--muted);margin-top:2px;text-transform:uppercase;letter-spacing:.4px;}
+.acc-stat.green .acc-stat-val{color:var(--green);}
+.acc-stat.red .acc-stat-val{color:var(--red);}
+.acc-stat.amber .acc-stat-val{color:var(--amber);}
+.jrn-row{display:grid;grid-template-columns:100px 1fr 1fr 90px 90px 28px;gap:5px;margin-bottom:5px;align-items:center;}
+.reg-row{display:grid;grid-template-columns:100px 1fr 1fr 80px 80px 28px;gap:5px;margin-bottom:5px;align-items:center;}
+.scad-item{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:var(--r);border:1px solid var(--border);margin-bottom:6px;background:var(--bg3);}
+.scad-item.overdue{border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06);}
+.scad-item.soon{border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06);}
+.scad-item.ok{border-color:rgba(16,185,129,.2);background:rgba(16,185,129,.04);}
+.diff-del{background:rgba(239,68,68,.12);color:var(--red);padding:1px 4px;border-radius:3px;}
+.diff-add{background:rgba(16,185,129,.12);color:var(--green);padding:1px 4px;border-radius:3px;}
+.acc-highlight{background:rgba(16,185,129,.08);border-left:3px solid var(--green);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin-top:10px;font-size:12px;color:var(--text);}
+.acc-warn{background:rgba(239,68,68,.08);border-left:3px solid var(--red);padding:10px 14px;border-radius:0 var(--r) var(--r) 0;margin-top:10px;font-size:12px;color:var(--text);}
 </style>
 </head>
 <body>
@@ -229,11 +281,16 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
 <header class="hdr">
   <div class="hdr-logo">⚡</div>
   <div>
-    <div class="hdr-title">Universal Converter Pro</div>
-    <div class="hdr-sub">Toate instrumentele într-un singur loc — direct în browser</div>
+    <div class="hdr-title" id="app-title">Universal Converter Pro</div>
+    <div class="hdr-sub" id="app-sub">Toate instrumentele într-un singur loc — direct în browser</div>
   </div>
-  <div class="hdr-badge">Gratuit · Privat · Fără limite</div>
+  <div class="hdr-badge">Gratuit · Privat · Moldova 🇲🇩</div>
 </header>
+
+<div class="app-switcher">
+  <div class="app-tab active" data-app="converter">⚡ Convertor & Tools</div>
+  <div class="app-tab" data-app="accounting">📊 Contabilitate Moldova</div>
+</div>
 
 <div class="layout">
 
@@ -256,6 +313,56 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
   <div class="nav-item" data-module="bulk"><div class="nav-icon">📦</div><div class="nav-text">Bulk Imagini</div></div>
   <div class="nav-item" data-module="ocr"><div class="nav-icon">🔍</div><div class="nav-text">OCR Scanner</div><div class="nav-badge">AI</div></div>
   <div class="nav-item" data-module="transcribe"><div class="nav-icon">🎙</div><div class="nav-text">Transcriere</div><div class="nav-badge">AI</div></div>
+
+  <!-- ACCOUNTING NAV (hidden until accounting app selected) -->
+  <div id="acc-nav" style="display:none">
+    <div class="sidebar-label-acc">Calculatoare</div>
+    <div class="nav-item" data-module="acc-tva"><div class="nav-icon">💰</div><div class="nav-text">Calculator TVA</div></div>
+    <div class="nav-item" data-module="acc-salariu"><div class="nav-icon">👤</div><div class="nav-text">Calculator Salariu</div></div>
+    <div class="nav-item" data-module="acc-amortizare"><div class="nav-icon">📉</div><div class="nav-text">Amortizare Active</div></div>
+    <div class="nav-item" data-module="acc-dobanda"><div class="nav-icon">📈</div><div class="nav-text">Calculator Dobândă</div></div>
+    <div class="nav-item" data-module="acc-curs"><div class="nav-icon">💱</div><div class="nav-text">Curs Valutar</div></div>
+    <div class="nav-item" data-module="acc-penalitati"><div class="nav-icon">⚠️</div><div class="nav-text">Penalități Întârziere</div></div>
+    <div class="nav-item" data-module="acc-credit"><div class="nav-icon">🏦</div><div class="nav-text">Calculator Credit</div></div>
+    <div class="nav-item" data-module="acc-breakeven"><div class="nav-icon">⚖️</div><div class="nav-text">Prag Rentabilitate</div></div>
+    <div class="nav-item" data-module="acc-cashflow"><div class="nav-icon">💵</div><div class="nav-text">Proiecție Cashflow</div></div>
+    <div class="nav-item" data-module="acc-zile"><div class="nav-icon">📅</div><div class="nav-text">Zile Lucrătoare</div></div>
+    <div class="sidebar-label-acc">Documente</div>
+    <div class="nav-item" data-module="acc-factura"><div class="nav-icon">🧾</div><div class="nav-text">Generator Factură</div></div>
+    <div class="nav-item" data-module="acc-chitanta"><div class="nav-icon">📋</div><div class="nav-text">Generator Chitanță</div></div>
+    <div class="nav-item" data-module="acc-contract"><div class="nav-icon">📃</div><div class="nav-text">Contract Simplu</div></div>
+    <div class="sidebar-label-acc">Analiză & Date</div>
+    <div class="nav-item" data-module="acc-csv"><div class="nav-icon">📊</div><div class="nav-text">Analizor CSV/Excel</div></div>
+    <div class="nav-item" data-module="acc-pivot"><div class="nav-icon">🔀</div><div class="nav-text">Tabel Pivot</div></div>
+    <div class="nav-item" data-module="acc-duplicate"><div class="nav-icon">🔎</div><div class="nav-text">Detector Duplicate</div></div>
+    <div class="nav-item" data-module="acc-reconciliere"><div class="nav-icon">⚖️</div><div class="nav-text">Reconciliere Bancară</div></div>
+    <div class="nav-item" data-module="acc-buget"><div class="nav-icon">📋</div><div class="nav-text">Comparator Buget</div></div>
+    <div class="sidebar-label-acc">Utilități</div>
+    <div class="nav-item" data-module="acc-jurnal"><div class="nav-icon">📒</div><div class="nav-text">Jurnal Contabil</div></div>
+    <div class="nav-item" data-module="acc-registru"><div class="nav-icon">💵</div><div class="nav-text">Registru de Casă</div></div>
+    <div class="nav-item" data-module="acc-scadentar"><div class="nav-icon">📅</div><div class="nav-text">Scadențar Plăți</div></div>
+    <div class="nav-item" data-module="acc-iban"><div class="nav-icon">🏦</div><div class="nav-text">Verificare IBAN</div></div>
+    <div class="nav-item" data-module="acc-split"><div class="nav-icon">➗</div><div class="nav-text">Split Cheltuieli</div></div>
+    <div class="sidebar-label-acc">Stocuri & Producție</div>
+    <div class="nav-item" data-module="acc-inventar"><div class="nav-icon">🗂</div><div class="nav-text">Inventar Active Fixe</div></div>
+    <div class="nav-item" data-module="acc-fifo"><div class="nav-icon">📦</div><div class="nav-text">Calculator FIFO/LIFO</div></div>
+    <div class="nav-item" data-module="acc-calculatie"><div class="nav-icon">🏭</div><div class="nav-text">Calculație Cost Produs</div></div>
+    <div class="nav-item" data-module="acc-norma"><div class="nav-icon">📐</div><div class="nav-text">Norme Consum</div></div>
+    <div class="sidebar-label-acc">Rapoarte & Grafice</div>
+    <div class="nav-item" data-module="acc-waterfall"><div class="nav-icon">📊</div><div class="nav-text">Grafic Cashflow</div></div>
+    <div class="nav-item" data-module="acc-fisc"><div class="nav-icon">📑</div><div class="nav-text">Raport Fiscal Lunar</div></div>
+    <div class="nav-item" data-module="acc-impozit"><div class="nav-icon">🧮</div><div class="nav-text">Estimator Impozit Anual</div></div>
+    <div class="nav-item" data-module="acc-depozit"><div class="nav-icon">🏦</div><div class="nav-text">Calculator Depozit</div></div>
+    <div class="nav-item" data-module="acc-tabel_zile"><div class="nav-icon">🗓</div><div class="nav-text">Pontaj & Concedii</div></div>
+    <div class="sidebar-label-acc">Documente Extra</div>
+    <div class="nav-item" data-module="acc-comanda"><div class="nav-icon">📋</div><div class="nav-text">Bon de Comandă</div></div>
+    <div class="nav-item" data-module="acc-nota"><div class="nav-icon">📄</div><div class="nav-text">Notă de Plată / Deviz</div></div>
+    <div class="nav-item" data-module="acc-stamp"><div class="nav-icon">🔵</div><div class="nav-text">Generator Ștampilă</div></div>
+    <div class="nav-item" data-module="acc-qr"><div class="nav-icon">📲</div><div class="nav-text">Generator QR Code</div></div>
+    <div class="sidebar-label-acc">Instrumente Text</div>
+    <div class="nav-item" data-module="acc-ron"><div class="nav-icon">💬</div><div class="nav-text">Sumă în Litere</div></div>
+    <div class="nav-item" data-module="acc-diferente"><div class="nav-icon">🔍</div><div class="nav-text">Diferențe Texte</div></div>
+  </div>
 </nav>
 
 <!-- CONTENT -->
@@ -826,6 +933,1014 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
       <div class="card-title">Transcriere <button class="btn btn-sm btn-green" id="tr-dl" style="float:right">⬇ TXT</button></div>
       <div class="transcript-box" id="tr-result-text"></div>
     </div>
+  </div>
+</div>
+
+
+<!-- ════ ACCOUNTING MODULES — Moldova 🇲🇩 ════ -->
+
+<!-- TVA -->
+<div class="module" id="mod-acc-tva">
+  <div class="module-header">
+    <div class="module-title">💰 Calculator TVA <span class="acc-badge">Moldova</span></div>
+    <div class="module-desc">Calculează TVA conform cotelor din Moldova: <strong>20%</strong> standard, <strong>8%</strong> alimente/medicamente/hoteluri, <strong>0%</strong> export. Funcționează în ambele direcții.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-tabs" id="tva-tabs">
+      <div class="acc-tab on" onclick="accTvaTab('fara',this)">Fără TVA → cu TVA</div>
+      <div class="acc-tab" onclick="accTvaTab('cu',this)">Cu TVA → fără TVA</div>
+    </div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label id="tva-lbl">Suma fără TVA (MDL)</label><input type="number" id="tva-suma" placeholder="1000" step="0.01"></div>
+      <div class="acc-input-col"><label>Cotă TVA</label><select id="tva-cota"><option value="20">20% — standard</option><option value="8">8% — alimente, medicamente</option><option value="0">0% — export</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcTva()">⚡ Calculează TVA</button>
+    <div class="acc-result" id="tva-result">
+      <div class="acc-result-row"><span class="acc-result-label">Bază de calcul</span><span class="acc-result-val" id="tva-r-baza">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">TVA (<span id="tva-r-cota-lbl">20</span>%)</span><span class="acc-result-val" id="tva-r-tva">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Total cu TVA</span><span class="acc-result-val" id="tva-r-total">—</span></div>
+    </div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-card-title">Calcul rapid mai multe sume</div>
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:2"><label>Sume (câte una pe rând)</label><textarea id="tva-multi" style="height:90px;width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-family:'JetBrains Mono';font-size:12px;padding:8px" placeholder="100&#10;250.50&#10;1800"></textarea></div>
+      <div class="acc-input-col"><label>Cotă</label><select id="tva-multi-cota"><option value="20">20%</option><option value="8">8%</option><option value="0">0%</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcTvaMulti()">⚡ Calculează toate</button>
+    <div id="tva-multi-result" style="margin-top:10px;overflow-x:auto"></div>
+  </div>
+</div>
+
+<!-- SALARIU -->
+<div class="module" id="mod-acc-salariu">
+  <div class="module-header">
+    <div class="module-title">👤 Calculator Salariu Net <span class="acc-badge">Moldova 2024</span></div>
+    <div class="module-desc">Calcul net conform legislației RM: <strong>impozit venit 12%</strong>, <strong>CAS angajat 6%</strong>, <strong>CNAM angajat 4.5%</strong>. Include scutirile personale și costul angajatorului.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Salariu brut (MDL/lună)</label><input type="number" id="sal-brut" placeholder="10000" step="1"></div>
+      <div class="acc-input-col"><label>Scutire personală anuală</label><select id="sal-scutire"><option value="27000">27 000 MDL — ordinară 2024</option><option value="31500">31 500 MDL — majorată</option><option value="0">Fără scutire</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcSalariu()">⚡ Calculează salariu net</button>
+    <div class="acc-result" id="sal-result">
+      <div class="acc-result-row"><span class="acc-result-label">Salariu brut</span><span class="acc-result-val" id="sal-r-brut">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">CAS angajat (6%)</span><span class="acc-result-val" id="sal-r-cas">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">CNAM angajat (4.5%)</span><span class="acc-result-val" id="sal-r-cnam">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Venit impozabil</span><span class="acc-result-val" id="sal-r-vimp">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Impozit venit (12%)</span><span class="acc-result-val" id="sal-r-iv">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">🟢 Salariu NET</span><span class="acc-result-val" id="sal-r-net">—</span></div>
+    </div>
+    <div class="acc-highlight" id="sal-angajator" style="display:none"><strong>Cost total angajator: <span id="sal-r-ang">—</span> MDL</strong><br><span style="color:var(--muted);font-size:11px">Brut + CAS angajator 24% + CNAM angajator 4.5%</span></div>
+  </div>
+</div>
+
+<!-- AMORTIZARE -->
+<div class="module" id="mod-acc-amortizare">
+  <div class="module-header">
+    <div class="module-title">📉 Calculator Amortizare Active <span class="acc-badge">Moldova</span></div>
+    <div class="module-desc">Calculează amortizarea prin <strong>linie dreaptă</strong>, <strong>degresiv dublu</strong> sau <strong>suma anilor</strong>. Generează tabelul complet cu export CSV.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Valoare inițială (MDL)</label><input type="number" id="amor-val" placeholder="50000" step="1"></div>
+      <div class="acc-input-col"><label>Valoare reziduală (MDL)</label><input type="number" id="amor-rez" placeholder="0" step="1" value="0"></div>
+      <div class="acc-input-col"><label>Durata utilă (ani)</label><input type="number" id="amor-ani" placeholder="5" min="1" max="50" value="5"></div>
+      <div class="acc-input-col"><label>Metodă</label><select id="amor-metoda"><option value="linie">Linie dreaptă (SL)</option><option value="ddb">Degresiv dublu (DDB)</option><option value="syd">Suma anilor (SYD)</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcAmortizare()">⚡ Generează tabel</button>
+    <div id="amor-result" style="display:none;margin-top:12px;overflow-x:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;flex-wrap:wrap;gap:6px">
+        <span style="font-size:12px;color:var(--muted)" id="amor-summary"></span>
+        <button class="btn btn-sm btn-green" onclick="amorExportCSV()">⬇ Export CSV</button>
+      </div>
+      <table class="acc-table" id="amor-table"><thead><tr><th>An</th><th>Amortizare an</th><th>Amort. cumulată</th><th>Valoare contabilă</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- DOBANDA -->
+<div class="module" id="mod-acc-dobanda">
+  <div class="module-header">
+    <div class="module-title">📈 Calculator Dobândă</div>
+    <div class="module-desc">Calculează dobânda <strong>simplă</strong> sau <strong>compusă</strong> cu capitalizare lunară, trimestrială sau anuală.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-tabs"><div class="acc-tab on" onclick="accDobTab('simpla',this)">Simplă</div><div class="acc-tab" onclick="accDobTab('compusa',this)">Compusă</div></div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Capital (MDL)</label><input type="number" id="dob-capital" placeholder="10000"></div>
+      <div class="acc-input-col"><label>Rată anuală (%)</label><input type="number" id="dob-rata" placeholder="8.5" step="0.1"></div>
+      <div class="acc-input-col"><label>Perioadă (ani)</label><input type="number" id="dob-ani" value="3" min="1"></div>
+      <div class="acc-input-col" id="dob-cap-wrap" style="display:none"><label>Capitalizare</label><select id="dob-cap"><option value="12">Lunară</option><option value="4">Trimestrială</option><option value="1">Anuală</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcDobanda()">⚡ Calculează</button>
+    <div class="acc-result" id="dob-result">
+      <div class="acc-result-row"><span class="acc-result-label">Capital inițial</span><span class="acc-result-val" id="dob-r-cap">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Dobândă totală</span><span class="acc-result-val" id="dob-r-dob">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Valoare finală</span><span class="acc-result-val" id="dob-r-fin">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CURS VALUTAR -->
+<div class="module" id="mod-acc-curs">
+  <div class="module-header">
+    <div class="module-title">💱 Curs Valutar BNM</div>
+    <div class="module-desc">Cursuri oficiale BNM actualizate zilnic. Convertor rapid MDL ↔ EUR, USD, RON, UAH și alte valute.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <span id="curs-status" style="font-size:12px;color:var(--amber)">Se încarcă cursurile BNM...</span>
+      <button class="btn btn-sm" onclick="loadCursuri()" style="padding:4px 10px;font-size:11px">🔄 Actualizează</button>
+    </div>
+    <div id="curs-tabel" style="overflow-x:auto;margin-bottom:14px"></div>
+    <div class="acc-card-title">Convertor rapid</div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Sumă</label><input type="number" id="curs-suma" placeholder="1000" step="0.01" oninput="calcCurs()"></div>
+      <div class="acc-input-col"><label>Din</label><select id="curs-din" onchange="calcCurs()"><option value="MDL">MDL</option><option value="EUR">EUR</option><option value="USD">USD</option><option value="RON">RON</option><option value="UAH">UAH</option><option value="GBP">GBP</option></select></div>
+      <div class="acc-input-col"><label>În</label><select id="curs-in" onchange="calcCurs()"><option value="EUR">EUR</option><option value="MDL">MDL</option><option value="USD">USD</option><option value="RON">RON</option><option value="UAH">UAH</option><option value="GBP">GBP</option></select></div>
+    </div>
+    <div class="acc-result show" id="curs-result">
+      <div class="acc-result-row"><span class="acc-result-label">Rezultat</span><span class="acc-result-val" id="curs-r-val" style="font-size:15px">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Curs aplicat</span><span class="acc-result-val" id="curs-r-curs">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PENALITATI -->
+<div class="module" id="mod-acc-penalitati">
+  <div class="module-header">
+    <div class="module-title">⚠️ Calculator Penalități Întârziere</div>
+    <div class="module-desc">Calculează penalitățile conform Codului Civil RM. Rata legală implicită: <strong>0.1% pe zi</strong>.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Suma datorată (MDL)</label><input type="number" id="pen-suma" placeholder="5000" step="0.01"></div>
+      <div class="acc-input-col"><label>Rată (%/zi)</label><input type="number" id="pen-rata" value="0.1" step="0.01"></div>
+      <div class="acc-input-col"><label>Data scadenței</label><input type="date" id="pen-scad"></div>
+      <div class="acc-input-col"><label>Data plății</label><input type="date" id="pen-plata"></div>
+    </div>
+    <button class="acc-btn" onclick="calcPenalitati()">⚡ Calculează</button>
+    <div class="acc-result" id="pen-result">
+      <div class="acc-result-row"><span class="acc-result-label">Suma principală</span><span class="acc-result-val" id="pen-r-suma">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Zile întârziere</span><span class="acc-result-val" id="pen-r-zile">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Penalitate</span><span class="acc-result-val" id="pen-r-pen">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Total de plată</span><span class="acc-result-val" id="pen-r-total">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CREDIT -->
+<div class="module" id="mod-acc-credit">
+  <div class="module-header">
+    <div class="module-title">🏦 Calculator Credit</div>
+    <div class="module-desc">Calculează rata lunară și costul total al creditului. Generează planul complet de rambursare cu export CSV.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Suma creditului (MDL)</label><input type="number" id="cred-suma" placeholder="100000"></div>
+      <div class="acc-input-col"><label>Rata anuală (%)</label><input type="number" id="cred-rata" placeholder="12" step="0.1"></div>
+      <div class="acc-input-col"><label>Perioada (luni)</label><input type="number" id="cred-luni" value="36" min="1" max="360"></div>
+    </div>
+    <button class="acc-btn" onclick="calcCredit()">⚡ Calculează plan rambursare</button>
+    <div class="acc-result" id="cred-result">
+      <div class="acc-result-row"><span class="acc-result-label">Rată lunară</span><span class="acc-result-val" id="cred-r-rata">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Total rambursare</span><span class="acc-result-val" id="cred-r-total">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Total dobânzi</span><span class="acc-result-val" id="cred-r-dob">—</span></div>
+    </div>
+    <div id="cred-table-wrap" style="display:none;margin-top:12px;overflow-x:auto">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:var(--muted)">Plan rambursare (primele 24 luni afișate)</span><button class="btn btn-sm btn-green" onclick="creditExportCSV()">⬇ CSV complet</button></div>
+      <table class="acc-table" id="cred-table"><thead><tr><th>Luna</th><th>Rată</th><th>Principal</th><th>Dobândă</th><th>Sold rămas</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- BREAKEVEN -->
+<div class="module" id="mod-acc-breakeven">
+  <div class="module-header">
+    <div class="module-title">⚖️ Prag Rentabilitate (Break-even)</div>
+    <div class="module-desc">Calculează câte unități trebuie vândute pentru a acoperi costurile fixe și variabile.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Costuri fixe/lună (MDL)</label><input type="number" id="be-fixe" placeholder="20000"></div>
+      <div class="acc-input-col"><label>Preț vânzare/unitate (MDL)</label><input type="number" id="be-pret" placeholder="150" step="0.01"></div>
+      <div class="acc-input-col"><label>Cost variabil/unitate (MDL)</label><input type="number" id="be-var" placeholder="80" step="0.01"></div>
+    </div>
+    <button class="acc-btn" onclick="calcBreakeven()">⚡ Calculează prag</button>
+    <div class="acc-result" id="be-result">
+      <div class="acc-result-row"><span class="acc-result-label">Marjă contribuție / unitate</span><span class="acc-result-val" id="be-r-marja">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Unități necesare (break-even)</span><span class="acc-result-val" id="be-r-unitati">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Cifră de afaceri break-even</span><span class="acc-result-val" id="be-r-ca">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Profit la 120% din prag</span><span class="acc-result-val" id="be-r-profit">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CASHFLOW -->
+<div class="module" id="mod-acc-cashflow">
+  <div class="module-header">
+    <div class="module-title">💵 Proiecție Cashflow 12 luni</div>
+    <div class="module-desc">Planifică fluxul de numerar lunar pe un an. Adaugă categorii de venituri și cheltuieli, vizualizează soldul cumulat.</div>
+  </div>
+  <div class="acc-card">
+    <div id="cf-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="cfAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:8px 16px;font-size:12px">+ Adaugă categorie</button>
+      <button class="acc-btn" onclick="calcCashflow()" style="flex:1">⚡ Generează proiecție</button>
+    </div>
+    <div id="cf-result" style="display:none;margin-top:14px;overflow-x:auto">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;font-weight:500">Proiecție 12 luni</span><button class="btn btn-sm btn-green" onclick="cfExportCSV()">⬇ CSV</button></div>
+      <table class="acc-table" id="cf-table"></table>
+    </div>
+  </div>
+</div>
+
+<!-- ZILE LUCRATOARE -->
+<div class="module" id="mod-acc-zile">
+  <div class="module-header">
+    <div class="module-title">📅 Calculator Zile Lucrătoare Moldova</div>
+    <div class="module-desc">Calculează zilele lucrătoare între două date, cu <strong>toate sărbătorile legale</strong> ale Republicii Moldova.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Data început</label><input type="date" id="zile-start"></div>
+      <div class="acc-input-col"><label>Data sfârșit</label><input type="date" id="zile-end"></div>
+    </div>
+    <button class="acc-btn" onclick="calcZile()">⚡ Calculează</button>
+    <div class="acc-result" id="zile-result">
+      <div class="acc-result-row"><span class="acc-result-label">Zile calendaristice</span><span class="acc-result-val" id="zile-r-cal">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Weekend-uri</span><span class="acc-result-val" id="zile-r-we">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Sărbători legale</span><span class="acc-result-val" id="zile-r-sarb">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">🟢 Zile lucrătoare</span><span class="acc-result-val" id="zile-r-lucr">—</span></div>
+    </div>
+    <div class="acc-info" style="margin-top:8px">Sărbători incluse: 1 ian, 7-8 ian (Crăciun), 8 mar, 1 mai, 9 mai, Paște+Sf.Constantin (mobile), 27 aug, 31 aug, 25 oct, 25-26 dec.</div>
+  </div>
+</div>
+
+<!-- FACTURA -->
+<div class="module" id="mod-acc-factura">
+  <div class="module-header">
+    <div class="module-title">🧾 Generator Factură PDF</div>
+    <div class="module-desc">Completezi datele furnizorului, cumpărătorului și produsele — generezi o <strong>factură PDF</strong> descărcabilă instant.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div><div class="acc-card-title">Furnizor</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="fct-fur-nume" placeholder="SRL Exemplu"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>IDNO</label><input type="text" id="fct-fur-idno" placeholder="1234567890123"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Adresă</label><input type="text" id="fct-fur-adr" placeholder="str. Ștefan cel Mare 1, Chișinău"></div>
+        <div class="acc-input-col"><label>IBAN</label><input type="text" id="fct-fur-iban" placeholder="MD24AG000000000002500003"></div>
+      </div>
+      <div><div class="acc-card-title">Cumpărător</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="fct-cum-nume" placeholder="SRL Client"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>IDNO</label><input type="text" id="fct-cum-idno" placeholder="9876543210987"></div>
+        <div class="acc-input-col"><label>Adresă</label><input type="text" id="fct-cum-adr" placeholder="str. Eminescu 10, Bălți"></div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:10px">
+      <div class="acc-input-col"><label>Nr. factură</label><input type="text" id="fct-nr" value="001"></div>
+      <div class="acc-input-col"><label>Data emiterii</label><input type="date" id="fct-data"></div>
+      <div class="acc-input-col"><label>Scadența</label><input type="date" id="fct-scad"></div>
+    </div>
+    <div class="acc-card-title" style="margin-top:12px">Produse / Servicii</div>
+    <div id="fct-items" style="margin-bottom:6px"></div>
+    <button class="acc-btn" onclick="fctAddItem()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px">+ Adaugă linie</button>
+    <div id="fct-totals" style="display:none;margin-top:10px;text-align:right;font-size:13px;line-height:1.8">
+      <div>Subtotal: <strong id="fct-subtotal">—</strong> MDL</div>
+      <div>TVA: <strong id="fct-tva-total">—</strong> MDL</div>
+      <div style="font-size:15px;color:var(--green)">TOTAL: <strong id="fct-total">—</strong> MDL</div>
+    </div>
+    <button class="acc-btn" onclick="genFactura()" style="margin-top:10px">🧾 Generează PDF Factură</button>
+    <div class="status" id="fct-status" style="margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- CHITANTA -->
+<div class="module" id="mod-acc-chitanta">
+  <div class="module-header">
+    <div class="module-title">📋 Generator Chitanță PDF</div>
+    <div class="module-desc">Generează o chitanță simplă în format PDF descărcabil.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Nr. chitanță</label><input type="text" id="chit-nr" value="001"></div>
+      <div class="acc-input-col"><label>Data</label><input type="date" id="chit-data"></div>
+      <div class="acc-input-col"><label>Suma (MDL)</label><input type="number" id="chit-suma" placeholder="1500" step="0.01"></div>
+    </div>
+    <div class="acc-input-col" style="margin-bottom:8px"><label>Am primit de la</label><input type="text" id="chit-dela" placeholder="Numele / firma plătitorului"></div>
+    <div class="acc-input-col" style="margin-bottom:8px"><label>Cu titlu de</label><input type="text" id="chit-titlu" placeholder="plată servicii contabilitate ianuarie 2024"></div>
+    <div class="acc-input-col" style="margin-bottom:10px"><label>Primit de</label><input type="text" id="chit-primit" placeholder="Nume Prenume, funcția"></div>
+    <button class="acc-btn" onclick="genChitanta()">📋 Generează PDF Chitanță</button>
+    <div class="status" id="chit-status" style="margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- CONTRACT -->
+<div class="module" id="mod-acc-contract">
+  <div class="module-header">
+    <div class="module-title">📃 Generator Contract</div>
+    <div class="module-desc">Template editabil de contract conform legislației Republicii Moldova: prestări servicii, vânzare-cumpărare, locațiune.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Tip contract</label><select id="contr-tip"><option value="servicii">Prestări servicii</option><option value="vanzare">Vânzare-cumpărare</option><option value="locatiune">Locațiune (chirie)</option></select></div>
+      <div class="acc-input-col"><label>Nr. contract</label><input type="text" id="contr-nr" value="01/2024"></div>
+      <div class="acc-input-col"><label>Data</label><input type="date" id="contr-data"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:8px">
+      <div><div class="acc-card-title">Prestator</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="contr-p-nume" placeholder="SRL / PF"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Reprezentat de</label><input type="text" id="contr-p-rep" placeholder="Director Ion Popescu"></div>
+        <div class="acc-input-col"><label>IDNO/IDNP</label><input type="text" id="contr-p-id"></div>
+      </div>
+      <div><div class="acc-card-title">Beneficiar</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="contr-b-nume" placeholder="SRL / PF"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Reprezentat de</label><input type="text" id="contr-b-rep" placeholder="Director Maria Ionescu"></div>
+        <div class="acc-input-col"><label>IDNO/IDNP</label><input type="text" id="contr-b-id"></div>
+      </div>
+    </div>
+    <div class="acc-input-row" style="margin-top:10px">
+      <div class="acc-input-col" style="flex:2"><label>Obiectul contractului</label><input type="text" id="contr-obiect" placeholder="servicii de contabilitate lunară"></div>
+      <div class="acc-input-col"><label>Valoare (MDL)</label><input type="number" id="contr-valoare" placeholder="2000"></div>
+      <div class="acc-input-col"><label>Durata</label><input type="text" id="contr-durata" value="12 luni"></div>
+    </div>
+    <button class="acc-btn" onclick="genContract()" style="margin-top:10px">📃 Generează PDF Contract</button>
+    <div class="status" id="contr-status" style="margin-top:8px"></div>
+  </div>
+</div>
+
+<!-- ════ BATCH 2: 10 MODULE NOI ════ -->
+
+<!-- CSV ANALIZOR -->
+<div class="module" id="mod-acc-csv">
+  <div class="module-header">
+    <div class="module-title">📊 Analizor CSV / Excel</div>
+    <div class="module-desc">Importă un fișier <strong>CSV sau Excel (.xlsx)</strong> și obții instant statistici: total, medie, min, max, număr rânduri. Vizualizare tabel cu sortare și filtrare.</div>
+  </div>
+  <div class="acc-card">
+    <div class="drop" id="csv-drop" style="padding:1.5rem"><input type="file" id="csv-input" accept=".csv,.xlsx,.xls,.tsv"><div class="drop-icon" style="font-size:28px">📊</div><h3 style="font-size:14px">Trage fișierul CSV sau Excel</h3><p style="font-size:12px">Acceptă: .CSV, .XLSX, .XLS</p></div>
+  </div>
+  <div id="csv-main" style="display:none">
+    <div class="acc-stat-grid" id="csv-stats"></div>
+    <div class="acc-card" style="padding:0;overflow:hidden">
+      <div style="padding:10px 14px;background:var(--bg3);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+        <input type="text" id="csv-filter" placeholder="Filtrează rânduri..." style="padding:6px 10px;font-size:12px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);width:200px" oninput="csvFilter()">
+        <span id="csv-rows-count" style="font-size:11px;color:var(--muted)"></span>
+        <div style="flex:1"></div>
+        <button class="btn btn-sm btn-green" onclick="csvExport()">⬇ Export CSV filtrat</button>
+      </div>
+      <div style="overflow-x:auto;max-height:420px;overflow-y:auto">
+        <table class="acc-table" id="csv-table" style="min-width:600px"></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TABEL PIVOT -->
+<div class="module" id="mod-acc-pivot">
+  <div class="module-header">
+    <div class="module-title">🔀 Tabel Pivot Simplu</div>
+    <div class="module-desc">Grupează datele dintr-un CSV după orice coloană și calculează automat <strong>suma, media sau numărul</strong> pentru coloana de valori.</div>
+  </div>
+  <div class="acc-card">
+    <div class="drop" id="pivot-drop" style="padding:1.5rem"><input type="file" id="pivot-input" accept=".csv"><div class="drop-icon" style="font-size:28px">🔀</div><h3 style="font-size:14px">Trage fișierul CSV</h3><p style="font-size:12px">Prima linie trebuie să fie header</p></div>
+  </div>
+  <div id="pivot-main" style="display:none">
+    <div class="acc-card">
+      <div class="acc-input-row">
+        <div class="acc-input-col"><label>Grupează după coloana</label><select id="pivot-group-col"></select></div>
+        <div class="acc-input-col"><label>Coloana de valori</label><select id="pivot-val-col"></select></div>
+        <div class="acc-input-col"><label>Funcție</label><select id="pivot-fn"><option value="sum">Sumă</option><option value="avg">Medie</option><option value="count">Număr</option><option value="min">Minim</option><option value="max">Maxim</option></select></div>
+      </div>
+      <button class="acc-btn" onclick="calcPivot()">⚡ Generează pivot</button>
+    </div>
+    <div id="pivot-result" style="display:none;overflow-x:auto;margin-top:10px">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span id="pivot-title" style="font-size:12px;color:var(--muted)"></span>
+        <button class="btn btn-sm btn-green" onclick="pivotExport()">⬇ Export CSV</button>
+      </div>
+      <table class="acc-table" id="pivot-table"></table>
+    </div>
+  </div>
+</div>
+
+<!-- DETECTOR DUPLICATE -->
+<div class="module" id="mod-acc-duplicate">
+  <div class="module-header">
+    <div class="module-title">🔎 Detector Duplicate</div>
+    <div class="module-desc">Găsește <strong>rânduri identice sau similare</strong> într-un fișier CSV. Poate compara pe toate coloanele sau doar pe coloanele selectate.</div>
+  </div>
+  <div class="acc-card">
+    <div class="drop" id="dup-drop" style="padding:1.5rem"><input type="file" id="dup-input" accept=".csv"><div class="drop-icon" style="font-size:28px">🔎</div><h3 style="font-size:14px">Trage fișierul CSV</h3><p style="font-size:12px">Caută rânduri duplicate</p></div>
+  </div>
+  <div id="dup-main" style="display:none">
+    <div class="acc-card">
+      <div class="acc-input-row">
+        <div class="acc-input-col" style="flex:2"><label>Coloane de verificat (gol = toate)</label><input type="text" id="dup-cols" placeholder="ex: Nume, IDNO sau gol pentru toate"></div>
+        <div class="acc-input-col"><label>Sensibil la majuscule</label><select id="dup-case"><option value="no">Nu (recomandat)</option><option value="yes">Da</option></select></div>
+      </div>
+      <button class="acc-btn" onclick="detectDuplicate()">🔎 Detectează duplicate</button>
+      <div id="dup-result" style="margin-top:10px"></div>
+    </div>
+  </div>
+</div>
+
+<!-- RECONCILIERE BANCARA -->
+<div class="module" id="mod-acc-reconciliere">
+  <div class="module-header">
+    <div class="module-title">⚖️ Reconciliere Bancară</div>
+    <div class="module-desc">Compară <strong>două liste de tranzacții</strong> (ex: extrasul de cont vs. registrul intern) și identifică diferențele: tranzacții lipsă sau sume nepotrivite.</div>
+  </div>
+  <div class="acc-card">
+    <div class="grid-2">
+      <div>
+        <div class="acc-card-title">Lista A — extrasul de cont</div>
+        <div class="drop" id="rec-drop-a" style="padding:1rem"><input type="file" id="rec-input-a" accept=".csv"><div class="drop-icon" style="font-size:20px">🏦</div><p style="font-size:12px">CSV — col: Referință, Sumă</p></div>
+        <div class="status" id="rec-status-a" style="font-size:11px;margin-top:4px"></div>
+      </div>
+      <div>
+        <div class="acc-card-title">Lista B — registrul intern</div>
+        <div class="drop" id="rec-drop-b" style="padding:1rem"><input type="file" id="rec-input-b" accept=".csv"><div class="drop-icon" style="font-size:20px">📒</div><p style="font-size:12px">CSV — col: Referință, Sumă</p></div>
+        <div class="status" id="rec-status-b" style="font-size:11px;margin-top:4px"></div>
+      </div>
+    </div>
+    <div class="acc-input-row" style="margin-top:10px">
+      <div class="acc-input-col"><label>Coloana cheie (referință/ID)</label><input type="text" id="rec-key-col" value="Referinta" placeholder="ex: Referinta"></div>
+      <div class="acc-input-col"><label>Coloana sumă</label><input type="text" id="rec-sum-col" value="Suma" placeholder="ex: Suma"></div>
+    </div>
+    <button class="acc-btn" onclick="calcReconciliere()">⚡ Compară listele</button>
+    <div id="rec-result" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<!-- COMPARATOR BUGET -->
+<div class="module" id="mod-acc-buget">
+  <div class="module-header">
+    <div class="module-title">📋 Comparator Buget vs. Realizat</div>
+    <div class="module-desc">Compară <strong>bugetul planificat</strong> cu <strong>valorile realizate</strong>. Diferențele negative sunt evidențiate cu roșu, cele pozitive cu verde.</div>
+  </div>
+  <div class="acc-card">
+    <div id="buget-rows"></div>
+    <button class="acc-btn" onclick="bugetAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px;margin-top:8px">+ Adaugă linie</button>
+    <button class="acc-btn" onclick="calcBuget()" style="margin-top:8px">⚡ Calculează diferențe</button>
+    <div id="buget-result" style="display:none;margin-top:12px;overflow-x:auto">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px">
+        <span style="font-size:12px;font-weight:500">Raport buget vs. realizat</span>
+        <button class="btn btn-sm btn-green" onclick="bugetExport()">⬇ Export CSV</button>
+      </div>
+      <table class="acc-table" id="buget-table"></table>
+    </div>
+  </div>
+</div>
+
+<!-- JURNAL CONTABIL -->
+<div class="module" id="mod-acc-jurnal">
+  <div class="module-header">
+    <div class="module-title">📒 Jurnal Contabil Simplu</div>
+    <div class="module-desc">Înregistrează operații contabile cu <strong>debit și credit</strong>. Verifică automat că totalul debit = total credit. Export CSV pentru import în alte sisteme.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:grid;grid-template-columns:90px 1fr 100px 90px 90px 28px;gap:5px;font-size:10px;color:var(--muted);padding:0 0 5px">
+      <span>Data</span><span>Descriere</span><span>Cont D/C</span><span>Debit</span><span>Credit</span><span></span>
+    </div>
+    <div id="jrn-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="jrnAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px">+ Adaugă înregistrare</button>
+      <button class="acc-btn" onclick="calcJurnal()" style="flex:1">⚡ Verifică balanța</button>
+    </div>
+    <div id="jrn-balance" style="margin-top:10px;display:none">
+      <div class="acc-input-row">
+        <div class="acc-stat"><div class="acc-stat-val green" id="jrn-total-d">0</div><div class="acc-stat-lbl">Total Debit</div></div>
+        <div class="acc-stat"><div class="acc-stat-val red" id="jrn-total-c">0</div><div class="acc-stat-lbl">Total Credit</div></div>
+        <div class="acc-stat"><div class="acc-stat-val" id="jrn-diff">0</div><div class="acc-stat-lbl">Diferență</div></div>
+      </div>
+      <div id="jrn-msg" style="margin-top:6px;font-size:12px"></div>
+    </div>
+    <button class="btn btn-sm btn-green" onclick="jrnExport()" id="jrn-export-btn" style="display:none;margin-top:8px">⬇ Export CSV Jurnal</button>
+  </div>
+</div>
+
+<!-- REGISTRU DE CASA -->
+<div class="module" id="mod-acc-registru">
+  <div class="module-header">
+    <div class="module-title">💵 Registru de Casă</div>
+    <div class="module-desc">Înregistrează <strong>încasări și plăți</strong> în numerar. Calculează automat soldul curent după fiecare operație. Export CSV sau PDF.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap">
+      <div class="acc-stat"><div class="acc-stat-val green" id="reg-sold">0.00</div><div class="acc-stat-lbl">Sold curent (MDL)</div></div>
+      <div class="acc-stat"><div class="acc-stat-val green" id="reg-total-in">0.00</div><div class="acc-stat-lbl">Total încasări</div></div>
+      <div class="acc-stat"><div class="acc-stat-val red" id="reg-total-out">0.00</div><div class="acc-stat-lbl">Total plăți</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:100px 1fr 1fr 90px 90px 28px;gap:5px;font-size:10px;color:var(--muted);padding:0 0 5px">
+      <span>Data</span><span>Descriere</span><span>Document</span><span>Încasare</span><span>Plată</span><span></span>
+    </div>
+    <div id="reg-rows" style="max-height:320px;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="regAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px">+ Adaugă operație</button>
+      <button class="acc-btn" onclick="regCalc()" style="flex:1">⚡ Actualizează sold</button>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-green" id="reg-export-csv" onclick="regExportCSV()" style="display:none">⬇ Export CSV</button>
+      <button class="btn btn-sm btn-green" id="reg-export-pdf" onclick="regExportPDF()" style="display:none">⬇ Export PDF</button>
+    </div>
+  </div>
+</div>
+
+<!-- SCADENTAR -->
+<div class="module" id="mod-acc-scadentar">
+  <div class="module-header">
+    <div class="module-title">📅 Scadențar Plăți</div>
+    <div class="module-desc">Urmărește facturile și plățile cu <strong>alerte vizuale</strong>: roșu = întârziat, portocaliu = scadent în 7 zile, verde = în termen. Salvat în browser între sesiuni.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:2"><label>Descriere / Furnizor</label><input type="text" id="scad-desc" placeholder="ex: Chirie birou ianuarie"></div>
+      <div class="acc-input-col"><label>Suma (MDL)</label><input type="number" id="scad-suma" placeholder="5000" step="0.01"></div>
+      <div class="acc-input-col"><label>Data scadenței</label><input type="date" id="scad-data"></div>
+    </div>
+    <button class="acc-btn" onclick="scadAdd()" style="margin-bottom:12px">+ Adaugă scadență</button>
+    <div id="scad-list"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap" id="scad-actions" style="display:none">
+      <button class="btn btn-sm btn-green" onclick="scadExport()">⬇ Export CSV</button>
+      <button class="btn btn-sm" onclick="scadClearDone()" style="border-color:var(--red);color:var(--red)">🗑 Șterge achitate</button>
+    </div>
+  </div>
+</div>
+
+<!-- IBAN -->
+<div class="module" id="mod-acc-iban">
+  <div class="module-header">
+    <div class="module-title">🏦 Verificare & Formatare IBAN</div>
+    <div class="module-desc">Verifică validitatea unui <strong>IBAN moldovenesc sau european</strong> și îl formatează corect. Extrage codul băncii și numărul de cont.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:3"><label>IBAN de verificat</label><input type="text" id="iban-input" placeholder="MD24AG000000000002500003" oninput="this.value=this.value.toUpperCase().replace(/\s/g,'')" style="font-family:'JetBrains Mono';letter-spacing:1px"></div>
+    </div>
+    <button class="acc-btn" onclick="verificaIBAN()">🏦 Verifică IBAN</button>
+    <div class="acc-result" id="iban-result">
+      <div class="acc-result-row"><span class="acc-result-label">Status</span><span class="acc-result-val" id="iban-r-status">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Țară</span><span class="acc-result-val" id="iban-r-tara">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Cod bancă</span><span class="acc-result-val" id="iban-r-banca">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Format standard</span><span class="acc-result-val" id="iban-r-format">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Format cu spații</span><span class="acc-result-val" id="iban-r-spaces">—</span></div>
+    </div>
+    <div class="acc-card-title" style="margin-top:14px">Lungimile IBAN acceptate</div>
+    <div class="acc-info">MD=24 · RO=24 · UA=29 · BG=22 · DE=22 · FR=27 · GB=22 · IT=27 · ES=24 · NL=18 · BE=16 · AT=20 · CH=21 · PL=28 · HU=28</div>
+  </div>
+</div>
+
+<!-- SPLIT CHELTUIELI -->
+<div class="module" id="mod-acc-split">
+  <div class="module-header">
+    <div class="module-title">➗ Split Cheltuieli între Persoane</div>
+    <div class="module-desc">Împarte cheltuielile <strong>echitabil sau personalizat</strong> între mai mulți participanți. Calculează cine datorează cui și cât — util pentru echipe, deplasări, proiecte.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-card-title">Participanți</div>
+    <div id="split-persons" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px"></div>
+    <div style="display:flex;gap:6px;margin-bottom:14px">
+      <input type="text" id="split-person-name" placeholder="Nume participant" style="flex:1;padding:7px 10px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <button class="acc-btn" onclick="splitAddPerson()" style="width:auto;padding:7px 14px;font-size:12px">+ Adaugă</button>
+    </div>
+    <div class="acc-card-title">Cheltuieli</div>
+    <div id="split-expenses"></div>
+    <button class="acc-btn" onclick="splitAddExpense()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px;margin-top:6px;margin-bottom:10px">+ Adaugă cheltuială</button>
+    <button class="acc-btn" onclick="calcSplit()">⚡ Calculează datoriile</button>
+    <div id="split-result" style="display:none;margin-top:12px">
+      <div class="acc-card-title">Rezumat per persoană</div>
+      <div id="split-summary" class="acc-stat-grid"></div>
+      <div class="acc-card-title" style="margin-top:12px">Tranzacții de efectuat</div>
+      <div id="split-transactions"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ BATCH 3: 16 MODULE FINALE ════ -->
+
+<!-- INVENTAR ACTIVE FIXE -->
+<div class="module" id="mod-acc-inventar">
+  <div class="module-header">
+    <div class="module-title">🗂 Inventar Active Fixe</div>
+    <div class="module-desc">Gestionează lista activelor fixe cu <strong>amortizare automată</strong> calculată pentru fiecare activ. Valoarea contabilă curentă se actualizează în timp real. Export CSV complet.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:grid;grid-template-columns:2fr 80px 80px 80px 90px 70px 28px;gap:5px;font-size:10px;color:var(--muted);padding:0 0 5px">
+      <span>Denumire activ</span><span>Val.inițială</span><span>Val.rez.</span><span>Durata(ani)</span><span>Data intrării</span><span>Val.contabilă</span><span></span>
+    </div>
+    <div id="inv-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="invAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px">+ Adaugă activ</button>
+      <button class="acc-btn" onclick="calcInventar()">⚡ Calculează amortizare</button>
+    </div>
+    <div id="inv-result" style="display:none;margin-top:12px">
+      <div class="acc-stat-grid" id="inv-stats"></div>
+      <div style="overflow-x:auto;margin-top:10px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:6px"><span style="font-size:12px;color:var(--muted)" id="inv-date-lbl"></span><button class="btn btn-sm btn-green" onclick="invExport()">⬇ Export CSV</button></div>
+        <table class="acc-table" id="inv-table"><thead><tr><th>Activ</th><th>Val.inițială</th><th>Amort./an</th><th>Amort.cumulată</th><th>Val.contabilă</th><th>Ani răm.</th></tr></thead><tbody></tbody></table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FIFO/LIFO -->
+<div class="module" id="mod-acc-fifo">
+  <div class="module-header">
+    <div class="module-title">📦 Calculator FIFO / LIFO / CMP</div>
+    <div class="module-desc">Calculează costul mărfurilor vândute și valoarea stocului rămas folosind metodele <strong>FIFO</strong> (primul intrat, primul ieșit), <strong>LIFO</strong> sau <strong>Cost Mediu Ponderat</strong>.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-tabs"><div class="acc-tab on" onclick="fifoSetTab('intrari',this)">Intrări stoc</div><div class="acc-tab" onclick="fifoSetTab('iesiri',this)">Ieșiri stoc</div></div>
+    <div id="fifo-intrari-wrap">
+      <div style="display:grid;grid-template-columns:100px 1fr 90px 90px 28px;gap:5px;font-size:10px;color:var(--muted);margin:8px 0 4px">
+        <span>Data</span><span>Descriere</span><span>Cantitate</span><span>Cost/buc</span><span></span>
+      </div>
+      <div id="fifo-intrari"></div>
+      <button class="acc-btn" onclick="fifoAddRow('intrari')" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px;margin-top:4px">+ Adaugă intrare</button>
+    </div>
+    <div id="fifo-iesiri-wrap" style="display:none">
+      <div style="display:grid;grid-template-columns:100px 1fr 90px 28px;gap:5px;font-size:10px;color:var(--muted);margin:8px 0 4px">
+        <span>Data</span><span>Descriere</span><span>Cantitate</span><span></span>
+      </div>
+      <div id="fifo-iesiri"></div>
+      <button class="acc-btn" onclick="fifoAddRow('iesiri')" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px;margin-top:4px">+ Adaugă ieșire</button>
+    </div>
+    <div class="acc-input-row" style="margin-top:10px">
+      <div class="acc-input-col"><label>Metodă calcul</label><select id="fifo-metoda"><option value="fifo">FIFO — primul intrat, primul ieșit</option><option value="lifo">LIFO — ultimul intrat, primul ieșit</option><option value="cmp">CMP — cost mediu ponderat</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcFifo()">⚡ Calculează cost mărfuri vândute</button>
+    <div class="acc-result" id="fifo-result">
+      <div class="acc-result-row"><span class="acc-result-label">Total intrări (valoare)</span><span class="acc-result-val" id="fifo-r-in">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Cost mărfuri vândute</span><span class="acc-result-val" id="fifo-r-cmv">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Valoare stoc rămas</span><span class="acc-result-val" id="fifo-r-stoc">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Cantitate stoc rămasă</span><span class="acc-result-val" id="fifo-r-cant">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATIE COST PRODUS -->
+<div class="module" id="mod-acc-calculatie">
+  <div class="module-header">
+    <div class="module-title">🏭 Calculație Cost Produs</div>
+    <div class="module-desc">Calculează costul complet al unui produs sau serviciu: <strong>materii prime, manoperă, cheltuieli indirecte</strong>. Determină prețul de vânzare cu marja dorită.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-card-title">Componente cost</div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 100px 28px;gap:5px;font-size:10px;color:var(--muted);margin-bottom:4px">
+      <span>Componenta</span><span>Cantitate</span><span>Cost/UM (MDL)</span><span></span>
+    </div>
+    <div id="calc-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="calcAddRow('MP','Materie primă')" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:11px">+ Materie primă</button>
+      <button class="acc-btn" onclick="calcAddRow('MO','Manoperă')" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:11px">+ Manoperă</button>
+      <button class="acc-btn" onclick="calcAddRow('CI','Cheltuieli indirecte')" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:11px">+ Cheltuieli ind.</button>
+    </div>
+    <div class="acc-input-row" style="margin-top:10px">
+      <div class="acc-input-col"><label>Cantitate produsă</label><input type="number" id="calc-qty" value="1" min="1" step="1"></div>
+      <div class="acc-input-col"><label>Marjă profit dorită (%)</label><input type="number" id="calc-marja" value="20" min="0" step="1"></div>
+      <div class="acc-input-col"><label>TVA aplicabilă (%)</label><select id="calc-tva"><option value="20">20%</option><option value="8">8%</option><option value="0">0%</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcCalculatie()">⚡ Calculează cost și preț</button>
+    <div class="acc-result" id="calc-result">
+      <div class="acc-result-row"><span class="acc-result-label">Cost total producție</span><span class="acc-result-val" id="calc-r-total">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Cost per unitate</span><span class="acc-result-val" id="calc-r-unit">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Preț vânzare (fără TVA)</span><span class="acc-result-val" id="calc-r-pret">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Preț cu TVA</span><span class="acc-result-val" id="calc-r-pretva">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- NORME CONSUM -->
+<div class="module" id="mod-acc-norma">
+  <div class="module-header">
+    <div class="module-title">📐 Calculator Norme Consum</div>
+    <div class="module-desc">Calculează consumul planificat de materiale pentru o cantitate dată de producție, bazat pe <strong>norme de consum</strong> pe unitate. Compară cu consumul efectiv.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Cantitate de produs (unități)</label><input type="number" id="norma-qty" value="100" min="1" step="1"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 80px 80px 80px 28px;gap:5px;font-size:10px;color:var(--muted);margin:8px 0 4px">
+      <span>Material</span><span>UM</span><span>Normă/buc</span><span>Consum plan.</span><span>Consum efect.</span><span></span>
+    </div>
+    <div id="norma-rows"></div>
+    <button class="acc-btn" onclick="normaAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px;margin-top:6px;margin-bottom:10px">+ Adaugă material</button>
+    <button class="acc-btn" onclick="calcNorma()">⚡ Calculează abateri</button>
+    <div id="norma-result" style="display:none;margin-top:10px;overflow-x:auto">
+      <table class="acc-table" id="norma-table"><thead><tr><th>Material</th><th>UM</th><th>Plan</th><th>Efectiv</th><th>Abatere</th><th>%</th></tr></thead><tbody></tbody></table>
+    </div>
+  </div>
+</div>
+
+<!-- WATERFALL CASHFLOW -->
+<div class="module" id="mod-acc-waterfall">
+  <div class="module-header">
+    <div class="module-title">📊 Grafic Flux Numerar (Waterfall)</div>
+    <div class="module-desc">Vizualizează <strong>intrările și ieșirile de numerar</strong> sub formă de grafic waterfall. Fiecare bară arată contribuția la fluxul total.</div>
+  </div>
+  <div class="acc-card">
+    <div id="wf-rows"></div>
+    <button class="acc-btn" onclick="wfAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:7px 14px;font-size:12px;margin-top:6px;margin-bottom:10px">+ Adaugă element</button>
+    <button class="acc-btn" onclick="drawWaterfall()">📊 Generează grafic</button>
+    <div id="wf-chart-wrap" style="display:none;margin-top:14px">
+      <canvas id="wf-canvas" style="width:100%;border-radius:var(--r);background:var(--bg3)"></canvas>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;flex-wrap:wrap;gap:6px">
+        <div class="acc-stat-grid" id="wf-stats" style="flex:1"></div>
+        <button class="btn btn-sm btn-green" onclick="wfExportCSV()">⬇ Export CSV</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RAPORT FISCAL LUNAR -->
+<div class="module" id="mod-acc-fisc">
+  <div class="module-header">
+    <div class="module-title">📑 Raport Fiscal Lunar</div>
+    <div class="module-desc">Generează un <strong>rezumat fiscal lunar</strong> cu totaluri TVA, impozit pe venit, CAS/CNAM, și totalul de plată la buget. Export PDF.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Luna</label><select id="fisc-luna"><option value="1">Ianuarie</option><option value="2">Februarie</option><option value="3">Martie</option><option value="4">Aprilie</option><option value="5">Mai</option><option value="6">Iunie</option><option value="7">Iulie</option><option value="8">August</option><option value="9">Septembrie</option><option value="10">Octombrie</option><option value="11">Noiembrie</option><option value="12">Decembrie</option></select></div>
+      <div class="acc-input-col"><label>Anul</label><input type="number" id="fisc-an" value="2024" min="2000" max="2099"></div>
+      <div class="acc-input-col"><label>Denumire companie</label><input type="text" id="fisc-firma" placeholder="SRL Exemplu"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:4px">
+      <div>
+        <div class="acc-card-title">Venituri</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Venituri din vânzări (fără TVA)</label><input type="number" id="fisc-vanzari" placeholder="0" step="0.01"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Alte venituri</label><input type="number" id="fisc-alte-v" placeholder="0" step="0.01"></div>
+        <div class="acc-input-col"><label>TVA colectată (20%)</label><input type="number" id="fisc-tva-col" placeholder="0" step="0.01"></div>
+      </div>
+      <div>
+        <div class="acc-card-title">Cheltuieli & Angajați</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Total cheltuieli deductibile</label><input type="number" id="fisc-chelt" placeholder="0" step="0.01"></div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>TVA deductibilă</label><input type="number" id="fisc-tva-ded" placeholder="0" step="0.01"></div>
+        <div class="acc-input-col"><label>Total salarii brute</label><input type="number" id="fisc-salarii" placeholder="0" step="0.01"></div>
+      </div>
+    </div>
+    <button class="acc-btn" onclick="calcFisc()" style="margin-top:10px">⚡ Generează raport fiscal</button>
+    <div id="fisc-result" style="display:none;margin-top:12px">
+      <div class="acc-stat-grid" id="fisc-stats"></div>
+      <button class="acc-btn" onclick="fiscExportPDF()" style="margin-top:10px">📑 Descarcă PDF Raport Fiscal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ESTIMATOR IMPOZIT ANUAL -->
+<div class="module" id="mod-acc-impozit">
+  <div class="module-header">
+    <div class="module-title">🧮 Estimator Impozit Anual</div>
+    <div class="module-desc">Estimează impozitul pe venit anual pentru <strong>persoane fizice</strong> sau <strong>întreprinderi individuale</strong> din Republica Moldova, cu scutiri aplicate.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-tabs"><div class="acc-tab on" onclick="impSetTab('pf',this)">Persoană fizică</div><div class="acc-tab" onclick="impSetTab('pj',this)">SRL / Companie</div></div>
+    <div id="imp-pf-wrap">
+      <div class="acc-input-row">
+        <div class="acc-input-col"><label>Venit brut anual (MDL)</label><input type="number" id="imp-venit" placeholder="120000" step="100"></div>
+        <div class="acc-input-col"><label>Scutire personală</label><select id="imp-scutire"><option value="27000">27 000 MDL — ordinară</option><option value="31500">31 500 MDL — majorată</option><option value="0">Fără scutire</option></select></div>
+      </div>
+      <div class="acc-input-row">
+        <div class="acc-input-col"><label>Scutire pentru soț/soție (MDL)</label><input type="number" id="imp-sot" value="0" step="100"></div>
+        <div class="acc-input-col"><label>Scutiri persoane întreținute</label><input type="number" id="imp-dep" value="0" min="0" step="1" placeholder="nr. persoane"></div>
+      </div>
+    </div>
+    <div id="imp-pj-wrap" style="display:none">
+      <div class="acc-input-row">
+        <div class="acc-input-col"><label>Profit impozabil anual (MDL)</label><input type="number" id="imp-profit" placeholder="200000" step="100"></div>
+        <div class="acc-input-col"><label>Tip impozitare</label><select id="imp-tip-pj"><option value="12">12% — impozit pe venit standard</option><option value="4">4% — regim simplificat cifra afaceri</option><option value="0">Scutit</option></select></div>
+      </div>
+    </div>
+    <button class="acc-btn" onclick="calcImpozit()" style="margin-top:8px">🧮 Estimează impozitul</button>
+    <div class="acc-result" id="imp-result">
+      <div class="acc-result-row"><span class="acc-result-label">Venit / profit brut</span><span class="acc-result-val" id="imp-r-brut">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Total scutiri / deduceri</span><span class="acc-result-val" id="imp-r-scutiri">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Baza impozabilă</span><span class="acc-result-val" id="imp-r-baza">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Impozit estimat anual</span><span class="acc-result-val" id="imp-r-imp">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Impozit / lună</span><span class="acc-result-val" id="imp-r-lunar">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CALCULATOR DEPOZIT -->
+<div class="module" id="mod-acc-depozit">
+  <div class="module-header">
+    <div class="module-title">🏦 Calculator Depozit Bancar</div>
+    <div class="module-desc">Calculează dobânda și suma finală la depozite bancare cu capitalizare lunară sau la scadență. Include impozitul pe dobândă (12% în Moldova).</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Suma depozitului (MDL)</label><input type="number" id="dep-suma" placeholder="50000" step="100"></div>
+      <div class="acc-input-col"><label>Rata anuală (%)</label><input type="number" id="dep-rata" placeholder="8.5" step="0.1"></div>
+      <div class="acc-input-col"><label>Durata (luni)</label><input type="number" id="dep-luni" value="12" min="1" max="120"></div>
+    </div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Tip dobândă</label><select id="dep-tip"><option value="la-scadenta">La scadență</option><option value="lunar">Lunară (capitalizat)</option></select></div>
+      <div class="acc-input-col"><label>Moneda</label><select id="dep-valuta"><option value="MDL">MDL — Leu Moldovenesc</option><option value="EUR">EUR — Euro</option><option value="USD">USD — Dolar</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcDepozit()">⚡ Calculează depozit</button>
+    <div class="acc-result" id="dep-result">
+      <div class="acc-result-row"><span class="acc-result-label">Suma inițială</span><span class="acc-result-val" id="dep-r-init">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Dobândă brută</span><span class="acc-result-val" id="dep-r-dob">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Impozit dobândă (12%)</span><span class="acc-result-val" id="dep-r-imp">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Dobândă netă</span><span class="acc-result-val" id="dep-r-net">—</span></div>
+      <div class="acc-result-row"><span class="acc-result-label">Suma totală la scadență</span><span class="acc-result-val" id="dep-r-total">—</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PONTAJ SI CONCEDII -->
+<div class="module" id="mod-acc-tabel_zile">
+  <div class="module-header">
+    <div class="module-title">🗓 Planificator Pontaj & Concedii</div>
+    <div class="module-desc">Urmărește prezența angajaților pe luni: zile lucrate, concediu, medical, absențe. Calculează automat totalurile și exportă pontajul în CSV.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Luna</label><select id="pont-luna"><option value="1">Ianuarie</option><option value="2">Februarie</option><option value="3">Martie</option><option value="4">Aprilie</option><option value="5">Mai</option><option value="6">Iunie</option><option value="7">Iulie</option><option value="8">August</option><option value="9">Septembrie</option><option value="10">Octombrie</option><option value="11">Noiembrie</option><option value="12">Decembrie</option></select></div>
+      <div class="acc-input-col"><label>Anul</label><input type="number" id="pont-an" value="2024"></div>
+      <div class="acc-input-col"><label>Zile lucrătoare în lună</label><input type="number" id="pont-zile-max" value="22" min="1" max="31"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 70px 70px 70px 70px 70px 28px;gap:5px;font-size:10px;color:var(--muted);margin:8px 0 4px">
+      <span>Angajat</span><span>Lucrate</span><span>Concediu</span><span>Medical</span><span>Absențe</span><span>Total</span><span></span>
+    </div>
+    <div id="pont-rows"></div>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <button class="acc-btn" onclick="pontAddRow()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px">+ Adaugă angajat</button>
+      <button class="acc-btn" onclick="calcPontaj()">⚡ Calculează pontaj</button>
+    </div>
+    <div id="pont-result" style="display:none;margin-top:10px">
+      <div class="acc-stat-grid" id="pont-stats"></div>
+      <button class="btn btn-sm btn-green" onclick="pontExport()" style="margin-top:8px">⬇ Export CSV Pontaj</button>
+    </div>
+  </div>
+</div>
+
+<!-- BON DE COMANDA -->
+<div class="module" id="mod-acc-comanda">
+  <div class="module-header">
+    <div class="module-title">📋 Generator Bon de Comandă</div>
+    <div class="module-desc">Creează un <strong>bon de comandă profesional</strong> cu lista produselor, cantitățile și prețurile. Export PDF descărcabil instant.</div>
+  </div>
+  <div class="acc-card">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+      <div><div class="acc-card-title">Cumpărător</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="bon-cum-nume" placeholder="SRL / Persoana fizică"></div>
+        <div class="acc-input-col"><label>Adresă / Contact</label><input type="text" id="bon-cum-adr" placeholder="Adresă, telefon"></div>
+      </div>
+      <div><div class="acc-card-title">Furnizor</div>
+        <div class="acc-input-col" style="margin-bottom:6px"><label>Denumire</label><input type="text" id="bon-fur-nume" placeholder="Furnizor SRL"></div>
+        <div class="acc-input-col"><label>Adresă / Contact</label><input type="text" id="bon-fur-adr" placeholder="Adresă, telefon"></div>
+      </div>
+    </div>
+    <div class="acc-input-row" style="margin-top:8px">
+      <div class="acc-input-col"><label>Nr. comandă</label><input type="text" id="bon-nr" value="C001"></div>
+      <div class="acc-input-col"><label>Data comenzii</label><input type="date" id="bon-data"></div>
+      <div class="acc-input-col"><label>Data livrare dorită</label><input type="date" id="bon-livrare"></div>
+    </div>
+    <div class="acc-card-title" style="margin-top:10px">Produse comandate</div>
+    <div id="bon-items"></div>
+    <button class="acc-btn" onclick="bonAddItem()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px;margin-top:6px">+ Adaugă produs</button>
+    <div id="bon-total-wrap" style="display:none;margin-top:8px;text-align:right;font-size:13px">
+      Total: <strong id="bon-total" style="color:var(--green)">—</strong> MDL
+    </div>
+    <button class="acc-btn" onclick="genBon()" style="margin-top:10px">📋 Generează PDF Bon de Comandă</button>
+    <div class="status" id="bon-status" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<!-- NOTA DE PLATA / DEVIZ -->
+<div class="module" id="mod-acc-nota">
+  <div class="module-header">
+    <div class="module-title">📄 Notă de Plată / Deviz</div>
+    <div class="module-desc">Generează o <strong>notă de plată sau deviz</strong> cu detalii complete ale lucrărilor/serviciilor și costurilor. Export PDF.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-tabs"><div class="acc-tab on" onclick="notaSetTab('nota',this)">Notă de plată</div><div class="acc-tab" onclick="notaSetTab('deviz',this)">Deviz de lucrări</div></div>
+    <div class="acc-input-row" style="margin-top:8px">
+      <div class="acc-input-col"><label>Nr. document</label><input type="text" id="nota-nr" value="NP-001"></div>
+      <div class="acc-input-col"><label>Data</label><input type="date" id="nota-data"></div>
+      <div class="acc-input-col" style="flex:2"><label>Beneficiar</label><input type="text" id="nota-benef" placeholder="Beneficiarul lucrărilor"></div>
+    </div>
+    <div class="acc-input-col" style="margin-bottom:8px"><label>Descriere generală</label><input type="text" id="nota-desc" placeholder="ex: Lucrări de reparație birou, str. Pușkin 10"></div>
+    <div class="acc-card-title">Devizul lucrărilor</div>
+    <div id="nota-items"></div>
+    <button class="acc-btn" onclick="notaAddItem()" style="background:var(--bg3);color:var(--text);border:1px solid var(--border2);width:auto;padding:6px 12px;font-size:12px;margin-top:6px">+ Adaugă linie</button>
+    <div id="nota-total-wrap" style="display:none;margin-top:8px;text-align:right;font-size:13px;line-height:1.8">
+      <div>Total fără TVA: <strong id="nota-subtotal">—</strong> MDL</div>
+      <div>TVA: <strong id="nota-tva">—</strong> MDL</div>
+      <div style="font-size:15px;color:var(--green)">TOTAL: <strong id="nota-total">—</strong> MDL</div>
+    </div>
+    <button class="acc-btn" onclick="genNota()" style="margin-top:10px">📄 Generează PDF</button>
+    <div class="status" id="nota-status" style="margin-top:6px"></div>
+  </div>
+</div>
+
+<!-- GENERATOR STAMPILA -->
+<div class="module" id="mod-acc-stamp">
+  <div class="module-header">
+    <div class="module-title">🔵 Generator Ștampilă Digitală</div>
+    <div class="module-desc">Creează o <strong>ștampilă rotundă digitală</strong> cu textul dorit, descărcabilă ca PNG transparent. Utilă pentru documente digitale.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:2"><label>Text exterior (sus)</label><input type="text" id="stamp-top" placeholder="SRL EXEMPLU · CHIȘINĂU" oninput="drawStamp()"></div>
+      <div class="acc-input-col" style="flex:2"><label>Text exterior (jos)</label><input type="text" id="stamp-bot" placeholder="REPUBLICA MOLDOVA" oninput="drawStamp()"></div>
+    </div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Text centru linia 1</label><input type="text" id="stamp-c1" placeholder="IDNO: 123456789" oninput="drawStamp()"></div>
+      <div class="acc-input-col"><label>Text centru linia 2</label><input type="text" id="stamp-c2" placeholder="Director" oninput="drawStamp()"></div>
+    </div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Culoare</label><input type="color" id="stamp-color" value="#0033aa" oninput="drawStamp()"></div>
+      <div class="acc-input-col"><label>Dimensiune (px)</label><input type="number" id="stamp-size" value="300" min="100" max="600" step="10" oninput="drawStamp()"></div>
+      <div class="acc-input-col"><label>Stea centrală</label><select id="stamp-star" onchange="drawStamp()"><option value="yes">Da</option><option value="no">Nu</option></select></div>
+    </div>
+    <div style="text-align:center;margin:14px 0">
+      <canvas id="stamp-canvas" style="border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,.3)"></canvas>
+    </div>
+    <button class="acc-btn" onclick="downloadStamp()">⬇ Descarcă PNG ștampilă</button>
+  </div>
+</div>
+
+<!-- GENERATOR QR CODE -->
+<div class="module" id="mod-acc-qr">
+  <div class="module-header">
+    <div class="module-title">📲 Generator QR Code</div>
+    <div class="module-desc">Generează <strong>coduri QR</strong> pentru linkuri, IBAN-uri, texte sau orice informație. Descarcă ca PNG de înaltă rezoluție.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:3">
+        <label>Tip conținut QR</label>
+        <select id="qr-type" onchange="qrUpdatePlaceholder()">
+          <option value="text">Text liber</option>
+          <option value="url">URL / Link</option>
+          <option value="iban">IBAN + Sumă (plată)</option>
+          <option value="email">Email</option>
+          <option value="tel">Număr de telefon</option>
+          <option value="vcard">vCard (persoană de contact)</option>
+        </select>
+      </div>
+    </div>
+    <div id="qr-fields">
+      <div class="acc-input-col" style="margin-top:8px;margin-bottom:8px"><label id="qr-lbl">Conținut QR</label><textarea id="qr-content" style="height:80px;width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:12px;padding:8px" placeholder="Introdu textul..."></textarea></div>
+    </div>
+    <div class="acc-input-row">
+      <div class="acc-input-col"><label>Dimensiune (px)</label><input type="number" id="qr-size" value="300" min="100" max="1000" step="50"></div>
+      <div class="acc-input-col"><label>Culoare</label><input type="color" id="qr-color" value="#000000"></div>
+      <div class="acc-input-col"><label>Fundal</label><input type="color" id="qr-bg" value="#ffffff"></div>
+    </div>
+    <button class="acc-btn" onclick="genQR()">📲 Generează QR Code</button>
+    <div id="qr-result" style="display:none;text-align:center;margin-top:14px">
+      <canvas id="qr-canvas" style="border-radius:var(--r);box-shadow:0 2px 12px rgba(0,0,0,.3)"></canvas>
+      <div style="margin-top:10px"><button class="btn btn-sm btn-green" onclick="downloadQR()">⬇ Descarcă PNG</button></div>
+    </div>
+    <div class="acc-info" style="margin-top:8px">Generare QR locală, fără server. Scanează cu orice aplicație de camera.</div>
+  </div>
+</div>
+
+<!-- SUMA IN LITERE -->
+<div class="module" id="mod-acc-ron">
+  <div class="module-header">
+    <div class="module-title">💬 Convertor Sumă în Litere</div>
+    <div class="module-desc">Transformă o sumă numerică în <strong>text scris în litere</strong> — util pentru facturi, chitanțe și contracte. Suportă MDL, RON și EUR.</div>
+  </div>
+  <div class="acc-card">
+    <div class="acc-input-row">
+      <div class="acc-input-col" style="flex:2"><label>Suma de convertit</label><input type="number" id="litere-suma" placeholder="ex: 1250.50" step="0.01" oninput="calcLitere()"></div>
+      <div class="acc-input-col"><label>Moneda</label><select id="litere-valuta" onchange="calcLitere()"><option value="MDL">MDL (lei moldovenești)</option><option value="RON">RON (lei românești)</option><option value="EUR">EUR (euro)</option><option value="USD">USD (dolari)</option></select></div>
+    </div>
+    <div class="acc-result show" id="litere-result" style="margin-top:12px">
+      <div class="acc-result-row"><span class="acc-result-label">Suma în cifre</span><span class="acc-result-val" id="litere-r-nr">—</span></div>
+      <div class="acc-result-row" style="flex-direction:column;align-items:flex-start;gap:4px">
+        <span class="acc-result-label">Suma în litere</span>
+        <span id="litere-r-text" style="font-size:14px;color:var(--text);font-weight:500;line-height:1.5">—</span>
+      </div>
+    </div>
+    <div style="margin-top:10px"><button class="btn btn-sm" id="litere-copy" onclick="navigator.clipboard.writeText(document.getElementById('litere-r-text').textContent)" style="border-color:var(--accent2);color:var(--accent2)">📋 Copiază textul</button></div>
+  </div>
+</div>
+
+<!-- DETECTOR DIFERENTE TEXTE -->
+<div class="module" id="mod-acc-diferente">
+  <div class="module-header">
+    <div class="module-title">🔍 Detector Diferențe Texte</div>
+    <div class="module-desc">Compară <strong>două versiuni ale unui text</strong> sau document și evidențiază exact ce s-a adăugat, modificat sau șters. Util pentru compararea contractelor.</div>
+  </div>
+  <div class="acc-card">
+    <div class="grid-2">
+      <div><label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Textul original (versiunea veche)</label><textarea id="diff-a" style="width:100%;height:200px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:12px;padding:10px;resize:vertical" placeholder="Lipește textul original..."></textarea></div>
+      <div><label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Textul modificat (versiunea nouă)</label><textarea id="diff-b" style="width:100%;height:200px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text);font-size:12px;padding:10px;resize:vertical" placeholder="Lipește textul modificat..."></textarea></div>
+    </div>
+    <div class="acc-input-row" style="margin-top:8px">
+      <div class="acc-input-col"><label>Nivel comparație</label><select id="diff-level"><option value="word">Pe cuvinte</option><option value="line">Pe linii</option><option value="char">Pe caractere</option></select></div>
+    </div>
+    <button class="acc-btn" onclick="calcDiff()">🔍 Compară textele</button>
+    <div id="diff-stats" style="display:none;margin-top:8px" class="acc-stat-grid"></div>
+    <div id="diff-result" style="display:none;margin-top:10px;background:var(--bg3);border-radius:var(--r);padding:14px;font-size:12px;line-height:1.9;max-height:400px;overflow-y:auto;word-break:break-word"></div>
   </div>
 </div>
 
@@ -1988,6 +3103,1740 @@ document.getElementById('tr-btn').addEventListener('click',async()=>{
   player.currentTime=0;player.play();recognition.start();setProg('tr-fill',50);setStatus('tr-status','Se transcrie... (vorbire detectată în timp real)','');
   player.onended=()=>{setTimeout(()=>recognition.stop(),1500);};
 });
+
+
+// ════════════════════════════════════════════
+// APP SWITCHER
+// ════════════════════════════════════════════
+let currentApp = 'converter';
+document.querySelectorAll('.app-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.app-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentApp = tab.dataset.app;
+    const isAcc = currentApp === 'accounting';
+    // Show/hide converter nav
+    document.querySelector('.sidebar-label') && document.querySelectorAll('.sidebar > *:not(#acc-nav)').forEach(el => {
+      el.style.display = isAcc ? 'none' : '';
+    });
+    document.getElementById('acc-nav').style.display = isAcc ? 'block' : 'none';
+    document.getElementById('app-title').textContent = isAcc ? 'Contabilitate Moldova 🇲🇩' : 'Universal Converter Pro';
+    document.getElementById('app-sub').textContent = isAcc ? 'Instrumente pentru contabili — TVA, salarii, facturi, contracte' : 'Toate instrumentele într-un singur loc — direct în browser';
+    // Hide all modules
+    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+    if (isAcc) {
+      document.getElementById('mod-acc-tva').classList.add('active');
+      // Activate first acc nav item
+      document.querySelectorAll('#acc-nav .nav-item').forEach((ni,i) => ni.classList.toggle('active', i===0));
+      document.querySelectorAll('.sidebar > .nav-item').forEach(ni => ni.classList.remove('active'));
+      // Load cursuri on first open
+      if (!window._cursLoaded) loadCursuri();
+    } else {
+      document.getElementById('mod-pdf').classList.add('active');
+      document.querySelectorAll('.sidebar > .nav-item').forEach((ni,i) => ni.classList.toggle('active', i===0));
+      document.querySelectorAll('#acc-nav .nav-item').forEach(ni => ni.classList.remove('active'));
+    }
+  });
+});
+// Wire acc nav items
+document.querySelectorAll('#acc-nav .nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    document.querySelectorAll('#acc-nav .nav-item').forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+    const mod = document.getElementById('mod-' + item.dataset.module);
+    if (mod) mod.classList.add('active');
+  });
+});
+// Set today's date defaults
+['pen-scad','pen-plata','chit-data','fct-data','contr-data'].forEach(id => {
+  const el = document.getElementById(id); if(el) el.value = new Date().toISOString().split('T')[0];
+});
+['fct-scad'].forEach(id => {
+  const el = document.getElementById(id);
+  if(el){ const d=new Date();d.setDate(d.getDate()+30);el.value=d.toISOString().split('T')[0]; }
+});
+
+// ════════════════════════════════════════════
+// UTILS
+// ════════════════════════════════════════════
+const fmt = (n, dec=2) => Number(n).toLocaleString('ro-MD', {minimumFractionDigits:dec, maximumFractionDigits:dec});
+function showAccResult(id) { const el=document.getElementById(id); if(el){el.classList.add('show');} }
+function setR(id, val) { const el=document.getElementById(id); if(el) el.textContent=val; }
+
+// ════════════════════════════════════════════
+// TVA
+// ════════════════════════════════════════════
+let tvaDir = 'fara';
+function accTvaTab(dir, btn) {
+  tvaDir = dir;
+  document.querySelectorAll('#tva-tabs .acc-tab').forEach(t => t.classList.remove('on'));
+  if(btn) btn.classList.add('on');
+  document.getElementById('tva-lbl').textContent = dir==='fara' ? 'Suma fără TVA (MDL)' : 'Suma cu TVA inclus (MDL)';
+}
+function calcTva() {
+  const suma = parseFloat(document.getElementById('tva-suma').value) || 0;
+  const cota = parseFloat(document.getElementById('tva-cota').value) || 0;
+  let baza, tva, total;
+  if (tvaDir === 'fara') { baza=suma; tva=suma*cota/100; total=suma+tva; }
+  else { total=suma; baza=suma/(1+cota/100); tva=suma-baza; }
+  setR('tva-r-baza', fmt(baza)+' MDL');
+  setR('tva-r-cota-lbl', cota);
+  setR('tva-r-tva', fmt(tva)+' MDL');
+  setR('tva-r-total', fmt(total)+' MDL');
+  showAccResult('tva-result');
+}
+function calcTvaMulti() {
+  const lines = document.getElementById('tva-multi').value.split('\n').map(l=>l.trim()).filter(l=>l);
+  const cota = parseFloat(document.getElementById('tva-multi-cota').value)||0;
+  if(!lines.length) return;
+  let rows='<table class="acc-table"><thead><tr><th>Suma bază</th><th>TVA '+cota+'%</th><th>Total</th></tr></thead><tbody>';
+  let totB=0,totT=0,totFin=0;
+  lines.forEach(l=>{
+    const v=parseFloat(l)||0; const t=v*cota/100; const fin=v+t;
+    totB+=v;totT+=t;totFin+=fin;
+    rows+=`<tr><td>${fmt(v)}</td><td>${fmt(t)}</td><td>${fmt(fin)}</td></tr>`;
+  });
+  rows+=`<tr><td>${fmt(totB)}</td><td>${fmt(totT)}</td><td>${fmt(totFin)}</td></tr></tbody></table>`;
+  document.getElementById('tva-multi-result').innerHTML=rows;
+}
+
+// ════════════════════════════════════════════
+// SALARIU
+// ════════════════════════════════════════════
+function calcSalariu() {
+  const brut = parseFloat(document.getElementById('sal-brut').value)||0;
+  const scutireAnuala = parseFloat(document.getElementById('sal-scutire').value)||0;
+  const scutirelunara = scutireAnuala/12;
+  const cas = brut*0.06;
+  const cnam = brut*0.045;
+  const bazaImpozit = Math.max(0, brut - cas - cnam - scutirelunara);
+  const iv = bazaImpozit*0.12;
+  const net = brut - cas - cnam - iv;
+  // Angajator
+  const casAng = brut*0.24;
+  const cnamAng = brut*0.045;
+  const totalAng = brut + casAng + cnamAng;
+  setR('sal-r-brut', fmt(brut)+' MDL');
+  setR('sal-r-cas', '-'+fmt(cas)+' MDL');
+  setR('sal-r-cnam', '-'+fmt(cnam)+' MDL');
+  setR('sal-r-vimp', fmt(bazaImpozit)+' MDL');
+  setR('sal-r-iv', '-'+fmt(iv)+' MDL');
+  setR('sal-r-net', fmt(net)+' MDL');
+  setR('sal-r-ang', fmt(totalAng));
+  showAccResult('sal-result');
+  document.getElementById('sal-angajator').style.display='block';
+}
+
+// ════════════════════════════════════════════
+// AMORTIZARE
+// ════════════════════════════════════════════
+let amorData = [];
+function calcAmortizare() {
+  const val = parseFloat(document.getElementById('amor-val').value)||0;
+  const rez = parseFloat(document.getElementById('amor-rez').value)||0;
+  const ani = parseInt(document.getElementById('amor-ani').value)||1;
+  const metoda = document.getElementById('amor-metoda').value;
+  const baza = val-rez;
+  amorData=[];
+  let ramasa=val;
+  for(let i=1;i<=ani;i++){
+    let amAn=0;
+    if(metoda==='linie') amAn=baza/ani;
+    else if(metoda==='ddb') { const rata=2/ani; amAn=ramasa*rata; if(ramasa-amAn<rez)amAn=ramasa-rez; }
+    else if(metoda==='syd') { const suma=ani*(ani+1)/2; amAn=baza*(ani-i+1)/suma; }
+    amAn=Math.max(0,amAn); ramasa-=amAn;
+    const cumul=val-ramasa-rez;
+    amorData.push({an:i, amAn, cumul:val-ramasa, ramasa:Math.max(rez,ramasa)});
+  }
+  document.getElementById('amor-summary').textContent=`Amortizare anuală (linie dreaptă): ${fmt(baza/ani)} MDL`;
+  const tbody=document.getElementById('amor-table').querySelector('tbody');
+  tbody.innerHTML=amorData.map(r=>`<tr><td>${r.an}</td><td>${fmt(r.amAn)}</td><td>${fmt(r.cumul)}</td><td>${fmt(r.ramasa)}</td></tr>`).join('');
+  document.getElementById('amor-result').style.display='block';
+}
+function amorExportCSV(){
+  if(!amorData.length)return;
+  const csv='An,Amortizare,Cumulata,Val.contabila\r\n'+amorData.map(r=>`${r.an},${r.amAn.toFixed(2)},${r.cumul.toFixed(2)},${r.ramasa.toFixed(2)}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'amortizare.csv');
+}
+
+// ════════════════════════════════════════════
+// DOBANDA
+// ════════════════════════════════════════════
+let dobDir='simpla';
+function accDobTab(dir,btn){
+  dobDir=dir;
+  document.querySelectorAll('#mod-acc-dobanda .acc-tab').forEach(t=>t.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  document.getElementById('dob-cap-wrap').style.display=dir==='compusa'?'':'none';
+}
+function calcDobanda(){
+  const cap=parseFloat(document.getElementById('dob-capital').value)||0;
+  const rata=parseFloat(document.getElementById('dob-rata').value)||0;
+  const ani=parseFloat(document.getElementById('dob-ani').value)||1;
+  let fin,dob;
+  if(dobDir==='simpla'){ dob=cap*rata/100*ani; fin=cap+dob; }
+  else{ const n=parseInt(document.getElementById('dob-cap').value)||12; fin=cap*Math.pow(1+rata/100/n,n*ani); dob=fin-cap; }
+  setR('dob-r-cap',fmt(cap)+' MDL');
+  setR('dob-r-dob',fmt(dob)+' MDL');
+  setR('dob-r-fin',fmt(fin)+' MDL');
+  showAccResult('dob-result');
+}
+
+// ════════════════════════════════════════════
+// CURS VALUTAR — BNM via exchangerate API
+// ════════════════════════════════════════════
+let cursuri = {MDL:1, EUR:19.5, USD:17.8, RON:3.9, UAH:0.43, GBP:22.5};
+window._cursLoaded = false;
+async function loadCursuri(){
+  document.getElementById('curs-status').textContent='Se încarcă de la BNM...';
+  try{
+    // Use exchangerate-api free tier (no key needed for basic)
+    const r=await fetch('https://api.exchangerate-api.com/v4/latest/MDL');
+    if(!r.ok) throw new Error('API indisponibil');
+    const data=await r.json();
+    // data.rates gives 1 MDL = X other currency, we need reverse
+    const toMDL={};
+    ['EUR','USD','RON','UAH','GBP','CHF','PLN','BGN'].forEach(cur=>{
+      if(data.rates[cur]) toMDL[cur]=1/data.rates[cur];
+    });
+    toMDL.MDL=1;
+    cursuri=toMDL;
+    window._cursLoaded=true;
+    document.getElementById('curs-status').textContent='✅ Curs actualizat — '+new Date().toLocaleDateString('ro-MD');
+    // Build rate table
+    const rows=Object.entries(toMDL).filter(([k])=>k!=='MDL').map(([k,v])=>`<tr><td>${k}</td><td>${fmt(v,4)}</td><td>1 MDL = ${fmt(1/v,4)} ${k}</td></tr>`).join('');
+    document.getElementById('curs-tabel').innerHTML=`<table class="acc-table"><thead><tr><th>Valuta</th><th>1 ${Object.keys(toMDL)[1]||'EUR'} = X MDL</th><th>1 MDL = X valută</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }catch(e){
+    document.getElementById('curs-status').textContent='⚠️ Nu s-a putut conecta — folosind cursuri estimative';
+  }
+  calcCurs();
+}
+function calcCurs(){
+  const suma=parseFloat(document.getElementById('curs-suma').value)||0;
+  const din=document.getElementById('curs-din').value;
+  const in2=document.getElementById('curs-in').value;
+  if(!suma){setR('curs-r-val','—');setR('curs-r-curs','—');return;}
+  const inMDL=suma*(cursuri[din]||1);
+  const result=inMDL/(cursuri[in2]||1);
+  setR('curs-r-val',fmt(result,4)+' '+in2);
+  setR('curs-r-curs','1 '+din+' = '+fmt((cursuri[din]||1)/(cursuri[in2]||1),4)+' '+in2);
+}
+
+// ════════════════════════════════════════════
+// PENALITATI
+// ════════════════════════════════════════════
+function calcPenalitati(){
+  const suma=parseFloat(document.getElementById('pen-suma').value)||0;
+  const rata=parseFloat(document.getElementById('pen-rata').value)||0.1;
+  const scad=new Date(document.getElementById('pen-scad').value);
+  const plata=new Date(document.getElementById('pen-plata').value);
+  if(isNaN(scad)||isNaN(plata)){alert('Completează ambele date!');return;}
+  const zile=Math.max(0,Math.round((plata-scad)/(1000*60*60*24)));
+  const pen=suma*rata/100*zile;
+  const total=suma+pen;
+  setR('pen-r-suma',fmt(suma)+' MDL');
+  setR('pen-r-zile',zile+' zile');
+  setR('pen-r-pen',fmt(pen)+' MDL');
+  setR('pen-r-total',fmt(total)+' MDL');
+  showAccResult('pen-result');
+}
+
+// ════════════════════════════════════════════
+// CREDIT
+// ════════════════════════════════════════════
+let creditPlan=[];
+function calcCredit(){
+  const suma=parseFloat(document.getElementById('cred-suma').value)||0;
+  const rataAnuala=parseFloat(document.getElementById('cred-rata').value)||0;
+  const luni=parseInt(document.getElementById('cred-luni').value)||1;
+  const rataLunara=rataAnuala/12/100;
+  let rata;
+  if(rataLunara===0) rata=suma/luni;
+  else rata=suma*rataLunara*Math.pow(1+rataLunara,luni)/(Math.pow(1+rataLunara,luni)-1);
+  const total=rata*luni;
+  const dob=total-suma;
+  creditPlan=[];
+  let sold=suma;
+  for(let i=1;i<=luni;i++){
+    const dobLuna=sold*rataLunara;
+    const principal=rata-dobLuna;
+    sold-=principal;
+    creditPlan.push({luna:i,rata,principal,dobLuna,sold:Math.max(0,sold)});
+  }
+  setR('cred-r-rata',fmt(rata)+' MDL/lună');
+  setR('cred-r-total',fmt(total)+' MDL');
+  setR('cred-r-dob',fmt(dob)+' MDL');
+  showAccResult('cred-result');
+  const tbody=document.getElementById('cred-table').querySelector('tbody');
+  tbody.innerHTML=creditPlan.slice(0,24).map(r=>`<tr><td>${r.luna}</td><td>${fmt(r.rata)}</td><td>${fmt(r.principal)}</td><td>${fmt(r.dobLuna)}</td><td>${fmt(r.sold)}</td></tr>`).join('');
+  document.getElementById('cred-table-wrap').style.display='block';
+}
+function creditExportCSV(){
+  if(!creditPlan.length)return;
+  const csv='Luna,Rata,Principal,Dobanda,Sold ramas\r\n'+creditPlan.map(r=>`${r.luna},${r.rata.toFixed(2)},${r.principal.toFixed(2)},${r.dobLuna.toFixed(2)},${r.sold.toFixed(2)}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'plan_rambursare.csv');
+}
+
+// ════════════════════════════════════════════
+// BREAK-EVEN
+// ════════════════════════════════════════════
+function calcBreakeven(){
+  const fixe=parseFloat(document.getElementById('be-fixe').value)||0;
+  const pret=parseFloat(document.getElementById('be-pret').value)||0;
+  const var_=parseFloat(document.getElementById('be-var').value)||0;
+  if(pret<=var_){alert('Prețul trebuie să fie mai mare decât costul variabil!');return;}
+  const marja=pret-var_;
+  const unitati=Math.ceil(fixe/marja);
+  const ca=unitati*pret;
+  const profit=unitati*1.2*marja-fixe;
+  setR('be-r-marja',fmt(marja)+' MDL');
+  setR('be-r-unitati',unitati.toLocaleString('ro-MD')+' unități');
+  setR('be-r-ca',fmt(ca)+' MDL');
+  setR('be-r-profit',fmt(profit)+' MDL');
+  showAccResult('be-result');
+}
+
+// ════════════════════════════════════════════
+// CASHFLOW
+// ════════════════════════════════════════════
+let cfRows=[];
+function cfAddRow(){
+  const id='cf-'+Date.now();
+  cfRows.push(id);
+  const div=document.createElement('div');
+  div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 100px 30px;gap:6px;margin-bottom:6px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="ex: Venituri din vânzări" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <select style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)"><option value="venit">Venit ↑</option><option value="cheltuiala">Cheltuială ↓</option></select>
+    <input type="number" placeholder="MDL" step="1" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="cfRemoveRow('${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px;padding:0">✕</button>`;
+  document.getElementById('cf-rows').appendChild(div);
+}
+function cfRemoveRow(id){
+  const el=document.getElementById(id);if(el)el.remove();
+  cfRows=cfRows.filter(r=>r!==id);
+}
+function calcCashflow(){
+  const rows=Array.from(document.getElementById('cf-rows').querySelectorAll('div[id^="cf-"]')).map(div=>{
+    const inputs=div.querySelectorAll('input,select');
+    return{name:inputs[0].value||'—',type:inputs[1].value,amount:parseFloat(inputs[2].value)||0};
+  });
+  if(!rows.length){cfAddRow();return;}
+  const months=['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'];
+  let sold=0;
+  let thead='<thead><tr><th>Categorie</th>'+months.map(m=>`<th>${m}</th>`).join('')+'</tr></thead><tbody>';
+  let tbody='';
+  let venTotal=new Array(12).fill(0);
+  let chelTotal=new Array(12).fill(0);
+  rows.forEach(r=>{
+    tbody+=`<tr><td>${esc(r.name)}</td>`;
+    for(let m=0;m<12;m++){
+      const val=r.amount;
+      if(r.type==='venit')venTotal[m]+=val; else chelTotal[m]+=val;
+      tbody+=`<td style="color:${r.type==='venit'?'var(--green)':'var(--red)'}">` +(r.type==='cheltuiala'?'-':'')+fmt(val)+'</td>';
+    }
+    tbody+='</tr>';
+  });
+  // Total venituri
+  tbody+=`<tr><td><strong>Total venituri</strong></td>`+venTotal.map(v=>`<td style="color:var(--green)">${fmt(v)}</td>`).join('')+'</tr>';
+  tbody+=`<tr><td><strong>Total cheltuieli</strong></td>`+chelTotal.map(v=>`<td style="color:var(--red)">${fmt(v)}</td>`).join('')+'</tr>';
+  let soldLunar=[];
+  for(let m=0;m<12;m++){sold+=venTotal[m]-chelTotal[m];soldLunar.push(sold);}
+  tbody+=`<tr><td><strong>Sold cumulat</strong></td>`+soldLunar.map(s=>`<td style="color:${s>=0?'var(--green)':'var(--red)'};font-weight:600">${fmt(s)}</td>`).join('')+'</tr>';
+  tbody+='</tbody>';
+  document.getElementById('cf-table').innerHTML=thead+tbody;
+  document.getElementById('cf-result').style.display='block';
+}
+function cfExportCSV(){
+  const table=document.getElementById('cf-table');if(!table)return;
+  const rows=Array.from(table.querySelectorAll('tr'));
+  const csv=rows.map(r=>Array.from(r.querySelectorAll('th,td')).map(c=>'"'+c.textContent.replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'cashflow.csv');
+}
+
+// ════════════════════════════════════════════
+// ZILE LUCRATOARE
+// ════════════════════════════════════════════
+function getSarbatoarMD(year){
+  // Calculate Easter (Orthodox, Julian calendar converted)
+  function easterOrthodox(y){
+    const a=y%4,b=y%7,c=y%19;
+    const d=(19*c+15)%30,e=(2*a+4*b-d+34)%7;
+    const month=Math.floor((d+e+114)/31),day=(d+e+114)%31+1;
+    // Julian to Gregorian: add 13 days for 21st century
+    const julian=new Date(y,month-1,day);
+    julian.setDate(julian.getDate()+13);
+    return julian;
+  }
+  const easter=easterOrthodox(year);
+  const sf=new Date(easter);sf.setDate(sf.getDate()+49); // Sf. Constantin = Duminica Mare + 49 = Rusalii? Actually it's Monday after Easter+7weeks
+  // Fixed holidays
+  const fixed=[
+    new Date(year,0,1),new Date(year,0,7),new Date(year,0,8),
+    new Date(year,2,8),new Date(year,4,1),new Date(year,4,9),
+    new Date(year,7,27),new Date(year,7,31),new Date(year,9,25),
+    new Date(year,11,25),new Date(year,11,26)
+  ];
+  // Easter Monday
+  const easterMon=new Date(easter);easterMon.setDate(easter.getDate()+1);
+  // Sf. Constantin si Elena — Monday after Rusalii (Easter+49+1 = Easter+50)
+  const sfConst=new Date(easter);sfConst.setDate(easter.getDate()+50);
+  return [...fixed,easter,easterMon,sfConst].map(d=>d.toDateString());
+}
+function calcZile(){
+  const s=new Date(document.getElementById('zile-start').value);
+  const e=new Date(document.getElementById('zile-end').value);
+  if(isNaN(s)||isNaN(e)){alert('Completează ambele date!');return;}
+  let calzile=0,we=0,sarb=0,lucr=0;
+  const years=new Set();
+  const cur=new Date(s);
+  while(cur<=e){years.add(cur.getFullYear());cur.setDate(cur.getDate()+1);}
+  const sarbatoarSet=new Set();
+  years.forEach(y=>getSarbatoarMD(y).forEach(d=>sarbatoarSet.add(d)));
+  const cur2=new Date(s);
+  while(cur2<=e){
+    calzile++;
+    const dow=cur2.getDay();
+    if(dow===0||dow===6){we++;}
+    else if(sarbatoarSet.has(cur2.toDateString())){sarb++;}
+    else{lucr++;}
+    cur2.setDate(cur2.getDate()+1);
+  }
+  setR('zile-r-cal',calzile+' zile');
+  setR('zile-r-we',we+' zile');
+  setR('zile-r-sarb',sarb+' zile');
+  setR('zile-r-lucr',lucr+' zile');
+  showAccResult('zile-result');
+}
+
+// ════════════════════════════════════════════
+// GENERATOR FACTURA PDF
+// ════════════════════════════════════════════
+let fctItems=[];
+function fctAddItem(){
+  const id='fct-'+Date.now();
+  fctItems.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:3fr 1fr 1fr 90px 70px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`
+    <input type="text" placeholder="Denumire produs/serviciu" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="fctCalc()">
+    <input type="text" placeholder="buc" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="fctCalc()">
+    <input type="number" placeholder="1" value="1" min="0" step="0.001" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="fctCalc()">
+    <input type="number" placeholder="0.00" step="0.01" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="fctCalc()">
+    <select style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" onchange="fctCalc()"><option value="20">20%</option><option value="8">8%</option><option value="0">0%</option></select>
+    <button onclick="fctRemove('${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('fct-items').appendChild(div);
+  fctCalc();
+}
+function fctRemove(id){const el=document.getElementById(id);if(el)el.remove();fctItems=fctItems.filter(i=>i!==id);fctCalc();}
+function fctCalc(){
+  let sub=0,tvaT=0;
+  fctItems.forEach(id=>{
+    const el=document.getElementById(id);if(!el)return;
+    const inputs=el.querySelectorAll('input,select');
+    const qty=parseFloat(inputs[2].value)||0;
+    const pret=parseFloat(inputs[3].value)||0;
+    const cotaTva=parseFloat(inputs[4].value)||0;
+    const val=qty*pret;sub+=val;tvaT+=val*cotaTva/100;
+  });
+  document.getElementById('fct-totals').style.display=fctItems.length?'block':'none';
+  setR('fct-subtotal',fmt(sub));setR('fct-tva-total',fmt(tvaT));setR('fct-total',fmt(sub+tvaT));
+}
+function genFactura(){
+  if(!fctItems.length){setStatus('fct-status','Adaugă cel puțin un produs!','err');return;}
+  setStatus('fct-status','Se generează factura...','info');
+  // Build PDF with pdf-lib
+  if(!window.PDFLib){
+    const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';
+    document.head.appendChild(s);s.onload=()=>_buildFacturaPDF();
+  } else { _buildFacturaPDF(); }
+}
+async function _buildFacturaPDF(){
+  try{
+    const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+    const pdfDoc=await PDFDocument.create();
+    const page=pdfDoc.addPage([595,842]);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const{height}=page.getSize();
+    const g=(x,y,txt,sz,bold,color)=>page.drawText(txt,{x,y:height-y,size:sz||10,font:bold?fontB:font,color:color||rgb(0,0,0)});
+    // Header
+    g(50,50,'FACTURĂ FISCALĂ',18,true,rgb(0.1,0.1,0.5));
+    g(400,50,'Nr. '+document.getElementById('fct-nr').value,12,true);
+    g(400,65,'Data: '+document.getElementById('fct-data').value,10);
+    g(400,80,'Scadența: '+document.getElementById('fct-scad').value,10);
+    // Furnizor
+    g(50,100,'Furnizor:',10,true);
+    g(50,115,document.getElementById('fct-fur-nume').value||'—',11,true);
+    g(50,130,'IDNO: '+(document.getElementById('fct-fur-idno').value||'—'),9);
+    g(50,145,document.getElementById('fct-fur-adr').value||'',9);
+    g(50,160,'IBAN: '+(document.getElementById('fct-fur-iban').value||'—'),9);
+    // Cumparator
+    g(320,100,'Cumpărător:',10,true);
+    g(320,115,document.getElementById('fct-cum-nume').value||'—',11,true);
+    g(320,130,'IDNO: '+(document.getElementById('fct-cum-idno').value||'—'),9);
+    g(320,145,document.getElementById('fct-cum-adr').value||'',9);
+    // Line
+    page.drawLine({start:{x:50,y:height-175},end:{x:545,y:height-175},thickness:1,color:rgb(0.7,0.7,0.7)});
+    // Table header
+    g(50,190,'Nr.',9,true);g(70,190,'Denumire',9,true);g(290,190,'UM',9,true);g(330,190,'Cant.',9,true);g(375,190,'Preț',9,true);g(425,190,'TVA%',9,true);g(470,190,'TVA',9,true);g(515,190,'Total',9,true);
+    page.drawLine({start:{x:50,y:height-195},end:{x:545,y:height-195},thickness:0.5,color:rgb(0.8,0.8,0.8)});
+    let y=210,sub=0,tvaT=0,nr=1;
+    fctItems.forEach(id=>{
+      const el=document.getElementById(id);if(!el)return;
+      const inputs=el.querySelectorAll('input,select');
+      const name=inputs[0].value||'—';const um=inputs[1].value||'buc';
+      const qty=parseFloat(inputs[2].value)||0;const pret=parseFloat(inputs[3].value)||0;const cotaTva=parseFloat(inputs[4].value)||0;
+      const val=qty*pret;const tva=val*cotaTva/100;sub+=val;tvaT+=tva;
+      g(50,y,nr+'.',9);g(70,y,name.slice(0,28),9);g(290,y,um,9);g(330,y,qty.toFixed(2),9);g(375,y,pret.toFixed(2),9);g(425,y,cotaTva+'%',9);g(470,y,tva.toFixed(2),9);g(515,y,(val+tva).toFixed(2),9);
+      y+=15;nr++;
+    });
+    page.drawLine({start:{x:50,y:height-y},end:{x:545,y:height-y},thickness:0.5,color:rgb(0.8,0.8,0.8)});
+    y+=15;
+    g(370,y,'Subtotal fără TVA:',9,true);g(475,y,fmt(sub)+' MDL',9);y+=15;
+    g(370,y,'TVA total:',9,true);g(475,y,fmt(tvaT)+' MDL',9);y+=15;
+    g(370,y,'TOTAL DE PLATĂ:',11,true,rgb(0,0.4,0));g(475,y,fmt(sub+tvaT)+' MDL',11,true,rgb(0,0.4,0));
+    y+=40;
+    g(50,y,'Semnătura furnizor: ___________________',9);g(350,y,'Semnătura cumpărător: ___________________',9);
+    const bytes=await pdfDoc.save();
+    const name=document.getElementById('fct-fur-nume').value||'furnizor';
+    triggerDl(new Blob([bytes],{type:'application/pdf'}),'factura_'+document.getElementById('fct-nr').value+'_'+name.replace(/\s+/g,'_')+'.pdf');
+    setStatus('fct-status','✅ Factura PDF generată!','ok');
+  }catch(e){setStatus('fct-status','Eroare: '+e.message,'err');}
+}
+
+// ════════════════════════════════════════════
+// GENERATOR CHITANTA PDF
+// ════════════════════════════════════════════
+async function genChitanta(){
+  setStatus('chit-status','Se generează...','info');
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  try{
+    const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+    const pdfDoc=await PDFDocument.create();
+    const page=pdfDoc.addPage([595,300]);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const{height}=page.getSize();
+    const g=(x,y,txt,sz,bold)=>page.drawText(String(txt),{x,y:height-y,size:sz||11,font:bold?fontB:font,color:rgb(0,0,0)});
+    // Border
+    page.drawRectangle({x:30,y:30,width:535,height:height-60,borderColor:rgb(0,0,0),borderWidth:1});
+    g(50,50,'CHITANȚĂ Nr. '+document.getElementById('chit-nr').value,16,true);
+    g(380,50,'Data: '+document.getElementById('chit-data').value,11);
+    g(50,90,'Am primit de la: '+document.getElementById('chit-dela').value,11);
+    g(50,115,'Suma: '+fmt(parseFloat(document.getElementById('chit-suma').value)||0)+' MDL',13,true);
+    g(50,140,'Cu titlu de: '+document.getElementById('chit-titlu').value,11);
+    g(50,185,'Primit: '+document.getElementById('chit-primit').value,11);
+    g(50,220,'Semnătura: ___________________',10);
+    const bytes=await pdfDoc.save();
+    triggerDl(new Blob([bytes],{type:'application/pdf'}),'chitanta_'+document.getElementById('chit-nr').value+'.pdf');
+    setStatus('chit-status','✅ Chitanța PDF generată!','ok');
+  }catch(e){setStatus('chit-status','Eroare: '+e.message,'err');}
+}
+
+// ════════════════════════════════════════════
+// GENERATOR CONTRACT PDF
+// ════════════════════════════════════════════
+async function genContract(){
+  setStatus('contr-status','Se generează...','info');
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  try{
+    const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+    const pdfDoc=await PDFDocument.create();
+    const page=pdfDoc.addPage([595,842]);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);
+    const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const{height}=page.getSize();
+    const g=(x,y,txt,sz,bold,col)=>page.drawText(String(txt||''),{x,y:height-y,size:sz||10,font:bold?fontB:font,color:col||rgb(0,0,0)});
+    const tipMap={servicii:'PRESTĂRI SERVICII',vanzare:'VÂNZARE-CUMPĂRARE',locatiune:'LOCAȚIUNE'};
+    const tip=document.getElementById('contr-tip').value;
+    g(50,50,'CONTRACT DE '+tipMap[tip],14,true,rgb(0.1,0.1,0.5));
+    g(50,70,'Nr. '+document.getElementById('contr-nr').value+' din '+document.getElementById('contr-data').value,10);
+    g(50,100,'REPUBLICA MOLDOVA',10,true);
+    g(50,120,'PRESTATOR: '+document.getElementById('contr-p-nume').value,10,true);
+    g(50,135,'Reprezentat de: '+document.getElementById('contr-p-rep').value,10);
+    g(50,150,'IDNO/IDNP: '+document.getElementById('contr-p-id').value,10);
+    g(50,175,'BENEFICIAR: '+document.getElementById('contr-b-nume').value,10,true);
+    g(50,190,'Reprezentat de: '+document.getElementById('contr-b-rep').value,10);
+    g(50,205,'IDNO/IDNP: '+document.getElementById('contr-b-id').value,10);
+    g(50,235,'1. OBIECTUL CONTRACTULUI',10,true);
+    g(50,252,'Prestatorul se obligă să presteze: '+document.getElementById('contr-obiect').value,10);
+    g(50,280,'2. VALOAREA CONTRACTULUI',10,true);
+    g(50,297,'Valoarea totală: '+fmt(parseFloat(document.getElementById('contr-valoare').value)||0)+' MDL (inclusiv TVA)',10);
+    g(50,325,'3. DURATA CONTRACTULUI',10,true);
+    g(50,342,'Contractul se încheie pe o perioadă de: '+document.getElementById('contr-durata').value,10);
+    g(50,370,'4. DREPTURILE ȘI OBLIGAȚIILE PĂRȚILOR',10,true);
+    g(50,387,'Prestatorul se obligă să execute lucrările/serviciile în termenul stabilit.',10);
+    g(50,402,'Beneficiarul se obligă să achite suma convenită conform termenelor stabilite.',10);
+    g(50,430,'5. RĂSPUNDEREA PĂRȚILOR',10,true);
+    g(50,447,'În caz de nerespectare a obligațiilor, partea vinovată va suporta penalități',10);
+    g(50,462,'conform legislației Republicii Moldova.',10);
+    g(50,490,'6. LITIGII',10,true);
+    g(50,507,'Litigiile se soluționează pe cale amiabilă sau în instanțele judecătorești competente.',10);
+    g(50,535,'7. DISPOZIȚII FINALE',10,true);
+    g(50,552,'Prezentul contract este întocmit în 2 exemplare, câte unul pentru fiecare parte.',10);
+    g(50,600,'PRESTATOR',10,true); g(350,600,'BENEFICIAR',10,true);
+    g(50,620,document.getElementById('contr-p-nume').value,10);g(350,620,document.getElementById('contr-b-nume').value,10);
+    g(50,660,'Semnătura: _______________',9);g(350,660,'Semnătura: _______________',9);
+    g(50,680,'Ștampila',9);g(350,680,'Ștampila',9);
+    const bytes=await pdfDoc.save();
+    triggerDl(new Blob([bytes],{type:'application/pdf'}),'contract_'+document.getElementById('contr-nr').value.replace('/','_')+'.pdf');
+    setStatus('contr-status','✅ Contract PDF generat!','ok');
+  }catch(e){setStatus('contr-status','Eroare: '+e.message,'err');}
+}
+
+// Init cashflow with 3 default rows
+['Venituri din vânzări|venit','Salarii|cheltuiala','Chirii și utilități|cheltuiala'].forEach(s=>{
+  const[name,type]=s.split('|');
+  cfAddRow();
+  const rows=document.getElementById('cf-rows').querySelectorAll('div[id^="cf-"]');
+  const last=rows[rows.length-1];
+  if(last){const inputs=last.querySelectorAll('input,select');inputs[0].value=name;inputs[1].value=type;}
+});
+
+// ════════════════════════════════════════════
+// BATCH 2 JS — 10 module noi
+// ════════════════════════════════════════════
+
+// ─── CSV / EXCEL ANALIZOR ───
+let csvData=[], csvHeaders=[], csvFiltered=[];
+makeDrop('csv-drop','csv-input', async f => {
+  let rows=[];
+  if(f.name.endsWith('.csv')||f.name.endsWith('.tsv')){
+    const txt=await f.text();
+    const sep=txt.includes('\t')? '\t' : (txt.includes(';')?';':',');
+    rows=txt.split('\n').filter(l=>l.trim()).map(l=>l.split(sep).map(c=>c.replace(/^"|"$/g,'').trim()));
+  } else {
+    // XLSX via SheetJS
+    const ab=await f.arrayBuffer();
+    const wb=XLSX.read(ab,{type:'array'});
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    rows=XLSX.utils.sheet_to_json(ws,{header:1}).filter(r=>r.length>0);
+  }
+  if(!rows.length){alert('Fișier gol sau format nerecunoscut');return;}
+  csvHeaders=rows[0].map(String);
+  csvData=rows.slice(1).filter(r=>r.some(c=>c!==''&&c!==null&&c!==undefined));
+  csvFiltered=[...csvData];
+  renderCsvStats();
+  renderCsvTable();
+  document.getElementById('csv-main').style.display='block';
+}, false);
+
+function renderCsvStats(){
+  const numCols=csvHeaders.filter((h,i)=>csvData.some(r=>!isNaN(parseFloat(r[i]))));
+  let statsHtml='<div class="acc-stat"><div class="acc-stat-val">'+csvData.length+'</div><div class="acc-stat-lbl">Rânduri</div></div>';
+  statsHtml+='<div class="acc-stat"><div class="acc-stat-val">'+csvHeaders.length+'</div><div class="acc-stat-lbl">Coloane</div></div>';
+  csvHeaders.forEach((h,i)=>{
+    const vals=csvData.map(r=>parseFloat(r[i])).filter(v=>!isNaN(v));
+    if(vals.length>0){
+      const sum=vals.reduce((a,b)=>a+b,0);
+      statsHtml+=`<div class="acc-stat green"><div class="acc-stat-val">${fmt(sum,0)}</div><div class="acc-stat-lbl">Σ ${h.slice(0,10)}</div></div>`;
+    }
+  });
+  document.getElementById('csv-stats').innerHTML=statsHtml;
+  document.getElementById('csv-rows-count').textContent=csvFiltered.length+' / '+csvData.length+' rânduri afișate';
+}
+function renderCsvTable(){
+  let th='<thead><tr>'+csvHeaders.map((h,i)=>`<th style="cursor:pointer" onclick="csvSort(${i})">${esc(h)} ↕</th>`).join('')+'</tr></thead>';
+  let td='<tbody>'+csvFiltered.slice(0,200).map(r=>'<tr>'+csvHeaders.map((_,i)=>'<td>'+esc(String(r[i]??''))+'</td>').join('')+'</tr>').join('')+'</tbody>';
+  document.getElementById('csv-table').innerHTML=th+td;
+  document.getElementById('csv-rows-count').textContent=csvFiltered.length+' / '+csvData.length+' rânduri'+(csvFiltered.length>200?' (primele 200 afișate)':'');
+}
+let csvSortCol=-1, csvSortAsc=true;
+function csvSort(col){
+  if(csvSortCol===col)csvSortAsc=!csvSortAsc; else{csvSortCol=col;csvSortAsc=true;}
+  csvFiltered.sort((a,b)=>{const av=a[col]??'',bv=b[col]??'';const an=parseFloat(av),bn=parseFloat(bv);return (csvSortAsc?1:-1)*((!isNaN(an)&&!isNaN(bn))?an-bn:String(av).localeCompare(String(bv)));});
+  renderCsvTable();
+}
+function csvFilter(){
+  const q=document.getElementById('csv-filter').value.toLowerCase();
+  csvFiltered=q?csvData.filter(r=>r.some(c=>String(c).toLowerCase().includes(q))):([...csvData]);
+  renderCsvTable();
+}
+function csvExport(){
+  if(!csvFiltered.length)return;
+  const csv=[csvHeaders,...csvFiltered].map(r=>r.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(',')).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'export_filtrat.csv');
+}
+
+// ─── TABEL PIVOT ───
+let pivotRawData=[], pivotHeaders=[];
+makeDrop('pivot-drop','pivot-input', async f => {
+  const txt=await f.text();
+  const sep=txt.includes(';')?';':',';
+  const rows=txt.split('\n').filter(l=>l.trim()).map(l=>l.split(sep).map(c=>c.replace(/^"|"$/g,'').trim()));
+  if(!rows.length)return;
+  pivotHeaders=rows[0];
+  pivotRawData=rows.slice(1).filter(r=>r.some(c=>c));
+  const sel1=document.getElementById('pivot-group-col');
+  const sel2=document.getElementById('pivot-val-col');
+  sel1.innerHTML=pivotHeaders.map((h,i)=>`<option value="${i}">${esc(h)}</option>`).join('');
+  sel2.innerHTML=pivotHeaders.map((h,i)=>`<option value="${i}">${esc(h)}</option>`).join('');
+  if(pivotHeaders.length>1)sel2.value='1';
+  document.getElementById('pivot-main').style.display='block';
+}, false);
+
+let pivotResult=[];
+function calcPivot(){
+  const gc=parseInt(document.getElementById('pivot-group-col').value);
+  const vc=parseInt(document.getElementById('pivot-val-col').value);
+  const fn=document.getElementById('pivot-fn').value;
+  const groups={};
+  pivotRawData.forEach(r=>{
+    const k=r[gc]??'—'; const v=parseFloat(r[vc]);
+    if(!groups[k])groups[k]=[];
+    groups[k].push(isNaN(v)?0:v);
+  });
+  pivotResult=Object.entries(groups).map(([k,vals])=>{
+    let res;
+    if(fn==='sum')res=vals.reduce((a,b)=>a+b,0);
+    else if(fn==='avg')res=vals.reduce((a,b)=>a+b,0)/vals.length;
+    else if(fn==='count')res=vals.length;
+    else if(fn==='min')res=Math.min(...vals);
+    else res=Math.max(...vals);
+    return{group:k,value:res,count:vals.length};
+  }).sort((a,b)=>b.value-a.value);
+  const fnLabel={sum:'Sumă',avg:'Medie',count:'Număr',min:'Min',max:'Max'};
+  document.getElementById('pivot-title').textContent=`${fnLabel[fn]} ${pivotHeaders[vc]} grupat după ${pivotHeaders[gc]} — ${pivotResult.length} grupuri`;
+  const total=pivotResult.reduce((a,r)=>a+(fn==='count'?r.count:r.value),0);
+  document.getElementById('pivot-table').innerHTML=
+    '<thead><tr><th>'+esc(pivotHeaders[gc])+'</th><th>'+fnLabel[fn]+' '+esc(pivotHeaders[vc])+'</th><th>Rânduri</th><th>%</th></tr></thead><tbody>'+
+    pivotResult.map(r=>`<tr><td>${esc(r.group)}</td><td>${fmt(r.value)}</td><td>${r.count}</td><td>${total?((fn==='count'?r.count:r.value)/total*100).toFixed(1)+'%':'—'}</td></tr>`).join('')+
+    `<tr><td><strong>TOTAL</strong></td><td><strong>${fmt(total)}</strong></td><td><strong>${pivotRawData.length}</strong></td><td>100%</td></tr></tbody>`;
+  document.getElementById('pivot-result').style.display='block';
+}
+function pivotExport(){
+  if(!pivotResult.length)return;
+  const csv='Grup,Valoare,Rânduri\r\n'+pivotResult.map(r=>`"${r.group}",${r.value.toFixed(2)},${r.count}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'pivot.csv');
+}
+
+// ─── DETECTOR DUPLICATE ───
+let dupData=[], dupHeaders2=[];
+makeDrop('dup-drop','dup-input', async f => {
+  const txt=await f.text();
+  const sep=txt.includes(';')?';':',';
+  const rows=txt.split('\n').filter(l=>l.trim()).map(l=>l.split(sep).map(c=>c.replace(/^"|"$/g,'').trim()));
+  dupHeaders2=rows[0]||[];
+  dupData=rows.slice(1).filter(r=>r.some(c=>c));
+  document.getElementById('dup-main').style.display='block';
+  document.getElementById('dup-result').innerHTML=`<div class="acc-info">${dupData.length} rânduri încărcate. Apasă Detectează duplicate.</div>`;
+}, false);
+
+function detectDuplicate(){
+  const colsInput=document.getElementById('dup-cols').value.trim();
+  const caseSens=document.getElementById('dup-case').value==='yes';
+  let colIdxs=[];
+  if(colsInput){
+    colsInput.split(',').forEach(cn=>{
+      const idx=dupHeaders2.findIndex(h=>h.trim().toLowerCase()===cn.trim().toLowerCase());
+      if(idx>=0)colIdxs.push(idx);
+    });
+  }
+  if(!colIdxs.length)colIdxs=dupHeaders2.map((_,i)=>i);
+  const seen={};const dups=[];
+  dupData.forEach((row,ri)=>{
+    const key=colIdxs.map(i=>{let v=String(row[i]??'');return caseSens?v:v.toLowerCase();}).join('||');
+    if(seen[key]===undefined)seen[key]=ri;
+    else dups.push({row,ri,firstAt:seen[key]+2,thisAt:ri+2});
+  });
+  if(!dups.length){
+    document.getElementById('dup-result').innerHTML='<div class="acc-highlight">✅ Nu s-au găsit duplicate pe coloanele selectate!</div>';
+    return;
+  }
+  let html=`<div class="acc-warn">⚠️ ${dups.length} rânduri duplicate găsite:</div>`;
+  html+='<div style="overflow-x:auto;margin-top:8px"><table class="acc-table"><thead><tr><th>Rând</th><th>Duplicat al rândului</th>'+
+    colIdxs.map(i=>'<th>'+esc(dupHeaders2[i])+'</th>').join('')+'</tr></thead><tbody>'+
+    dups.slice(0,50).map(d=>'<tr><td>'+d.thisAt+'</td><td>'+d.firstAt+'</td>'+colIdxs.map(i=>'<td>'+esc(String(d.row[i]??''))+'</td>').join('')+'</tr>').join('')+
+    (dups.length>50?'<tr><td colspan="'+(colIdxs.length+2)+'" style="color:var(--muted)">... și încă '+(dups.length-50)+' duplicate</td></tr>':'')+
+    '</tbody></table></div>';
+  document.getElementById('dup-result').innerHTML=html;
+}
+
+// ─── RECONCILIERE BANCARA ───
+let recDataA=null, recDataB=null;
+function loadRecFile(file, side){
+  file.text().then(txt=>{
+    const sep=txt.includes(';')?';':',';
+    const rows=txt.split('\n').filter(l=>l.trim()).map(l=>l.split(sep).map(c=>c.replace(/^"|"$/g,'').trim()));
+    if(side==='a'){recDataA={headers:rows[0],data:rows.slice(1).filter(r=>r.some(c=>c))};document.getElementById('rec-status-a').textContent='✅ '+recDataA.data.length+' tranzacții încărcate';}
+    else{recDataB={headers:rows[0],data:rows.slice(1).filter(r=>r.some(c=>c))};document.getElementById('rec-status-b').textContent='✅ '+recDataB.data.length+' tranzacții încărcate';}
+  });
+}
+makeDrop('rec-drop-a','rec-input-a', f=>loadRecFile(f,'a'), false);
+makeDrop('rec-drop-b','rec-input-b', f=>loadRecFile(f,'b'), false);
+function calcReconciliere(){
+  if(!recDataA||!recDataB){alert('Încarcă ambele fișiere CSV!');return;}
+  const keyCol=document.getElementById('rec-key-col').value.trim();
+  const sumCol=document.getElementById('rec-sum-col').value.trim();
+  const getIdx=(headers,col)=>headers.findIndex(h=>h.toLowerCase()===col.toLowerCase());
+  const kiA=getIdx(recDataA.headers,keyCol),siA=getIdx(recDataA.headers,sumCol);
+  const kiB=getIdx(recDataB.headers,keyCol),siB=getIdx(recDataB.headers,sumCol);
+  if(kiA<0||kiB<0){alert('Coloana cheie "'+keyCol+'" nu a fost găsită. Verifică numele coloanelor.');return;}
+  const mapA={},mapB={};
+  recDataA.data.forEach(r=>{mapA[r[kiA]]={sum:parseFloat(r[siA])||0,row:r};});
+  recDataB.data.forEach(r=>{mapB[r[kiB]]={sum:parseFloat(r[siB])||0,row:r};});
+  const allKeys=new Set([...Object.keys(mapA),...Object.keys(mapB)]);
+  const results=[];
+  allKeys.forEach(k=>{
+    const a=mapA[k],b=mapB[k];
+    let status,diff=0;
+    if(!a)status='🔴 Lipsă din A';
+    else if(!b)status='🔴 Lipsă din B';
+    else{diff=(a.sum-b.sum);status=Math.abs(diff)<0.01?'✅ OK':'🟡 Sumă diferită';}
+    results.push({key:k,sumA:a?a.sum:null,sumB:b?b.sum:null,diff,status});
+  });
+  const ok=results.filter(r=>r.status==='✅ OK').length;
+  const issues=results.filter(r=>r.status!=='✅ OK');
+  let html=`<div class="acc-stat-grid">
+    <div class="acc-stat"><div class="acc-stat-val">${allKeys.size}</div><div class="acc-stat-lbl">Total tranzacții</div></div>
+    <div class="acc-stat green"><div class="acc-stat-val">${ok}</div><div class="acc-stat-lbl">Reconciliate ✅</div></div>
+    <div class="acc-stat red"><div class="acc-stat-val">${issues.length}</div><div class="acc-stat-lbl">Diferențe ⚠️</div></div>
+  </div>`;
+  if(issues.length){
+    html+='<div style="overflow-x:auto;margin-top:10px"><table class="acc-table"><thead><tr><th>Referință</th><th>Sumă A</th><th>Sumă B</th><th>Diferență</th><th>Status</th></tr></thead><tbody>'+
+    issues.map(r=>`<tr><td>${esc(r.key)}</td><td>${r.sumA!==null?fmt(r.sumA):'—'}</td><td>${r.sumB!==null?fmt(r.sumB):'—'}</td><td style="color:${r.diff!==0?'var(--red)':'inherit'}">${r.diff!==0?fmt(r.diff):''}</td><td>${r.status}</td></tr>`).join('')+
+    '</tbody></table></div>';
+  }
+  document.getElementById('rec-result').innerHTML=html;
+}
+
+// ─── COMPARATOR BUGET ───
+let bugetRows2=[];
+function bugetAddRow(){
+  const id='b-'+Date.now();bugetRows2.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr 28px;gap:6px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Categorie (ex: Salarii)" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="Bugetat" step="0.01" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="Realizat" step="0.01" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="this.parentElement.remove();bugetRows2=bugetRows2.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('buget-rows').appendChild(div);
+}
+let bugetData2=[];
+function calcBuget(){
+  bugetData2=[];
+  document.getElementById('buget-rows').querySelectorAll('div[id^="b-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const cat=ins[0].value||'—',bug=parseFloat(ins[1].value)||0,real=parseFloat(ins[2].value)||0;
+    bugetData2.push({cat,bug,real,diff:real-bug,pct:bug?((real-bug)/bug*100):null});
+  });
+  if(!bugetData2.length)return;
+  const totB=bugetData2.reduce((a,r)=>a+r.bug,0),totR=bugetData2.reduce((a,r)=>a+r.real,0);
+  const color=d=>d>0?'var(--red)':d<0?'var(--green)':'inherit';
+  document.getElementById('buget-table').innerHTML=
+    '<thead><tr><th>Categorie</th><th>Bugetat</th><th>Realizat</th><th>Diferență</th><th>%</th></tr></thead><tbody>'+
+    bugetData2.map(r=>`<tr><td>${esc(r.cat)}</td><td>${fmt(r.bug)}</td><td>${fmt(r.real)}</td><td style="color:${color(r.diff)}">${r.diff>=0?'+':''}${fmt(r.diff)}</td><td style="color:${color(r.diff)}">${r.pct!==null?(r.pct>=0?'+':'')+r.pct.toFixed(1)+'%':'—'}</td></tr>`).join('')+
+    `<tr><td><strong>TOTAL</strong></td><td><strong>${fmt(totB)}</strong></td><td><strong>${fmt(totR)}</strong></td><td style="color:${color(totR-totB)};font-weight:600">${totR-totB>=0?'+':''}${fmt(totR-totB)}</td><td style="color:${color(totR-totB)}">${totB?((totR-totB)/totB*100).toFixed(1)+'%':'—'}</td></tr>
+    </tbody>`;
+  document.getElementById('buget-result').style.display='block';
+}
+function bugetExport(){
+  if(!bugetData2.length)return;
+  const csv='Categorie,Bugetat,Realizat,Diferenta,Procent\r\n'+bugetData2.map(r=>`"${r.cat}",${r.bug},${r.real},${r.diff},${r.pct!==null?r.pct.toFixed(1)+'%':'—'}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'buget_vs_realizat.csv');
+}
+// Init buget with defaults
+['Venituri din vânzări','Salarii','Chirii','Utilități','Marketing','Alte cheltuieli'].forEach(cat=>{
+  bugetAddRow();
+  const last=document.getElementById('buget-rows').lastElementChild;
+  if(last)last.querySelector('input').value=cat;
+});
+
+// ─── JURNAL CONTABIL ───
+let jrnData=[];
+function jrnAddRow(){
+  const id='j-'+Date.now();jrnData.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:100px 1fr 100px 90px 90px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  const today=new Date().toISOString().split('T')[0];
+  div.innerHTML=`<input type="date" value="${today}" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="text" placeholder="Descriere operație" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="text" placeholder="Cont (ex:531)" style="padding:5px 8px;font-size:11px;font-family:'JetBrains Mono';background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="Debit" step="0.01" style="padding:5px 8px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="Credit" step="0.01" style="padding:5px 8px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="this.parentElement.remove();jrnData=jrnData.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('jrn-rows').appendChild(div);
+}
+function calcJurnal(){
+  let totD=0,totC=0,rows=[];
+  document.getElementById('jrn-rows').querySelectorAll('div[id^="j-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const d=parseFloat(ins[3].value)||0,c=parseFloat(ins[4].value)||0;
+    totD+=d;totC+=c;rows.push({data:ins[0].value,desc:ins[1].value,cont:ins[2].value,d,c});
+  });
+  const diff=totD-totC;
+  setR('jrn-total-d',fmt(totD)+' MDL');
+  setR('jrn-total-c',fmt(totC)+' MDL');
+  setR('jrn-diff',fmt(Math.abs(diff))+' MDL');
+  document.getElementById('jrn-msg').innerHTML=Math.abs(diff)<0.01?
+    '<div class="acc-highlight">✅ Jurnal echilibrat! Debit = Credit</div>':
+    '<div class="acc-warn">⚠️ Dezechilibru: '+fmt(Math.abs(diff))+' MDL — verifică înregistrările</div>';
+  document.getElementById('jrn-balance').style.display='block';
+  document.getElementById('jrn-export-btn').style.display=rows.length?'':'none';
+  window._jrnRows=rows;
+}
+function jrnExport(){
+  if(!window._jrnRows)return;
+  const csv='Data,Descriere,Cont,Debit,Credit\r\n'+window._jrnRows.map(r=>`"${r.data}","${r.desc}","${r.cont}",${r.d},${r.c}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'jurnal_contabil.csv');
+}
+// Init jurnal with 3 rows
+['Încasare numerar de la client','Plată furnizor','Salarii angajați'].forEach(desc=>{
+  jrnAddRow();
+  const last=document.getElementById('jrn-rows').lastElementChild;
+  if(last)last.querySelectorAll('input')[1].value=desc;
+});
+
+// ─── REGISTRU DE CASĂ ───
+let regData=[];
+function regAddRow(){
+  const id='r-'+Date.now();regData.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:100px 1fr 1fr 90px 90px 28px;gap:5px;margin-bottom:4px;align-items:center';
+  const today=new Date().toISOString().split('T')[0];
+  div.innerHTML=`<input type="date" value="${today}" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="text" placeholder="Descriere" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="text" placeholder="Nr. document" style="padding:5px 8px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="0.00" step="0.01" style="padding:5px 8px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--green)" oninput="regCalc()">
+    <input type="number" placeholder="0.00" step="0.01" style="padding:5px 8px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--red)" oninput="regCalc()">
+    <button onclick="this.parentElement.remove();regData=regData.filter(i=>i!=='${id}');regCalc()" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('reg-rows').appendChild(div);
+  regCalc();
+}
+function regCalc(){
+  let totalIn=0,totalOut=0;
+  window._regRows=[];
+  document.getElementById('reg-rows').querySelectorAll('div[id^="r-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const inc=parseFloat(ins[3].value)||0,plt=parseFloat(ins[4].value)||0;
+    totalIn+=inc;totalOut+=plt;
+    window._regRows.push({data:ins[0].value,desc:ins[1].value,doc:ins[2].value,inc,plt});
+  });
+  setR('reg-sold',fmt(totalIn-totalOut));setR('reg-total-in',fmt(totalIn));setR('reg-total-out',fmt(totalOut));
+  const hasd=window._regRows&&window._regRows.length>0;
+  document.getElementById('reg-export-csv').style.display=hasd?'':'none';
+  document.getElementById('reg-export-pdf').style.display=hasd?'':'none';
+}
+function regExportCSV(){
+  if(!window._regRows)return;
+  const csv='Data,Descriere,Document,Incasare,Plata\r\n'+window._regRows.map(r=>`"${r.data}","${r.desc}","${r.doc}",${r.inc},${r.plt}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'registru_casa.csv');
+}
+async function regExportPDF(){
+  if(!window._regRows||!window._regRows.length)return;
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+  const pdfDoc=await PDFDocument.create();const page=pdfDoc.addPage([595,842]);
+  const font=await pdfDoc.embedFont(StandardFonts.Helvetica);const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const{height}=page.getSize();
+  const g=(x,y,t,sz,bold,col)=>page.drawText(String(t||''),{x,y:height-y,size:sz||9,font:bold?fontB:font,color:col||rgb(0,0,0)});
+  g(50,50,'REGISTRU DE CASĂ',14,true,rgb(0.1,0.1,0.5));
+  g(50,70,'Data: '+new Date().toLocaleDateString('ro-MD'),9);
+  g(50,95,'Data',9,true);g(130,95,'Descriere',9,true);g(270,95,'Document',9,true);g(360,95,'Încasare',9,true);g(440,95,'Plată',9,true);g(520,95,'Sold',9,true);
+  page.drawLine({start:{x:50,y:height-100},end:{x:545,y:height-100},thickness:0.5,color:rgb(0.7,0.7,0.7)});
+  let y=115,sold=0;
+  window._regRows.forEach(r=>{sold+=r.inc-r.plt;g(50,y,r.data);g(130,y,r.desc.slice(0,18));g(270,y,r.doc.slice(0,12));g(360,y,fmt(r.inc));g(440,y,fmt(r.plt));g(520,y,fmt(sold),9,false,sold>=0?rgb(0,0.5,0):rgb(0.8,0,0));y+=14;if(y>780){y=60;}});
+  const bytes=await pdfDoc.save();triggerDl(new Blob([bytes],{type:'application/pdf'}),'registru_casa.pdf');
+}
+
+// ─── SCADENTAR PLATI ───
+let scadItems=JSON.parse(localStorage.getItem('scadentar')||'[]');
+function scadRender(){
+  const today=new Date();today.setHours(0,0,0,0);
+  const el=document.getElementById('scad-list');
+  if(!scadItems.length){el.innerHTML='<div class="acc-info">Nu ai scadențe adăugate. Folosește formularul de mai sus.</div>';return;}
+  const sorted=[...scadItems].sort((a,b)=>new Date(a.data)-new Date(b.data));
+  el.innerHTML=sorted.map((item,i)=>{
+    const d=new Date(item.data);d.setHours(0,0,0,0);
+    const diff=Math.round((d-today)/(1000*60*60*24));
+    let cls='ok',badge='✅ În termen ('+diff+' zile)';
+    if(diff<0){cls='overdue';badge='🔴 Întârziat '+Math.abs(diff)+' zile';}
+    else if(diff<=7){cls='soon';badge='🟡 Scadent în '+diff+' zile';}
+    return`<div class="scad-item ${cls}"><div style="flex:1"><div style="font-size:13px;font-weight:500">${esc(item.desc)}</div><div style="font-size:11px;color:var(--muted)">Scadent: ${item.data} · ${fmt(item.suma)} MDL</div></div><div style="font-size:11px;font-weight:500;white-space:nowrap">${badge}</div><button onclick="scadDelete(${scadItems.indexOf(item)})" style="background:none;border:none;color:var(--muted2);cursor:pointer;font-size:14px;padding:0 4px;flex-shrink:0">✕</button></div>`;
+  }).join('');
+  document.getElementById('scad-actions').style.display='flex';
+}
+function scadAdd(){
+  const desc=document.getElementById('scad-desc').value.trim();
+  const suma=parseFloat(document.getElementById('scad-suma').value)||0;
+  const data=document.getElementById('scad-data').value;
+  if(!desc||!data){alert('Completează descrierea și data scadenței!');return;}
+  scadItems.push({desc,suma,data,id:Date.now()});
+  localStorage.setItem('scadentar',JSON.stringify(scadItems));
+  document.getElementById('scad-desc').value='';document.getElementById('scad-suma').value='';
+  scadRender();
+}
+function scadDelete(idx){scadItems.splice(idx,1);localStorage.setItem('scadentar',JSON.stringify(scadItems));scadRender();}
+function scadClearDone(){scadItems=scadItems.filter(i=>{const d=new Date(i.data);d.setHours(0,0,0,0);return d>=new Date(new Date().setHours(0,0,0,0));});localStorage.setItem('scadentar',JSON.stringify(scadItems));scadRender();}
+function scadExport(){const csv='Descriere,Suma,Data scadenta\r\n'+scadItems.map(i=>`"${i.desc}",${i.suma},"${i.data}"`).join('\r\n');triggerDl(new Blob([csv],{type:'text/csv'}),'scadentar.csv');}
+scadRender();
+
+// ─── IBAN ───
+const ibanLengths={AD:24,AE:23,AL:28,AT:20,AZ:28,BA:20,BE:16,BG:22,BH:22,BR:29,BY:28,CH:21,CR:22,CY:28,CZ:24,DE:22,DJ:27,DK:18,DO:28,EE:20,EG:29,ES:24,FI:18,FO:18,FR:27,GB:22,GE:22,GI:23,GL:18,GR:27,GT:28,HR:21,HU:28,IE:22,IL:23,IQ:23,IS:26,IT:27,JO:30,KW:30,KZ:20,LB:28,LC:32,LI:21,LT:20,LU:20,LV:21,LY:25,MC:27,MD:24,ME:22,MK:19,MR:27,MT:31,MU:30,NL:18,NO:15,PK:24,PL:28,PS:29,PT:25,QA:29,RO:24,RS:22,SA:24,SC:31,SD:18,SE:24,SI:19,SK:24,SM:27,ST:25,SV:28,TL:23,TN:24,TR:26,UA:29,VA:22,VG:24,XK:20};
+function verificaIBAN(){
+  const raw=document.getElementById('iban-input').value.replace(/\s/g,'').toUpperCase();
+  if(!raw){alert('Introdu un IBAN!');return;}
+  const country=raw.slice(0,2);const expectedLen=ibanLengths[country];
+  if(!expectedLen){setR('iban-r-status','⚠️ Cod de țară necunoscut: '+country);showAccResult('iban-result');return;}
+  if(raw.length!==expectedLen){setR('iban-r-status','❌ Lungime incorectă ('+raw.length+' din '+expectedLen+' caractere)');showAccResult('iban-result');setR('iban-r-tara',country);setR('iban-r-banca','—');setR('iban-r-format',raw);setR('iban-r-spaces',raw.match(/.{1,4}/g).join(' '));return;}
+  // Validate checksum (ISO 7064 MOD 97-10)
+  const rearranged=raw.slice(4)+raw.slice(0,4);
+  const numeric=rearranged.split('').map(c=>isNaN(c)?c.charCodeAt(0)-55:c).join('');
+  let remainder=0;for(const ch of numeric){remainder=(remainder*10+parseInt(ch))%97;}
+  const valid=remainder===1;
+  const formatted=raw.match(/.{1,4}/g).join(' ');
+  const bankCode=country==='MD'?raw.slice(4,6):raw.slice(4,8);
+  setR('iban-r-status',valid?'✅ IBAN valid':'❌ IBAN invalid (checksum greșit)');
+  setR('iban-r-tara',country);
+  setR('iban-r-banca',bankCode);
+  setR('iban-r-format',raw);
+  setR('iban-r-spaces',formatted);
+  showAccResult('iban-result');
+}
+
+// ─── SPLIT CHELTUIELI ───
+let splitPersons=[],splitExpenses2=[];
+function splitAddPerson(){
+  const name=document.getElementById('split-person-name').value.trim();
+  if(!name||splitPersons.includes(name))return;
+  splitPersons.push(name);
+  document.getElementById('split-person-name').value='';
+  renderSplitPersons();
+}
+function renderSplitPersons(){
+  document.getElementById('split-persons').innerHTML=splitPersons.map(p=>
+    `<span style="padding:4px 12px;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);border-radius:20px;font-size:12px;color:var(--accent3);cursor:pointer" onclick="splitRemovePerson('${p}')">${esc(p)} ✕</span>`
+  ).join('');
+}
+function splitRemovePerson(name){splitPersons=splitPersons.filter(p=>p!==name);renderSplitPersons();}
+function splitAddExpense(){
+  if(!splitPersons.length){alert('Adaugă mai întâi participanții!');return;}
+  const id='se-'+Date.now();splitExpenses2.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 1fr 28px;gap:6px;margin-bottom:6px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Descriere cheltuială" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="Suma MDL" step="0.01" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <select style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      ${splitPersons.map(p=>`<option value="${esc(p)}">${esc(p)} a plătit</option>`).join('')}
+    </select>
+    <button onclick="this.parentElement.remove();splitExpenses2=splitExpenses2.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('split-expenses').appendChild(div);
+}
+function calcSplit(){
+  if(!splitPersons.length){alert('Adaugă participanți!');return;}
+  const expenses=Array.from(document.getElementById('split-expenses').querySelectorAll('div[id^="se-"]')).map(div=>{
+    const ins=div.querySelectorAll('input,select');
+    return{desc:ins[0].value||'—',suma:parseFloat(ins[1].value)||0,paidBy:ins[2].value};
+  }).filter(e=>e.suma>0);
+  if(!expenses.length){alert('Adaugă cheltuieli!');return;}
+  const total=expenses.reduce((a,e)=>a+e.suma,0);
+  const perPerson=total/splitPersons.length;
+  const balance={};splitPersons.forEach(p=>{balance[p]=0;});
+  expenses.forEach(e=>{if(balance[e.paidBy]!==undefined)balance[e.paidBy]+=e.suma;});
+  splitPersons.forEach(p=>{balance[p]-=perPerson;});
+  // Summary
+  document.getElementById('split-summary').innerHTML=splitPersons.map(p=>{
+    const b=balance[p];
+    const bLabel=b>0.01?'primește':b<-0.01?'plătește':'achitat';
+    const bClass=b>0.01?'green':b<-0.01?'red':'';
+    return`<div class="acc-stat ${bClass}"><div class="acc-stat-val">${fmt(Math.abs(b))}</div><div class="acc-stat-lbl">${esc(p)}<br>${bLabel}</div></div>`;
+  }).join('');
+  // Transactions
+  const creditors=splitPersons.filter(p=>balance[p]>0.01).map(p=>({name:p,bal:balance[p]}));
+  const debtors=splitPersons.filter(p=>balance[p]<-0.01).map(p=>({name:p,bal:-balance[p]}));
+  const txns=[];
+  let ci=0,di=0;
+  while(ci<creditors.length&&di<debtors.length){
+    const amount=Math.min(creditors[ci].bal,debtors[di].bal);
+    txns.push({from:debtors[di].name,to:creditors[ci].name,amount});
+    creditors[ci].bal-=amount;debtors[di].bal-=amount;
+    if(creditors[ci].bal<0.01)ci++;if(debtors[di].bal<0.01)di++;
+  }
+  document.getElementById('split-transactions').innerHTML=txns.length?
+    txns.map(t=>`<div class="scad-item ok" style="font-size:13px"><strong>${esc(t.from)}</strong><span style="color:var(--muted);margin:0 8px">plătește</span><strong style="color:var(--green)">${fmt(t.amount)} MDL</strong><span style="color:var(--muted);margin:0 8px">către</span><strong>${esc(t.to)}</strong></div>`).join(''):
+    '<div class="acc-highlight">✅ Toți sunt quits! Nicio tranzacție necesară.</div>';
+  document.getElementById('split-result').style.display='block';
+}
+
+// Load XLSX for CSV analyzer
+if(!window.XLSX){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';document.head.appendChild(s);}
+
+// ════ BATCH 3 JS ════
+
+// ─── INVENTAR ACTIVE FIXE ───
+let invRows=[];
+function invAddRow(){
+  const id='inv-'+Date.now(); invRows.push(id);
+  const div=document.createElement('div'); div.id=id;
+  const today=new Date().toISOString().split('T')[0];
+  div.style.cssText='display:grid;grid-template-columns:2fr 80px 80px 80px 90px 70px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="ex: Calculator portabil" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="10000" step="1" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="0" step="1" value="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="5" min="1" max="50" value="5" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="date" value="${today}" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <span style="font-size:11px;color:var(--accent2);font-family:'JetBrains Mono'" id="inv-vc-${id}">—</span>
+    <button onclick="this.parentElement.remove();invRows=invRows.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('inv-rows').appendChild(div);
+}
+let invData=[];
+function calcInventar(){
+  invData=[];
+  const today=new Date();
+  document.getElementById('inv-rows').querySelectorAll('div[id^="inv-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const name=ins[0].value||'—', vi=parseFloat(ins[1].value)||0, vr=parseFloat(ins[2].value)||0;
+    const ani=parseInt(ins[3].value)||1, dataIn=new Date(ins[4].value);
+    const aniScursi=Math.max(0,(today-dataIn)/(365.25*24*3600*1000));
+    const amAn=(vi-vr)/ani;
+    const amCumul=Math.min(vi-vr, amAn*aniScursi);
+    const vc=Math.max(vr, vi-amCumul);
+    const aniRam=Math.max(0,ani-Math.floor(aniScursi));
+    invData.push({name,vi,vr,ani,amAn,amCumul,vc,aniRam});
+    const vcEl=div.querySelector('[id^="inv-vc-"]');
+    if(vcEl)vcEl.textContent=fmt(vc);
+  });
+  if(!invData.length)return;
+  const totVI=invData.reduce((a,r)=>a+r.vi,0);
+  const totVC=invData.reduce((a,r)=>a+r.vc,0);
+  const totAm=invData.reduce((a,r)=>a+r.amCumul,0);
+  document.getElementById('inv-stats').innerHTML=
+    `<div class="acc-stat"><div class="acc-stat-val">${fmt(totVI,0)}</div><div class="acc-stat-lbl">Valoare inițială</div></div>
+     <div class="acc-stat amber"><div class="acc-stat-val">${fmt(totAm,0)}</div><div class="acc-stat-lbl">Amort. cumulată</div></div>
+     <div class="acc-stat green"><div class="acc-stat-val">${fmt(totVC,0)}</div><div class="acc-stat-lbl">Valoare contabilă</div></div>`;
+  document.getElementById('inv-date-lbl').textContent='La data de '+today.toLocaleDateString('ro-MD');
+  document.getElementById('inv-table').querySelector('tbody').innerHTML=
+    invData.map(r=>`<tr><td>${esc(r.name)}</td><td>${fmt(r.vi)}</td><td>${fmt(r.amAn)}</td><td>${fmt(r.amCumul)}</td><td>${fmt(r.vc)}</td><td>${r.aniRam}</td></tr>`).join('');
+  document.getElementById('inv-result').style.display='block';
+}
+function invExport(){
+  if(!invData.length)return;
+  const csv='Activ,Val.Initiala,Amort.An,Amort.Cumulata,Val.Contabila,Ani.Ramasi\r\n'+
+    invData.map(r=>`"${r.name}",${r.vi},${r.amAn.toFixed(2)},${r.amCumul.toFixed(2)},${r.vc.toFixed(2)},${r.aniRam}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'inventar_active.csv');
+}
+['Calculator portabil','Mobilier birou','Autoturism'].forEach(n=>{invAddRow();const last=document.getElementById('inv-rows').lastElementChild;if(last)last.querySelector('input').value=n;});
+
+// ─── FIFO/LIFO ───
+let fifoIn=[], fifoOut=[], fifoTab='intrari';
+function fifoSetTab(t,btn){
+  fifoTab=t;
+  document.querySelectorAll('#mod-acc-fifo .acc-tab').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  document.getElementById('fifo-intrari-wrap').style.display=t==='intrari'?'block':'none';
+  document.getElementById('fifo-iesiri-wrap').style.display=t==='iesiri'?'block':'none';
+}
+function fifoAddRow(type){
+  const id='fi-'+Date.now();
+  const div=document.createElement('div');div.id=id;
+  const today=new Date().toISOString().split('T')[0];
+  if(type==='intrari'){
+    fifoIn.push(id);
+    div.style.cssText='display:grid;grid-template-columns:100px 1fr 90px 90px 28px;gap:5px;margin-bottom:5px;align-items:center';
+    div.innerHTML=`<input type="date" value="${today}" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <input type="text" placeholder="Intrare marfă" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <input type="number" placeholder="100" step="1" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <input type="number" placeholder="50.00" step="0.01" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <button onclick="this.parentElement.remove();fifoIn=fifoIn.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+    document.getElementById('fifo-intrari').appendChild(div);
+  } else {
+    fifoOut.push(id);
+    div.style.cssText='display:grid;grid-template-columns:100px 1fr 90px 28px;gap:5px;margin-bottom:5px;align-items:center';
+    div.innerHTML=`<input type="date" value="${today}" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <input type="text" placeholder="Ieșire marfă" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <input type="number" placeholder="50" step="1" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+      <button onclick="this.parentElement.remove();fifoOut=fifoOut.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+    document.getElementById('fifo-iesiri').appendChild(div);
+  }
+}
+function calcFifo(){
+  const metoda=document.getElementById('fifo-metoda').value;
+  const intrari=Array.from(document.getElementById('fifo-intrari').querySelectorAll('div[id^="fi-"]')).map(div=>{
+    const ins=div.querySelectorAll('input');
+    return{data:ins[0].value,desc:ins[1].value,qty:parseFloat(ins[2].value)||0,cost:parseFloat(ins[3].value)||0};
+  }).filter(r=>r.qty>0);
+  const iesiri=Array.from(document.getElementById('fifo-iesiri').querySelectorAll('div[id^="fi-"]')).map(div=>{
+    const ins=div.querySelectorAll('input');
+    return{data:ins[0].value,desc:ins[1].value,qty:parseFloat(ins[2].value)||0};
+  }).filter(r=>r.qty>0);
+  const totIn=intrari.reduce((a,r)=>a+r.qty*r.cost,0);
+  const totQtyIn=intrari.reduce((a,r)=>a+r.qty,0);
+  const totQtyOut=iesiri.reduce((a,r)=>a+r.qty,0);
+  let cmv=0;
+  if(metoda==='cmp'){
+    const cmp=totQtyIn?totIn/totQtyIn:0;
+    cmv=totQtyOut*cmp;
+  } else {
+    let stoc=[...intrari.map(r=>({qty:r.qty,cost:r.cost}))];
+    if(metoda==='lifo')stoc.reverse();
+    let remaining=totQtyOut;
+    for(const lot of stoc){
+      if(remaining<=0)break;
+      const used=Math.min(lot.qty,remaining);
+      cmv+=used*lot.cost; remaining-=used;
+    }
+  }
+  const stocVal=totIn-cmv;
+  setR('fifo-r-in',fmt(totIn)+' MDL ('+fmt(totQtyIn,0)+' buc)');
+  setR('fifo-r-cmv',fmt(cmv)+' MDL');
+  setR('fifo-r-stoc',fmt(stocVal)+' MDL');
+  setR('fifo-r-cant',fmt(totQtyIn-totQtyOut,0)+' buc');
+  showAccResult('fifo-result');
+}
+['Marfă lot 1','Marfă lot 2'].forEach((n,i)=>{fifoAddRow('intrari');const last=document.getElementById('fifo-intrari').lastElementChild;if(last){last.querySelectorAll('input')[1].value=n;last.querySelectorAll('input')[2].value=100;last.querySelectorAll('input')[3].value=50+i*10;}});
+fifoAddRow('iesiri');const lastFifoOut=document.getElementById('fifo-iesiri').lastElementChild;if(lastFifoOut){lastFifoOut.querySelectorAll('input')[2].value=80;}
+
+// ─── CALCULATIE COST PRODUS ───
+let calcRows2=[];
+function calcAddRow(tip,label){
+  const id='cr-'+Date.now();calcRows2.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:60px 2fr 1fr 100px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<span style="font-size:10px;font-weight:600;padding:3px 6px;border-radius:6px;background:rgba(245,158,11,.12);color:#f59e0b;text-align:center">${tip}</span>
+    <input type="text" placeholder="${label}" value="${label}" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="1" value="1" step="0.001" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="0.00" step="0.01" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="this.parentElement.remove();calcRows2=calcRows2.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('calc-rows').appendChild(div);
+}
+function calcCalculatie(){
+  let total=0;
+  document.getElementById('calc-rows').querySelectorAll('div[id^="cr-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    total+=(parseFloat(ins[1].value)||0)*(parseFloat(ins[2].value)||0);
+  });
+  const qty=parseFloat(document.getElementById('calc-qty').value)||1;
+  const marja=parseFloat(document.getElementById('calc-marja').value)||0;
+  const tva=parseFloat(document.getElementById('calc-tva').value)||0;
+  const unit=total/qty;
+  const pret=unit*(1+marja/100);
+  const pretTva=pret*(1+tva/100);
+  setR('calc-r-total',fmt(total)+' MDL');
+  setR('calc-r-unit',fmt(unit)+' MDL/buc');
+  setR('calc-r-pret',fmt(pret)+' MDL/buc');
+  setR('calc-r-pretva',fmt(pretTva)+' MDL/buc');
+  showAccResult('calc-result');
+}
+[['MP','Făină (kg)'],['MP','Zahăr (kg)'],['MO','Manoperă (ore)'],['CI','Energie electrică']].forEach(([t,n])=>calcAddRow(t,n));
+
+// ─── NORME CONSUM ───
+let normaRows=[];
+function normaAddRow(){
+  const id='nr-'+Date.now();normaRows.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 70px 80px 80px 80px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Material" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="text" placeholder="kg" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="0.5" step="0.001" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <span style="font-size:11px;color:var(--accent2);font-family:'JetBrains Mono'" id="nr-plan-${id}">—</span>
+    <input type="number" placeholder="efectiv" step="0.001" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="this.parentElement.remove();normaRows=normaRows.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('norma-rows').appendChild(div);
+}
+function calcNorma(){
+  const qty=parseFloat(document.getElementById('norma-qty').value)||1;
+  const rows=[];
+  document.getElementById('norma-rows').querySelectorAll('div[id^="nr-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const name=ins[0].value||'—',um=ins[1].value||'',norma=parseFloat(ins[2].value)||0,efect=parseFloat(ins[4].value)||null;
+    const plan=norma*qty;
+    const planEl=div.querySelector('[id^="nr-plan-"]');if(planEl)planEl.textContent=fmt(plan,3);
+    rows.push({name,um,plan,efect:efect!==null?efect:null});
+  });
+  const tbody=document.getElementById('norma-table').querySelector('tbody');
+  tbody.innerHTML=rows.map(r=>{
+    const diff=r.efect!==null?r.efect-r.plan:null;
+    const pct=r.plan&&diff!==null?(diff/r.plan*100):null;
+    return`<tr><td>${esc(r.name)}</td><td>${esc(r.um)}</td><td>${fmt(r.plan,3)}</td><td>${r.efect!==null?fmt(r.efect,3):'—'}</td><td style="color:${diff===null?'inherit':diff>0?'var(--red)':'var(--green)'}">${diff!==null?(diff>0?'+':'')+fmt(diff,3):'—'}</td><td style="color:${pct===null?'inherit':pct>0?'var(--red)':'var(--green)'}">${pct!==null?(pct>0?'+':'')+pct.toFixed(1)+'%':'—'}</td></tr>`;
+  }).join('');
+  document.getElementById('norma-result').style.display='block';
+}
+['Făină','Zahăr','Ouă','Unt'].forEach(n=>{normaAddRow();const last=document.getElementById('norma-rows').lastElementChild;if(last)last.querySelector('input').value=n;});
+
+// ─── WATERFALL CASHFLOW ───
+let wfRows2=[];
+function wfAddRow(){
+  const id='wf-'+Date.now();wfRows2.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 1fr 90px 28px;gap:6px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Categorie" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <select style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)"><option value="in">Intrare ↑</option><option value="out">Ieșire ↓</option></select>
+    <input type="number" placeholder="MDL" step="1" style="padding:6px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <button onclick="this.parentElement.remove();wfRows2=wfRows2.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('wf-rows').appendChild(div);
+}
+function drawWaterfall(){
+  const items=Array.from(document.getElementById('wf-rows').querySelectorAll('div[id^="wf-"]')).map(div=>{
+    const ins=div.querySelectorAll('input,select');
+    return{name:ins[0].value||'—',type:ins[1].value,val:parseFloat(ins[2].value)||0};
+  }).filter(r=>r.val>0);
+  if(!items.length)return;
+  const canvas=document.getElementById('wf-canvas');
+  const totalIn=items.filter(r=>r.type==='in').reduce((a,r)=>a+r.val,0);
+  const totalOut=items.filter(r=>r.type==='out').reduce((a,r)=>a+r.val,0);
+  const net=totalIn-totalOut;
+  const W=Math.min(800,canvas.parentElement.offsetWidth||600);
+  const H=340;canvas.width=W;canvas.height=H;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#18181f';ctx.fillRect(0,0,W,H);
+  const allItems=[...items,{name:'NET',type:net>=0?'in':'out',val:Math.abs(net),isNet:true}];
+  const maxVal=Math.max(...allItems.map(r=>r.val))*1.2;
+  const barW=Math.min(60,Math.floor((W-80)/(allItems.length+1)));
+  const gap=(W-60-barW*allItems.length)/(allItems.length+1);
+  let runBase=0;
+  allItems.forEach((item,i)=>{
+    const x=60+gap*(i+1)+barW*i;
+    const barH=Math.max(4,(item.val/maxVal)*(H-80));
+    const isIn=item.type==='in';
+    const y=item.isNet?(H-40-barH):(isIn?(H-40-runBase-barH):(H-40-runBase));
+    ctx.fillStyle=item.isNet?(net>=0?'rgba(16,185,129,.8)':'rgba(239,68,68,.8)'):isIn?'rgba(16,185,129,.7)':'rgba(239,68,68,.7)';
+    ctx.beginPath();ctx.roundRect(x,y,barW,barH,4);ctx.fill();
+    ctx.fillStyle='#f0eeff';ctx.font='10px Inter,sans-serif';ctx.textAlign='center';
+    ctx.fillText(item.name.slice(0,10),x+barW/2,H-20);
+    ctx.fillText(fmt(item.val,0),x+barW/2,y-5);
+    if(!item.isNet){if(isIn)runBase+=item.val;else runBase-=item.val;}
+  });
+  // Axis
+  ctx.strokeStyle='rgba(255,255,255,0.1)';ctx.beginPath();ctx.moveTo(55,H-40);ctx.lineTo(W-10,H-40);ctx.stroke();
+  document.getElementById('wf-chart-wrap').style.display='block';
+  document.getElementById('wf-stats').innerHTML=
+    `<div class="acc-stat green"><div class="acc-stat-val">${fmt(totalIn,0)}</div><div class="acc-stat-lbl">Total intrări</div></div>
+     <div class="acc-stat red"><div class="acc-stat-val">${fmt(totalOut,0)}</div><div class="acc-stat-lbl">Total ieșiri</div></div>
+     <div class="acc-stat ${net>=0?'green':'red'}"><div class="acc-stat-val">${fmt(Math.abs(net),0)}</div><div class="acc-stat-lbl">Flux net ${net>=0?'pozitiv':'negativ'}</div></div>`;
+}
+function wfExportCSV(){
+  const items=Array.from(document.getElementById('wf-rows').querySelectorAll('div[id^="wf-"]')).map(div=>{
+    const ins=div.querySelectorAll('input,select');return`"${ins[0].value}","${ins[1].value==='in'?'Intrare':'Iesire'}",${parseFloat(ins[2].value)||0}`;
+  });
+  triggerDl(new Blob([['Categorie,Tip,Valoare',...items].join('\r\n')],{type:'text/csv'}),'cashflow_waterfall.csv');
+}
+['Venituri din vânzări','Alte venituri','Salarii','Chirii','Utilități','Furnizori'].forEach((n,i)=>{
+  wfAddRow();const last=document.getElementById('wf-rows').lastElementChild;if(!last)return;
+  const ins=last.querySelectorAll('input,select');
+  ins[0].value=n;ins[1].value=i<2?'in':'out';ins[2].value=(i<2?100000-i*20000:30000+i*5000);
+});
+
+// ─── RAPORT FISCAL LUNAR ───
+let fiscDataCache=null;
+function calcFisc(){
+  const luna=document.getElementById('fisc-luna').value;
+  const an=document.getElementById('fisc-an').value;
+  const firma=document.getElementById('fisc-firma').value||'—';
+  const vanzari=parseFloat(document.getElementById('fisc-vanzari').value)||0;
+  const alteV=parseFloat(document.getElementById('fisc-alte-v').value)||0;
+  const tvaCol=parseFloat(document.getElementById('fisc-tva-col').value)||0;
+  const chelt=parseFloat(document.getElementById('fisc-chelt').value)||0;
+  const tvaDed=parseFloat(document.getElementById('fisc-tva-ded').value)||0;
+  const salarii=parseFloat(document.getElementById('fisc-salarii').value)||0;
+  const tvaDePlata=Math.max(0,tvaCol-tvaDed);
+  const profitBrut=vanzari+alteV-chelt;
+  const cas=salarii*0.24;const cnam=salarii*0.045;
+  const iv=salarii*0.12*0.9; // approx
+  const totalBuget=tvaDePlata+cas+cnam+iv;
+  fiscDataCache={luna,an,firma,vanzari,alteV,tvaCol,chelt,tvaDed,salarii,tvaDePlata,profitBrut,cas,cnam,iv,totalBuget};
+  document.getElementById('fisc-stats').innerHTML=
+    `<div class="acc-stat green"><div class="acc-stat-val">${fmt(vanzari+alteV,0)}</div><div class="acc-stat-lbl">Total venituri</div></div>
+     <div class="acc-stat amber"><div class="acc-stat-val">${fmt(tvaDePlata,0)}</div><div class="acc-stat-lbl">TVA de plată</div></div>
+     <div class="acc-stat amber"><div class="acc-stat-val">${fmt(cas,0)}</div><div class="acc-stat-lbl">CAS angajator</div></div>
+     <div class="acc-stat red"><div class="acc-stat-val">${fmt(totalBuget,0)}</div><div class="acc-stat-lbl">Total la buget</div></div>`;
+  document.getElementById('fisc-result').style.display='block';
+}
+async function fiscExportPDF(){
+  if(!fiscDataCache)return;
+  const d=fiscDataCache;
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+  const pdfDoc=await PDFDocument.create();const page=pdfDoc.addPage([595,500]);
+  const font=await pdfDoc.embedFont(StandardFonts.Helvetica);const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+  const{height}=page.getSize();
+  const g=(x,y,t,sz,bold,col)=>page.drawText(String(t||''),{x,y:height-y,size:sz||10,font:bold?fontB:font,color:col||rgb(0,0,0)});
+  const mnArr=['','Ianuarie','Februarie','Martie','Aprilie','Mai','Iunie','Iulie','August','Septembrie','Octombrie','Noiembrie','Decembrie'];
+  g(50,45,'RAPORT FISCAL LUNAR',14,true,rgb(0.1,0.1,0.5));
+  g(50,65,d.firma+' · '+mnArr[parseInt(d.luna)]+' '+d.an,10);
+  const rows=[
+    ['VENITURI','',''],['Vânzări',fmt(d.vanzari),''],['Alte venituri',fmt(d.alteV),''],
+    ['CHELTUIELI','',''],['Cheltuieli deductibile',fmt(d.chelt),''],['Profit brut',fmt(d.profitBrut),''],
+    ['OBLIGAȚII FISCALE','',''],['TVA colectată',fmt(d.tvaCol),''],['TVA deductibilă',fmt(d.tvaDed),''],
+    ['TVA de plată',fmt(d.tvaDePlata),''],['CAS angajator (24%)',fmt(d.cas),''],
+    ['CNAM angajator (4.5%)',fmt(d.cnam),''],['Impozit venit (estimat)',fmt(d.iv),''],
+    ['TOTAL PLĂȚI LA BUGET',fmt(d.totalBuget),''],
+  ];
+  let y=100;
+  rows.forEach(([l,v])=>{
+    const isHead=!v;
+    if(isHead){y+=5;g(50,y,l,10,true,rgb(0.1,0.1,0.5));y+=18;}
+    else{g(60,y,l);g(350,y,v+' MDL');y+=15;}
+  });
+  g(50,y+10,'Semnat: _______________',9);g(350,y+10,'Data: '+new Date().toLocaleDateString('ro-MD'),9);
+  const bytes=await pdfDoc.save();
+  triggerDl(new Blob([bytes],{type:'application/pdf'}),'raport_fiscal_'+d.luna+'_'+d.an+'.pdf');
+}
+
+// ─── IMPOZIT ANUAL ───
+let impTab='pf';
+function impSetTab(t,btn){impTab=t;document.querySelectorAll('#mod-acc-impozit .acc-tab').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');document.getElementById('imp-pf-wrap').style.display=t==='pf'?'block':'none';document.getElementById('imp-pj-wrap').style.display=t==='pj'?'block':'none';}
+function calcImpozit(){
+  let brut,scutiri,baza,imp;
+  if(impTab==='pf'){
+    brut=parseFloat(document.getElementById('imp-venit').value)||0;
+    const sc=parseFloat(document.getElementById('imp-scutire').value)||0;
+    const sot=parseFloat(document.getElementById('imp-sot').value)||0;
+    const dep=(parseFloat(document.getElementById('imp-dep').value)||0)*4500;
+    scutiri=sc+sot+dep;baza=Math.max(0,brut-scutiri);imp=baza*0.12;
+  } else {
+    brut=parseFloat(document.getElementById('imp-profit').value)||0;
+    const rata=parseFloat(document.getElementById('imp-tip-pj').value)||0;
+    scutiri=0;baza=brut;imp=baza*rata/100;
+  }
+  setR('imp-r-brut',fmt(brut)+' MDL');setR('imp-r-scutiri',fmt(scutiri)+' MDL');
+  setR('imp-r-baza',fmt(baza)+' MDL');setR('imp-r-imp',fmt(imp)+' MDL/an');
+  setR('imp-r-lunar',fmt(imp/12)+' MDL/lună');
+  showAccResult('imp-result');
+}
+
+// ─── DEPOZIT BANCAR ───
+function calcDepozit(){
+  const suma=parseFloat(document.getElementById('dep-suma').value)||0;
+  const rata=parseFloat(document.getElementById('dep-rata').value)||0;
+  const luni=parseInt(document.getElementById('dep-luni').value)||1;
+  const tip=document.getElementById('dep-tip').value;
+  const valuta=document.getElementById('dep-valuta').value;
+  let dobBruta;
+  if(tip==='la-scadenta'){dobBruta=suma*rata/100*(luni/12);}
+  else{dobBruta=suma*(Math.pow(1+rata/100/12,luni)-1);}
+  const impDob=dobBruta*0.12;
+  const dobNeta=dobBruta-impDob;
+  const total=suma+dobNeta;
+  setR('dep-r-init',fmt(suma)+' '+valuta);setR('dep-r-dob',fmt(dobBruta)+' '+valuta);
+  setR('dep-r-imp',fmt(impDob)+' '+valuta);setR('dep-r-net',fmt(dobNeta)+' '+valuta);
+  setR('dep-r-total',fmt(total)+' '+valuta);
+  showAccResult('dep-result');
+}
+
+// ─── PONTAJ ───
+let pontRows=[];
+function pontAddRow(){
+  const id='pont-'+Date.now();pontRows.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:2fr 70px 70px 70px 70px 70px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Nume Prenume" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" min="0" max="31" step="1" placeholder="22" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" min="0" max="31" step="1" value="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" min="0" max="31" step="1" value="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" min="0" max="31" step="1" value="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <span style="font-size:11px;color:var(--accent2);font-family:'JetBrains Mono'" id="pont-tot-${id}">—</span>
+    <button onclick="this.parentElement.remove();pontRows=pontRows.filter(i=>i!=='${id}')" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('pont-rows').appendChild(div);
+}
+let pontData=[];
+function calcPontaj(){
+  const maxZile=parseInt(document.getElementById('pont-zile-max').value)||22;
+  const luna=document.getElementById('pont-luna').value;
+  const an=document.getElementById('pont-an').value;
+  pontData=[];
+  document.getElementById('pont-rows').querySelectorAll('div[id^="pont-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    const name=ins[0].value||'—',lucr=parseInt(ins[1].value)||0,conc=parseInt(ins[2].value)||0,med=parseInt(ins[3].value)||0,abs=parseInt(ins[4].value)||0;
+    const total=lucr+conc+med+abs;
+    const totEl=div.querySelector('[id^="pont-tot-"]');
+    if(totEl)totEl.textContent=total;
+    pontData.push({name,lucr,conc,med,abs,total,maxZile});
+  });
+  const totLucr=pontData.reduce((a,r)=>a+r.lucr,0);
+  const totConc=pontData.reduce((a,r)=>a+r.conc,0);
+  const totMed=pontData.reduce((a,r)=>a+r.med,0);
+  document.getElementById('pont-stats').innerHTML=
+    `<div class="acc-stat"><div class="acc-stat-val">${pontData.length}</div><div class="acc-stat-lbl">Angajați</div></div>
+     <div class="acc-stat green"><div class="acc-stat-val">${totLucr}</div><div class="acc-stat-lbl">Zile lucrate</div></div>
+     <div class="acc-stat amber"><div class="acc-stat-val">${totConc}</div><div class="acc-stat-lbl">Zile concediu</div></div>
+     <div class="acc-stat red"><div class="acc-stat-val">${totMed}</div><div class="acc-stat-lbl">Zile medicale</div></div>`;
+  document.getElementById('pont-result').style.display='block';
+}
+function pontExport(){
+  if(!pontData.length)return;
+  const luna=document.getElementById('pont-luna').value;
+  const an=document.getElementById('pont-an').value;
+  const mnArr=['','Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Nov','Dec'];
+  const csv='Angajat,Zile lucrate,Concediu,Medical,Absente,Total\r\n'+
+    pontData.map(r=>`"${r.name}",${r.lucr},${r.conc},${r.med},${r.abs},${r.total}`).join('\r\n');
+  triggerDl(new Blob([csv],{type:'text/csv'}),'pontaj_'+mnArr[parseInt(luna)]+'_'+an+'.csv');
+}
+['Ion Popescu','Maria Ionescu','Andrei Rusu'].forEach(n=>{pontAddRow();const last=document.getElementById('pont-rows').lastElementChild;if(last){last.querySelector('input').value=n;last.querySelectorAll('input')[1].value=22;}});
+
+// ─── BON DE COMANDA ───
+let bonItems=[];
+function bonAddItem(){
+  const id='bon-'+Date.now();bonItems.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:3fr 70px 1fr 90px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Denumire produs" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="bonCalc()">
+    <input type="text" placeholder="buc" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="1" step="1" value="1" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="bonCalc()">
+    <input type="number" placeholder="0.00" step="0.01" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="bonCalc()">
+    <button onclick="this.parentElement.remove();bonItems=bonItems.filter(i=>i!=='${id}');bonCalc()" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('bon-items').appendChild(div);bonCalc();
+}
+function bonCalc(){
+  let total=0;
+  document.getElementById('bon-items').querySelectorAll('div[id^="bon-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input');
+    total+=(parseFloat(ins[2].value)||0)*(parseFloat(ins[3].value)||0);
+  });
+  document.getElementById('bon-total-wrap').style.display=bonItems.length?'block':'none';
+  setR('bon-total',fmt(total));
+}
+async function genBon(){
+  if(!bonItems.length){setStatus('bon-status','Adaugă produse!','err');return;}
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  try{
+    const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+    const pdfDoc=await PDFDocument.create();const page=pdfDoc.addPage([595,700]);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const{height}=page.getSize();
+    const g=(x,y,t,sz,bold,col)=>page.drawText(String(t||''),{x,y:height-y,size:sz||10,font:bold?fontB:font,color:col||rgb(0,0,0)});
+    g(50,45,'BON DE COMANDĂ Nr. '+document.getElementById('bon-nr').value,14,true,rgb(0.1,0.1,0.5));
+    g(50,65,'Data comenzii: '+document.getElementById('bon-data').value+'  ·  Livrare: '+document.getElementById('bon-livrare').value,9);
+    g(50,90,'Cumpărător: '+document.getElementById('bon-cum-nume').value,10,true);
+    g(50,105,document.getElementById('bon-cum-adr').value,9);
+    g(320,90,'Furnizor: '+document.getElementById('bon-fur-nume').value,10,true);
+    g(320,105,document.getElementById('bon-fur-adr').value,9);
+    page.drawLine({start:{x:50,y:height-120},end:{x:545,y:height-120},thickness:0.5,color:rgb(0.7,0.7,0.7)});
+    g(50,135,'Nr.',9,true);g(70,135,'Denumire',9,true);g(290,135,'UM',9,true);g(330,135,'Cant.',9,true);g(390,135,'Preț unit.',9,true);g(460,135,'Total',9,true);
+    let y=155,total=0,nr=1;
+    document.getElementById('bon-items').querySelectorAll('div[id^="bon-"]').forEach(div=>{
+      const ins=div.querySelectorAll('input');
+      const name=ins[0].value,um=ins[1].value,qty=parseFloat(ins[2].value)||0,pret=parseFloat(ins[3].value)||0,val=qty*pret;
+      total+=val;g(50,y,nr+'.',9);g(70,y,name.slice(0,28),9);g(290,y,um,9);g(330,y,qty,9);g(390,y,fmt(pret),9);g(460,y,fmt(val),9);y+=14;nr++;
+    });
+    page.drawLine({start:{x:50,y:height-y},end:{x:545,y:height-y},thickness:0.5,color:rgb(0.8,0.8,0.8)});y+=15;
+    g(370,y,'TOTAL:',11,true,rgb(0,0.4,0));g(460,y,fmt(total)+' MDL',11,true,rgb(0,0.4,0));y+=40;
+    g(50,y,'Comandat de: _______________',9);g(350,y,'Confirmat de: _______________',9);
+    const bytes=await pdfDoc.save();
+    triggerDl(new Blob([bytes],{type:'application/pdf'}),'bon_comanda_'+document.getElementById('bon-nr').value+'.pdf');
+    setStatus('bon-status','✅ Bon de comandă generat!','ok');
+  }catch(e){setStatus('bon-status','Eroare: '+e.message,'err');}
+}
+
+// ─── NOTA DE PLATA / DEVIZ ───
+let notaItems=[], notaDocType='nota';
+function notaSetTab(t,btn){notaDocType=t;document.querySelectorAll('#mod-acc-nota .acc-tab').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');document.getElementById('nota-nr').value=t==='nota'?'NP-001':'DEV-001';}
+function notaAddItem(){
+  const id='ni-'+Date.now();notaItems.push(id);
+  const div=document.createElement('div');div.id=id;
+  div.style.cssText='display:grid;grid-template-columns:3fr 70px 1fr 90px 70px 28px;gap:5px;margin-bottom:5px;align-items:center';
+  div.innerHTML=`<input type="text" placeholder="Descriere lucrare/serviciu" style="padding:5px 8px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="notaCalc()">
+    <input type="text" placeholder="buc" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+    <input type="number" placeholder="1" step="1" value="1" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="notaCalc()">
+    <input type="number" placeholder="0.00" step="0.01" min="0" style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" oninput="notaCalc()">
+    <select style="padding:5px 6px;font-size:11px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)" onchange="notaCalc()"><option value="20">20%</option><option value="8">8%</option><option value="0">0%</option></select>
+    <button onclick="this.parentElement.remove();notaItems=notaItems.filter(i=>i!=='${id}');notaCalc()" style="background:none;border:none;color:var(--red);cursor:pointer;font-size:16px">✕</button>`;
+  document.getElementById('nota-items').appendChild(div);notaCalc();
+}
+function notaCalc(){
+  let sub=0,tva=0;
+  document.getElementById('nota-items').querySelectorAll('div[id^="ni-"]').forEach(div=>{
+    const ins=div.querySelectorAll('input,select');
+    const val=(parseFloat(ins[2].value)||0)*(parseFloat(ins[3].value)||0);
+    sub+=val;tva+=val*(parseFloat(ins[4].value)||0)/100;
+  });
+  document.getElementById('nota-total-wrap').style.display=notaItems.length?'block':'none';
+  setR('nota-subtotal',fmt(sub));setR('nota-tva',fmt(tva));setR('nota-total',fmt(sub+tva));
+}
+async function genNota(){
+  if(!notaItems.length){setStatus('nota-status','Adaugă lucrări!','err');return;}
+  if(!window.PDFLib){const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js';document.head.appendChild(s);await new Promise(r=>s.onload=r);}
+  try{
+    const{PDFDocument,rgb,StandardFonts}=window.PDFLib;
+    const pdfDoc=await PDFDocument.create();const page=pdfDoc.addPage([595,750]);
+    const font=await pdfDoc.embedFont(StandardFonts.Helvetica);const fontB=await pdfDoc.embedFont(StandardFonts.HelveticaBold);
+    const{height}=page.getSize();
+    const g=(x,y,t,sz,bold,col)=>page.drawText(String(t||''),{x,y:height-y,size:sz||10,font:bold?fontB:font,color:col||rgb(0,0,0)});
+    const title=notaDocType==='nota'?'NOTĂ DE PLATĂ':'DEVIZ DE LUCRĂRI';
+    g(50,45,title+' Nr. '+document.getElementById('nota-nr').value,14,true,rgb(0.1,0.1,0.5));
+    g(50,65,'Data: '+document.getElementById('nota-data').value,9);
+    g(50,85,'Beneficiar: '+document.getElementById('nota-benef').value,10,true);
+    g(50,100,document.getElementById('nota-desc').value,9);
+    page.drawLine({start:{x:50,y:height-115},end:{x:545,y:height-115},thickness:0.5,color:rgb(0.7,0.7,0.7)});
+    g(50,130,'Nr.',9,true);g(70,130,'Descriere',9,true);g(300,130,'UM',9,true);g(340,130,'Cant.',9,true);g(390,130,'Preț',9,true);g(440,130,'TVA',9,true);g(490,130,'Total',9,true);
+    let y=150,sub=0,tva=0,nr=1;
+    document.getElementById('nota-items').querySelectorAll('div[id^="ni-"]').forEach(div=>{
+      const ins=div.querySelectorAll('input,select');
+      const name=ins[0].value,um=ins[1].value,qty=parseFloat(ins[2].value)||0,pret=parseFloat(ins[3].value)||0,cotaTva=parseFloat(ins[4].value)||0;
+      const val=qty*pret,t2=val*cotaTva/100;sub+=val;tva+=t2;
+      g(50,y,nr+'.',9);g(70,y,name.slice(0,28),9);g(300,y,um,9);g(340,y,qty,9);g(390,y,fmt(pret),9);g(440,y,cotaTva+'%',9);g(490,y,fmt(val+t2),9);y+=14;nr++;
+    });
+    page.drawLine({start:{x:50,y:height-y},end:{x:545,y:height-y},thickness:0.5,color:rgb(0.8,0.8,0.8)});y+=12;
+    g(370,y,'Subtotal:',9);g(470,y,fmt(sub)+' MDL',9);y+=14;
+    g(370,y,'TVA:',9);g(470,y,fmt(tva)+' MDL',9);y+=14;
+    g(370,y,'TOTAL:',11,true,rgb(0,0.4,0));g(470,y,fmt(sub+tva)+' MDL',11,true,rgb(0,0.4,0));y+=40;
+    g(50,y,'Întocmit: _______________',9);g(350,y,'Aprobat: _______________',9);
+    const bytes=await pdfDoc.save();
+    triggerDl(new Blob([bytes],{type:'application/pdf'}),(notaDocType==='nota'?'nota_plata_':'deviz_')+document.getElementById('nota-nr').value+'.pdf');
+    setStatus('nota-status','✅ Document PDF generat!','ok');
+  }catch(e){setStatus('nota-status','Eroare: '+e.message,'err');}
+}
+
+// ─── STAMPILA ───
+function drawStamp(){
+  const top=document.getElementById('stamp-top').value||'DENUMIRE FIRMĂ';
+  const bot=document.getElementById('stamp-bot').value||'REPUBLICA MOLDOVA';
+  const c1=document.getElementById('stamp-c1').value||'';
+  const c2=document.getElementById('stamp-c2').value||'';
+  const color=document.getElementById('stamp-color').value||'#0033aa';
+  const size=parseInt(document.getElementById('stamp-size').value)||300;
+  const star=document.getElementById('stamp-star').value==='yes';
+  const canvas=document.getElementById('stamp-canvas');
+  canvas.width=size;canvas.height=size;
+  const ctx=canvas.getContext('2d');
+  ctx.clearRect(0,0,size,size);
+  const cx=size/2,cy=size/2,r=size*0.46,r2=size*0.38;
+  // Outer ring
+  ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.strokeStyle=color;ctx.lineWidth=size*0.025;ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,r2,0,Math.PI*2);ctx.stroke();
+  // Text top
+  ctx.save();ctx.font=`bold ${size*0.07}px Arial,sans-serif`;ctx.fillStyle=color;ctx.textAlign='center';
+  ctx.translate(cx,cy);
+  const topArr=top.split('');
+  const topR=(r+r2)/2;
+  const topAngle=-Math.PI/2-Math.PI*0.7;
+  const arcLen=Math.PI*1.4;
+  topArr.forEach((ch,i)=>{
+    const a=topAngle+(i/(topArr.length-1||1))*arcLen;
+    ctx.save();ctx.rotate(a);ctx.translate(0,-topR);ctx.rotate(Math.PI/2);ctx.fillText(ch,0,0);ctx.restore();
+  });
+  // Text bottom
+  if(bot){
+    const botArr=bot.split('');
+    const botAngle=Math.PI/2-Math.PI*0.55;
+    botArr.forEach((ch,i)=>{
+      const a=botAngle+(i/(botArr.length-1||1))*Math.PI*1.1;
+      ctx.save();ctx.rotate(a);ctx.translate(0,topR);ctx.rotate(-Math.PI/2);ctx.fillText(ch,0,0);ctx.restore();
+    });
+  }
+  ctx.restore();
+  // Center text
+  ctx.font=`bold ${size*0.065}px Arial,sans-serif`;ctx.fillStyle=color;ctx.textAlign='center';
+  if(c1)ctx.fillText(c1,cx,cy-(c2?size*0.04:0));
+  if(c2)ctx.fillText(c2,cx,cy+size*0.08);
+  // Star
+  if(star){
+    ctx.save();ctx.translate(cx,cy-(c1?size*0.18:0));
+    ctx.beginPath();for(let i=0;i<5;i++){const a=i*Math.PI*2/5-Math.PI/2;ctx.lineTo(Math.cos(a)*size*0.04,Math.sin(a)*size*0.04);}
+    ctx.closePath();ctx.fillStyle=color;ctx.fill();ctx.restore();
+  }
+}
+function downloadStamp(){
+  const canvas=document.getElementById('stamp-canvas');
+  canvas.toBlob(blob=>triggerDl(blob,'stampila.png'),'image/png');
+}
+drawStamp();
+
+// ─── QR CODE ───
+function qrUpdatePlaceholder(){
+  const type=document.getElementById('qr-type').value;
+  const placeholders={text:'Orice text sau informație',url:'https://example.com',iban:'IBAN:MD24AG000000000002500003;Amount:1000;Name:SRL Exemplu',email:'mailto:office@exemplu.md',tel:'tel:+37369000000',vcard:'BEGIN:VCARD\nVERSION:3.0\nFN:Ion Popescu\nORG:SRL Exemplu\nTEL:+37369000000\nEMAIL:ion@exemplu.md\nEND:VCARD'};
+  document.getElementById('qr-lbl').textContent='Conținut '+type.toUpperCase();
+  document.getElementById('qr-content').placeholder=placeholders[type]||'Introdu conținutul...';
+}
+function genQR(){
+  const content=document.getElementById('qr-content').value.trim();if(!content){alert('Introdu conținut pentru QR!');return;}
+  const size=parseInt(document.getElementById('qr-size').value)||300;
+  const color=document.getElementById('qr-color').value||'#000000';
+  const bg=document.getElementById('qr-bg').value||'#ffffff';
+  // Use QR CDN
+  if(!window.QRCode){
+    const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js';document.head.appendChild(s);
+    s.onload=()=>_genQR(content,size,color,bg);
+  } else { _genQR(content,size,color,bg); }
+}
+function _genQR(content,size,color,bg){
+  const resultDiv=document.getElementById('qr-result');
+  const canvas=document.getElementById('qr-canvas');
+  canvas.width=size;canvas.height=size;
+  const tmpDiv=document.createElement('div');
+  new QRCode(tmpDiv,{text:content,width:size,height:size,colorDark:color,colorLight:bg,correctLevel:QRCode.CorrectLevel.H});
+  setTimeout(()=>{
+    const qrImg=tmpDiv.querySelector('img')||tmpDiv.querySelector('canvas');
+    if(qrImg){
+      const ctx=canvas.getContext('2d');
+      const img=new Image();img.onload=()=>{ctx.drawImage(img,0,0,size,size);};
+      img.src=qrImg.src||qrImg.toDataURL();
+    }
+    resultDiv.style.display='block';
+  },200);
+}
+function downloadQR(){const c=document.getElementById('qr-canvas');c.toBlob(b=>triggerDl(b,'qr_code.png'),'image/png');}
+
+// ─── SUMA IN LITERE ───
+function calcLitere(){
+  const suma=parseFloat(document.getElementById('litere-suma').value);
+  const valuta=document.getElementById('litere-valuta').value;
+  if(isNaN(suma)||suma<0){setR('litere-r-nr','—');setR('litere-r-text','—');return;}
+  const intreg=Math.floor(suma);
+  const zecimale=Math.round((suma-intreg)*100);
+  const unitateMap={MDL:['leu','lei','lei'],RON:['leu','lei','lei'],EUR:['euro','euro','euro'],USD:['dolar','dolari','dolari']};
+  const subUnitMap={MDL:['ban','bani','bani'],RON:['ban','bani','bani'],EUR:['cent','cenți','cenți'],USD:['cent','cenți','cenți']};
+  function plural(n,forms){return n===1?forms[0]:n>=2&&n<=19?forms[1]:forms[2];}
+  function toWords(n){
+    if(n===0)return'zero';
+    const u=['','unu','doi','trei','patru','cinci','șase','șapte','opt','nouă','zece','unsprezece','doisprezece','treisprezece','paisprezece','cincisprezece','șaisprezece','șaptesprezece','optsprezece','nouăsprezece'];
+    const t=['','','douăzeci','treizeci','patruzeci','cincizeci','șaizeci','șaptezeci','optzeci','nouăzeci'];
+    const h=['','o sută','două sute','trei sute','patru sute','cinci sute','șase sute','șapte sute','opt sute','nouă sute'];
+    let r='';
+    if(n>=1000000){r+=toWords(Math.floor(n/1000000))+' milioane ';n%=1000000;}
+    if(n>=1000){const m=Math.floor(n/1000);r+=(m===1?'o mie ':toWords(m)+' mii ');n%=1000;}
+    if(n>=100){r+=h[Math.floor(n/100)]+' ';n%=100;}
+    if(n>=20){r+=t[Math.floor(n/10)]+(n%10?' și ':'')+u[n%10]+' ';}
+    else if(n>0){r+=u[n]+' ';}
+    return r.trim();
+  }
+  const textIntreg=toWords(intreg)+' '+plural(intreg,unitateMap[valuta]||['leu','lei','lei']);
+  const textZec=zecimale>0?(toWords(zecimale)+' '+plural(zecimale,subUnitMap[valuta]||['ban','bani','bani'])):'';
+  const text=(textIntreg+(textZec?' și '+textZec:'')).trim();
+  const textFinal=text.charAt(0).toUpperCase()+text.slice(1);
+  setR('litere-r-nr',fmt(suma)+' '+valuta);
+  setR('litere-r-text',textFinal);
+}
+
+// ─── DIFERENTE TEXTE ───
+function calcDiff(){
+  const a=document.getElementById('diff-a').value;
+  const b=document.getElementById('diff-b').value;
+  const level=document.getElementById('diff-level').value;
+  if(!a.trim()&&!b.trim()){alert('Introdu texte în ambele câmpuri!');return;}
+  function tokenize(text,lvl){
+    if(lvl==='char')return text.split('');
+    if(lvl==='word')return text.match(/\S+|\s+/g)||[];
+    return text.split('\n');
+  }
+  const tokA=tokenize(a,level),tokB=tokenize(b,level);
+  // LCS diff
+  const m=tokA.length,n=tokB.length;
+  const dp=Array.from({length:m+1},()=>new Array(n+1).fill(0));
+  for(let i=1;i<=m;i++)for(let j=1;j<=n;j++)dp[i][j]=tokA[i-1]===tokB[j-1]?dp[i-1][j-1]+1:Math.max(dp[i-1][j],dp[i][j-1]);
+  const result=[];let i=m,j=n;
+  while(i>0||j>0){
+    if(i>0&&j>0&&tokA[i-1]===tokB[j-1]){result.unshift({type:'same',val:tokA[i-1]});i--;j--;}
+    else if(j>0&&(i===0||dp[i][j-1]>=dp[i-1][j])){result.unshift({type:'add',val:tokB[j-1]});j--;}
+    else{result.unshift({type:'del',val:tokA[i-1]});i--;}
+  }
+  let added=0,deleted=0,unchanged=0;
+  result.forEach(r=>{if(r.type==='add')added++;else if(r.type==='del')deleted++;else unchanged++;});
+  document.getElementById('diff-stats').innerHTML=
+    `<div class="acc-stat green"><div class="acc-stat-val">${added}</div><div class="acc-stat-lbl">Adăugat</div></div>
+     <div class="acc-stat red"><div class="acc-stat-val">${deleted}</div><div class="acc-stat-lbl">Șters</div></div>
+     <div class="acc-stat"><div class="acc-stat-val">${unchanged}</div><div class="acc-stat-lbl">Nemodificat</div></div>`;
+  document.getElementById('diff-stats').style.display='grid';
+  const html2=result.slice(0,2000).map(r=>{
+    if(r.type==='same')return'<span>'+esc(r.val)+'</span>';
+    if(r.type==='add')return'<span class="diff-add">'+esc(r.val)+'</span>';
+    return'<span class="diff-del" style="text-decoration:line-through">'+esc(r.val)+'</span>';
+  }).join('');
+  document.getElementById('diff-result').innerHTML=html2+(result.length>2000?'<br><span style="color:var(--muted)">[... '+result.length+' elemente total]</span>':'');
+  document.getElementById('diff-result').style.display='block';
+}
 </script>
 </body>
 </html>
