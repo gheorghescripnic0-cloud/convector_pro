@@ -393,6 +393,7 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
         <button class="fmt-btn" data-pfmt="png">PNG</button>
         <button class="fmt-btn" data-pfmt="docx">DOCX</button>
         <button class="fmt-btn" data-pfmt="csv">CSV</button>
+        <button class="fmt-btn" data-pfmt="xlsx">XLSX</button>
         <button class="fmt-btn" data-pfmt="dbf">DBF</button>
         <button class="fmt-btn" data-pfmt="html">HTML</button>
         <button class="fmt-btn" data-pfmt="md">Markdown</button>
@@ -890,22 +891,85 @@ footer{text-align:center;padding:1rem;font-size:11px;color:var(--muted2);border-
 <div class="module" id="mod-ocr">
   <div class="module-header">
     <div class="module-title">🔍 OCR Scanner <span class="tag tag-ai">AI</span></div>
-    <div class="module-desc">Extrage textul din <strong>fotografii, documente scanate sau capturi de ecran</strong> folosind AI Tesseract. Suportă <strong>română, engleză, germană, franceză și rusă</strong>. Rezultatul se descarcă ca TXT.</div>
+    <div class="module-desc">Trage direct <strong>orice PDF scanat cu telefonul</strong> sau o poză — și extrage tot textul dintr-o singură mișcare. Funcționează pentru PDF-uri cu imagini înăuntru (documente scanate), JPG, PNG. Suportă română, engleză, germană, franceză, rusă.</div>
   </div>
+
   <div class="card">
-    <div class="drop" id="ocr-drop"><input type="file" id="ocr-input" accept="image/*,.pdf"><div class="drop-icon">🔍</div><h3>Trage poza sau documentul scanat</h3><p>JPG, PNG — text tipărit sau scris de mână</p></div>
+    <div class="drop" id="ocr-drop">
+      <input type="file" id="ocr-input" accept="image/*,.pdf">
+      <div class="drop-icon">🔍</div>
+      <h3>Trage PDF-ul scanat sau poza</h3>
+      <p>PDF scanat cu telefonul, JPG, PNG, WebP</p>
+      <div class="hint">PDF multipagină → fiecare pagină este scanată automat</div>
+    </div>
   </div>
+
   <div id="ocr-main" style="display:none">
     <div class="card">
-      <img id="ocr-preview-img" src="" style="max-width:100%;border-radius:var(--r);margin-bottom:12px;max-height:250px;object-fit:contain">
-      <div class="opts"><h4>Limbă</h4>
-        <select id="ocr-lang"><option value="ron">Română</option><option value="eng" selected>Engleză</option><option value="deu">Germană</option><option value="fra">Franceză</option><option value="rus">Rusă</option></select>
+
+      <!-- info bar -->
+      <div class="file-info" id="ocr-file-info">
+        <div class="fi-icon" id="ocr-fi-icon">📄</div>
+        <div>
+          <div class="fi-name" id="ocr-fi-name">—</div>
+          <div class="fi-meta" id="ocr-fi-meta">—</div>
+        </div>
+        <button class="fi-remove" onclick="ocrReset()">✕</button>
       </div>
-      <button class="btn btn-primary" id="ocr-btn">🔍 Extrage text (OCR)</button>
-      <div class="prog-wrap" id="ocr-prog"><div class="prog-bar"><div class="prog-fill" id="ocr-fill" style="width:0%"></div></div><div class="status" id="ocr-status"></div></div>
+
+      <!-- PDF thumbnails -->
+      <div id="ocr-pdf-strip" style="display:none;margin-bottom:12px">
+        <div style="font-size:11px;color:var(--muted);margin-bottom:6px">📋 Pagini detectate (toate vor fi scanate):</div>
+        <div id="ocr-thumbs" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
+
+      <!-- image preview -->
+      <img id="ocr-preview-img" src="" style="display:none;max-width:100%;border-radius:var(--r);margin-bottom:12px;max-height:200px;object-fit:contain">
+
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end;margin-bottom:12px">
+        <div style="flex:1;min-width:140px">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Limba documentului</label>
+          <select id="ocr-lang" style="width:100%;padding:7px 10px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+            <option value="ron">Română</option>
+            <option value="eng" selected>Engleză</option>
+            <option value="deu">Germană</option>
+            <option value="fra">Franceză</option>
+            <option value="rus">Rusă</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:140px" id="ocr-scale-wrap">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Calitate scanare PDF</label>
+          <select id="ocr-pdf-scale" style="width:100%;padding:7px 10px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+            <option value="1.5">Rapidă (150 DPI)</option>
+            <option value="2" selected>Standard (200 DPI) — recomandat</option>
+            <option value="3">Înaltă (300 DPI) — mai lentă</option>
+          </select>
+        </div>
+        <div style="flex:1;min-width:140px" id="ocr-pages-wrap">
+          <label style="font-size:11px;color:var(--muted);display:block;margin-bottom:4px">Pagini de extras</label>
+          <select id="ocr-pages-sel" style="width:100%;padding:7px 10px;font-size:12px;background:var(--bg3);border:1px solid var(--border2);border-radius:var(--r);color:var(--text)">
+            <option value="all" selected>Toate paginile</option>
+            <option value="first">Doar prima pagină</option>
+          </select>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="ocr-btn">🔍 Extrage tot textul</button>
+      <div class="prog-wrap" id="ocr-prog">
+        <div class="prog-bar"><div class="prog-fill" id="ocr-fill" style="width:0%"></div></div>
+        <div class="status" id="ocr-status"></div>
+      </div>
     </div>
+
     <div id="ocr-result-panel" style="display:none" class="card">
-      <div class="card-title">Text extras <button class="btn btn-sm btn-green" id="ocr-dl" style="float:right">⬇ TXT</button></div>
+      <div class="card-title">
+        Text extras
+        <div style="float:right;display:flex;gap:6px">
+          <button class="btn btn-sm btn-green" id="ocr-dl">⬇ Descarcă TXT</button>
+          <button class="btn btn-sm" id="ocr-copy" onclick="navigator.clipboard.writeText(document.getElementById('ocr-result-text').textContent);this.textContent='✓ Copiat!';setTimeout(()=>this.textContent='📋 Copiază',2000)">📋 Copiază</button>
+        </div>
+      </div>
+      <div id="ocr-page-tabs" style="display:none;margin-bottom:8px"></div>
       <div class="ocr-result" id="ocr-result-text"></div>
     </div>
   </div>
@@ -2104,7 +2168,7 @@ document.querySelectorAll('[data-pfmt]').forEach(b=>{
     document.querySelectorAll('[data-pfmt]').forEach(x=>x.classList.remove('sel'));
     b.classList.add('sel');pdfFmt=b.dataset.pfmt;
     document.getElementById('pdf-opt-img').style.display=(pdfFmt==='jpg'||pdfFmt==='png')?'block':'none';
-    document.getElementById('pdf-opt-csv').style.display=pdfFmt==='csv'?'block':'none';
+    document.getElementById('pdf-opt-csv').style.display=(pdfFmt==='csv'||pdfFmt==='xlsx')?'block':'none';
     document.getElementById('pdf-out-lbl').textContent='Ieșire ('+pdfFmt.toUpperCase()+')';
     document.getElementById('pdf-out-badge').textContent=pdfFmt.toUpperCase();
     document.getElementById('pdf-out-body').innerHTML='<div class="empty"><div class="empty-icon">✨</div><span>Apasă Convertește</span></div>';
@@ -2223,6 +2287,61 @@ async function pdfConvert(){
     else if(pdfFmt==='json'){const json=JSON.stringify({title:base,pages:pdfPages.map(p=>({page:p.num,text:p.text}))},null,2);const blob=new Blob([json],{type:'application/json'});pdfBlobs=[{blob,name:base+'.json'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=json.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
     else if(pdfFmt==='html'){const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${esc(base)}</title><style>body{font-family:Georgia,serif;max-width:800px;margin:40px auto;padding:0 20px;line-height:1.8;}h2{color:#555;border-bottom:1px solid #ddd;}</style></head><body><h1>${esc(base)}</h1>${pdfPages.map((p,i)=>(i>0?'<h2>Pagina '+(i+1)+'</h2>':'')+p.text.split('\n').map(l=>'<p>'+esc(l)+'</p>').join('')).join('')}</body></html>`;const blob=new Blob([html],{type:'text/html'});pdfBlobs=[{blob,name:base+'.html'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=html.slice(0,1500);document.getElementById('pdf-dl').style.display='';}
     else if(pdfFmt==='csv'){const sep=document.getElementById('pdf-csv-sep').value;const rows=parseTable(pdfText)||pdfText.split('\n').filter(l=>l.trim()).map((l,i)=>[(i+1).toString(),l]);const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(sep)).join('\r\n');const blob=new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'});pdfBlobs=[{blob,name:base+'.csv'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').textContent=csv.slice(0,2000);document.getElementById('pdf-dl').style.display='';}
+    else if(pdfFmt==='xlsx'){
+      // Load SheetJS if needed
+      if(!window.XLSX){
+        await new Promise((res,rej)=>{
+          const s=document.createElement('script');
+          s.src='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+          s.onload=res; s.onerror=rej;
+          document.head.appendChild(s);
+        });
+      }
+      setProg('pdf-fill',20);
+      // Parse table from PDF text, fall back to line-per-row
+      const sep=document.getElementById('pdf-csv-sep').value;
+      let rows=parseTable(pdfText);
+      if(!rows||rows.length<2){
+        // Try splitting by detected separator in text
+        const lines=pdfText.split('\n').filter(l=>l.trim());
+        // Detect if lines have consistent column separators
+        rows=lines.map((l,i)=>{
+          // Try tab, then multiple spaces (2+), then the chosen sep
+          const parts=l.split('\t').filter((_,idx,a)=>a.length>1?true:false);
+          if(parts.length>1) return parts.map(p=>p.trim());
+          return [l.trim()];
+        });
+      }
+      setProg('pdf-fill',50);
+      // Build worksheet — multiple pages = multiple sheets
+      const wb=XLSX.utils.book_new();
+      if(pdfPages.length===1){
+        const ws=XLSX.utils.aoa_to_sheet(rows);
+        // Auto column widths
+        const cols=rows[0]?rows[0].map((_,ci)=>({wch:Math.min(50,Math.max(10,...rows.map(r=>String(r[ci]||'').length)))})):[];
+        ws['!cols']=cols;
+        XLSX.utils.book_append_sheet(wb,ws,'Pagina 1');
+      } else {
+        pdfPages.forEach((pg,idx)=>{
+          const pgLines=pg.text.split('\n').filter(l=>l.trim());
+          let pgRows=parseTable(pg.text);
+          if(!pgRows||pgRows.length<2) pgRows=pgLines.map(l=>[l.trim()]);
+          const ws=XLSX.utils.aoa_to_sheet(pgRows);
+          XLSX.utils.book_append_sheet(wb,ws,'Pagina '+(idx+1));
+        });
+      }
+      setProg('pdf-fill',80);
+      const wbArr=XLSX.write(wb,{bookType:'xlsx',type:'array'});
+      const blob=new Blob([wbArr],{type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+      pdfBlobs=[{blob,name:base+'.xlsx'}];
+      setProg('pdf-fill',100);
+      // Preview as HTML table
+      const previewRows=rows.slice(0,30);
+      const thead=previewRows[0]?'<thead><tr>'+previewRows[0].map(c=>'<th style="padding:4px 8px;background:rgba(245,158,11,.1);font-size:11px;white-space:nowrap">'+esc(String(c))+'</th>').join('')+'</tr></thead>':'';
+      const tbody='<tbody>'+previewRows.slice(1).map(r=>'<tr>'+r.map(c=>'<td style="padding:3px 8px;font-size:11px;border-bottom:1px solid var(--border)">'+esc(String(c||''))+'</td>').join('')+'</tr>').join('')+'</tbody>';
+      document.getElementById('pdf-out-body').innerHTML='<div style="overflow-x:auto"><table style="border-collapse:collapse;width:100%">'+thead+tbody+'</table></div>'+(rows.length>30?'<p style="font-size:11px;color:var(--muted);margin-top:6px">... si inca '+(rows.length-30)+' randuri</p>':'');
+      document.getElementById('pdf-dl').style.display='';
+    }
     else if(pdfFmt==='dbf'){const rows=parseTable(pdfText)||[['Nr','Text'],...pdfText.split('\n').filter(l=>l.trim()).map((l,i)=>[(i+1).toString(),l])];const blob=buildDBFBlob(rows);pdfBlobs=[{blob,name:base+'.dbf'}];setProg('pdf-fill',100);let h='<div class="tbl-wrap"><table class="ptbl"><thead><tr>'+rows[0].map(c=>'<th>'+esc(c)+'</th>').join('')+'</tr></thead><tbody>'+rows.slice(1,30).map(r=>'<tr>'+r.map(c=>'<td>'+esc(String(c).slice(0,40))+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';document.getElementById('pdf-out-body').innerHTML=h;document.getElementById('pdf-dl').style.display='';}
     else if(pdfFmt==='docx'){if(typeof docx==='undefined'){setStatus('pdf-status','DOCX: reîncarcă pagina','err');document.getElementById('pdf-convert').disabled=false;return;}const{Document,Packer,Paragraph,TextRun,HeadingLevel}=docx;const paras=[];pdfPages.forEach((pg,i)=>{if(i>0)paras.push(new Paragraph({text:'Pagina '+(i+1),heading:HeadingLevel.HEADING_2}));pg.text.split('\n').filter(l=>l.trim()).forEach(line=>paras.push(new Paragraph({children:[new TextRun({text:line,size:24})]})));});const doc=new Document({sections:[{properties:{},children:paras}]});const blob=await Packer.toBlob(doc);pdfBlobs=[{blob,name:base+'.docx'}];setProg('pdf-fill',100);document.getElementById('pdf-out-body').style.fontFamily='inherit';document.getElementById('pdf-out-body').innerHTML='<p style="font-size:13px;color:var(--muted)">Document Word generat cu '+pdfPages.length+' pagini.</p>';document.getElementById('pdf-dl').style.display='';}
     else if(pdfFmt==='jpg'||pdfFmt==='png'){
@@ -3060,25 +3179,207 @@ document.getElementById('bulk-process').addEventListener('click',async()=>{
 // ═══════════════════════════════════════════
 // OCR MODULE
 // ═══════════════════════════════════════════
-let ocrFile=null;
-makeDrop('ocr-drop','ocr-input',f=>{ocrFile=f;document.getElementById('ocr-main').style.display='block';document.getElementById('ocr-result-panel').style.display='none';const url=URL.createObjectURL(f);document.getElementById('ocr-preview-img').src=url;},false);
-document.getElementById('ocr-btn').addEventListener('click',async()=>{
-  if(!ocrFile)return;
-  document.getElementById('ocr-btn').disabled=true;showProg('ocr-prog');setProg('ocr-fill',10);setStatus('ocr-status','Se inițializează Tesseract OCR...','');
+// OCR SCANNER - PDF + imagini
+let ocrFile=null, ocrIsPdf=false, ocrPageTexts=[];
+
+function ocrReset(){
+  ocrFile=null; ocrIsPdf=false; ocrPageTexts=[];
+  document.getElementById('ocr-main').style.display='none';
+  document.getElementById('ocr-result-panel').style.display='none';
+  document.getElementById('ocr-input').value='';
+  document.getElementById('ocr-thumbs').innerHTML='';
+  document.getElementById('ocr-pdf-strip').style.display='none';
+  document.getElementById('ocr-preview-img').style.display='none';
+  document.getElementById('ocr-preview-img').src='';
+  setProg('ocr-fill',0);
+  setStatus('ocr-status','','');
+}
+
+makeDrop('ocr-drop','ocr-input', async function(f){
+  ocrFile=f;
+  ocrIsPdf = f.type==='application/pdf' || f.name.toLowerCase().slice(-4)==='.pdf';
+  document.getElementById('ocr-main').style.display='block';
+  document.getElementById('ocr-result-panel').style.display='none';
+  document.getElementById('ocr-fi-name').textContent = f.name;
+  document.getElementById('ocr-fi-meta').textContent = (f.size/1024).toFixed(1)+' KB';
+  document.getElementById('ocr-fi-icon').textContent = ocrIsPdf ? '📄' : '🖼';
+  document.getElementById('ocr-scale-wrap').style.display = ocrIsPdf ? '' : 'none';
+  document.getElementById('ocr-pages-wrap').style.display = ocrIsPdf ? '' : 'none';
+
+  if(ocrIsPdf){
+    document.getElementById('ocr-preview-img').style.display='none';
+    setStatus('ocr-status','Se citeste PDF-ul...','info');
+    try{
+      var ab = await f.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({data: new Uint8Array(ab)}).promise;
+      document.getElementById('ocr-fi-meta').textContent =
+        (f.size/1024).toFixed(1)+' KB  |  PDF '+pdf.numPages+' pagini';
+      var thumbsEl = document.getElementById('ocr-thumbs');
+      thumbsEl.innerHTML='';
+      var maxTh = Math.min(pdf.numPages, 16);
+      for(var ti=1; ti<=maxTh; ti++){
+        var tpg = await pdf.getPage(ti);
+        var tvp = tpg.getViewport({scale:0.15});
+        var tc = document.createElement('canvas');
+        tc.width=tvp.width; tc.height=tvp.height;
+        var tctx = tc.getContext('2d');
+        tctx.fillStyle='#fff'; tctx.fillRect(0,0,tc.width,tc.height);
+        await tpg.render({canvasContext:tctx,viewport:tvp}).promise;
+        var tw = document.createElement('div');
+        tw.style.cssText='text-align:center;flex-shrink:0';
+        var timg = document.createElement('img');
+        timg.src = tc.toDataURL('image/jpeg',0.7);
+        timg.style.cssText='width:56px;height:auto;border-radius:4px;border:1px solid var(--border2);display:block';
+        var tlbl = document.createElement('div');
+        tlbl.style.cssText='font-size:9px;color:var(--muted);margin-top:2px';
+        tlbl.textContent='p.'+ti;
+        tw.appendChild(timg); tw.appendChild(tlbl);
+        thumbsEl.appendChild(tw);
+      }
+      if(pdf.numPages>16){
+        var more=document.createElement('div');
+        more.style.cssText='font-size:11px;color:var(--muted);align-self:center;padding:0 8px';
+        more.textContent='+ '+(pdf.numPages-16)+' pagini';
+        thumbsEl.appendChild(more);
+      }
+      document.getElementById('ocr-pdf-strip').style.display='block';
+      setStatus('ocr-status','PDF incarcat: '+pdf.numPages+' pagini. Apasa Extrage tot textul.','ok');
+    }catch(e){
+      setStatus('ocr-status','Eroare citire PDF: '+e.message,'err');
+    }
+  } else {
+    document.getElementById('ocr-pdf-strip').style.display='none';
+    var url = URL.createObjectURL(f);
+    var img = document.getElementById('ocr-preview-img');
+    img.src=url; img.style.display='block';
+    setStatus('ocr-status','Imagine incarcata. Apasa Extrage textul.','ok');
+  }
+}, false);
+
+document.getElementById('ocr-btn').addEventListener('click', async function(){
+  if(!ocrFile) return;
+  document.getElementById('ocr-btn').disabled=true;
+  document.getElementById('ocr-result-panel').style.display='none';
+  showProg('ocr-prog'); setProg('ocr-fill',5);
+  setStatus('ocr-status','Se initializeaza Tesseract OCR...','info');
+  ocrPageTexts=[];
+  var lang = document.getElementById('ocr-lang').value;
+
   try{
-    const lang=document.getElementById('ocr-lang').value;
-    const result=await Tesseract.recognize(ocrFile,lang,{
-      logger:m=>{if(m.status==='recognizing text')setProg('ocr-fill',Math.round(m.progress*90));setStatus('ocr-status',m.status+' '+(m.progress?Math.round(m.progress*100)+'%':''),'');}
-    });
-    setProg('ocr-fill',100);
-    const text=result.data.text;
-    document.getElementById('ocr-result-text').textContent=text||'(Nu s-a putut extrage text)';
-    document.getElementById('ocr-result-panel').style.display='block';
-    document.getElementById('ocr-dl').onclick=()=>triggerDl(new Blob([text],{type:'text/plain'}),'ocr_text.txt');
-    setStatus('ocr-status','✓ Text extras — '+text.split(' ').length+' cuvinte detectate','ok');
-  }catch(e){setStatus('ocr-status','Eroare OCR: '+e.message,'err');}
+    if(ocrIsPdf){
+      // Render PDF pages as images then OCR each one
+      var scale = parseFloat(document.getElementById('ocr-pdf-scale').value) || 2;
+      var pagesOpt = document.getElementById('ocr-pages-sel').value;
+      var ab = await ocrFile.arrayBuffer();
+      var pdf = await pdfjsLib.getDocument({data: new Uint8Array(ab)}).promise;
+      var total = pagesOpt==='first' ? 1 : pdf.numPages;
+
+      for(var pi=1; pi<=total; pi++){
+        setStatus('ocr-status','Se proceseaza pagina '+pi+' din '+total+'...','info');
+        setProg('ocr-fill', Math.round(5 + (pi-1)/total*80));
+
+        // Render page to canvas at chosen DPI
+        var pg = await pdf.getPage(pi);
+        var vp = pg.getViewport({scale: scale});
+        var canvas = document.createElement('canvas');
+        canvas.width = vp.width;
+        canvas.height = vp.height;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        await pg.render({canvasContext: ctx, viewport: vp}).promise;
+
+        // Convert canvas to blob for Tesseract
+        var blob = await new Promise(function(res){ canvas.toBlob(res,'image/png'); });
+
+        // Run OCR on this page's image
+        var result = await Tesseract.recognize(blob, lang, {
+          logger: function(m){
+            if(m.status==='recognizing text'){
+              var base = Math.round(5 + (pi-1)/total*80);
+              var step = Math.round(m.progress * 80/total);
+              setProg('ocr-fill', Math.min(85, base+step));
+            }
+          }
+        });
+        ocrPageTexts.push({page: pi, text: result.data.text || ''});
+        setProg('ocr-fill', Math.round(5 + pi/total*80));
+      }
+
+      // Combine all pages
+      setProg('ocr-fill',95);
+      var allText = ocrPageTexts.map(function(p){
+        return (total>1 ? '--- Pagina '+p.page+' ---\n' : '') + p.text;
+      }).join('\n\n');
+
+      setProg('ocr-fill',100);
+
+      // Show page navigation tabs if multiple pages
+      var tabsEl = document.getElementById('ocr-page-tabs');
+      if(total>1){
+        var tabHtml = '<button class="btn btn-sm" onclick="ocrShowAll()" style="font-size:11px">Toate paginile</button>';
+        for(var ti2=0; ti2<ocrPageTexts.length; ti2++){
+          tabHtml += '<button class="btn btn-sm" onclick="ocrShowPage('+ocrPageTexts[ti2].page+')" style="font-size:11px">P.'+ocrPageTexts[ti2].page+'</button>';
+        }
+        tabsEl.innerHTML = tabHtml;
+        tabsEl.style.cssText='display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px';
+      } else {
+        tabsEl.innerHTML='';
+        tabsEl.style.display='none';
+      }
+
+      document.getElementById('ocr-result-text').textContent = allText || '(Nu s-a putut extrage text)';
+      document.getElementById('ocr-result-panel').style.display='block';
+
+      var fname = ocrFile.name.replace(/\.pdf$/i,'') + '_text.txt';
+      document.getElementById('ocr-dl').onclick = function(){
+        triggerDl(new Blob([allText],{type:'text/plain;charset=utf-8'}), fname);
+      };
+
+      var words = allText.trim().split(/\s+/).filter(function(w){return w;}).length;
+      setStatus('ocr-status',
+        'Gata! '+total+' pagini scanate | '+words.toLocaleString('ro-MD')+' cuvinte extrase','ok');
+
+    } else {
+      // Image OCR - simple single pass
+      setStatus('ocr-status','Se analizeaza imaginea...','info');
+      var result2 = await Tesseract.recognize(ocrFile, lang, {
+        logger: function(m){
+          if(m.status==='recognizing text')
+            setProg('ocr-fill', Math.round(m.progress*90)+5);
+          setStatus('ocr-status', m.status+(m.progress?' '+Math.round(m.progress*100)+'%':''),'info');
+        }
+      });
+      setProg('ocr-fill',100);
+      var text = result2.data.text || '';
+      document.getElementById('ocr-page-tabs').innerHTML='';
+      document.getElementById('ocr-page-tabs').style.display='none';
+      document.getElementById('ocr-result-text').textContent = text || '(Nu s-a putut extrage text)';
+      document.getElementById('ocr-result-panel').style.display='block';
+      document.getElementById('ocr-dl').onclick = function(){
+        triggerDl(new Blob([text],{type:'text/plain;charset=utf-8'}),'ocr_text.txt');
+      };
+      var words2 = text.trim().split(/\s+/).filter(function(w){return w;}).length;
+      setStatus('ocr-status', 'Gata! '+words2.toLocaleString('ro-MD')+' cuvinte extrase','ok');
+    }
+  } catch(e){
+    setStatus('ocr-status','Eroare OCR: '+e.message,'err');
+    setProg('ocr-fill',0);
+  }
   document.getElementById('ocr-btn').disabled=false;
 });
+
+function ocrShowAll(){
+  var all = ocrPageTexts.map(function(p){
+    return '--- Pagina '+p.page+' ---\n'+p.text;
+  }).join('\n\n');
+  document.getElementById('ocr-result-text').textContent = all;
+}
+function ocrShowPage(n){
+  var p = ocrPageTexts.filter(function(x){return x.page===n;})[0];
+  if(p) document.getElementById('ocr-result-text').textContent = p.text;
+}
+
 
 // ═══════════════════════════════════════════
 // TRANSCRIERE MODULE
